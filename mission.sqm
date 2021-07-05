@@ -1,0 +1,52 @@
+version=54;
+class EditorData
+{
+	moveGridStep=1;
+	angleGridStep=0.2617994;
+	scaleGridStep=1;
+	autoGroupingDist=10;
+	toggles=1;
+	mods[]=
+	{
+		"3denEnhanced"
+	};
+	class Camera
+	{
+		pos[]={3896.8193,53.814835,462.76682};
+		dir[]={0.43259537,-0.30764338,-0.84758836};
+		up[]={0.13987151,0.95147771,-0.2740517};
+		aside[]={-0.89077079,-5.4808334e-007,-0.45463762};
+	};
+};
+binarizationWanted=0;
+sourceName="SIA-Mission-Framework";
+class AddonsMetaData
+{
+};
+randomSeed=10258519;
+class ScenarioData
+{
+	author="Liam McKendrick";
+};
+class Mission
+{
+	class Intel
+	{
+		timeOfChanges=1800.0002;
+		startWeather=0;
+		startWind=0.1;
+		startWaves=0.1;
+		forecastWeather=0;
+		forecastWind=0.1;
+		forecastWaves=0.1;
+		forecastLightnings=0.1;
+		wavesForced=1;
+		windForced=1;
+		year=2035;
+		day=28;
+		hour=13;
+		minute=37;
+		startFogDecay=0.014;
+		forecastFogDecay=0.014;
+	};
+};

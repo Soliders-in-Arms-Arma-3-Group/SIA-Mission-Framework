@@ -1,0 +1,41 @@
+//Revo's TP Function
+	import ctrlListBox;
+	import ctrlButton;
+	import ctrlStaticTitle;
+	import ctrlStaticBackground;
+
+	#include "sia_f\TPD_teleportDialog\GUI.hpp"
+
+class CfgFunctions
+{
+	
+	class TPD
+  {
+	tag = "TPD";
+	class Initialize
+	{
+	  file = "sia_f\TPD_teleportDialog";
+	  class teleport;
+	};
+  };
+};
+
+class Header
+{
+	gameType =  Coop;
+	minPlayers =  1;
+	maxPlayers = 40;
+};
+
+disabledAI = 1;
+
+respawnTemplates[] = {"ace_spectator","Wave","Counter","Tickets"};
+
+author = "Soliders in Arms"; // Author
+onLoadName = "SIA Mission Framework";
+onLoadMission = "Version 0.10";
+//loadScreen = "images\loadScreen.jpg";
+
+respawn=3;
+respawnDelay=45;
+respawnOnStart=-1;
