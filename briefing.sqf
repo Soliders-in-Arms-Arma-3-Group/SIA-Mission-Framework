@@ -1,3 +1,8 @@
+_situation = "";
+_mission = "";
+_execution = "";
+_support = "";
+_signal = "";
 
 player createDiaryRecord ["Diary",["Signal",_signal],taskNull,"",true];
 player createDiaryRecord ["Diary",["Support",_support],taskNull,"",true];
