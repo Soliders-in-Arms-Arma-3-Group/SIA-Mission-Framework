@@ -1,7 +1,26 @@
-_p = _this select 0;
-_sl = leader _p;
-_i = 0;
-_safezone = 150;
+/*
+
+	SIA Mission Framework (https://github.com/Soliders-in-Arms-Arma-3-Group/SIA-Mission-Framework.VR.git)
+	Author: McKendrick
+
+=====================================================================
+
+	Description:
+		Teleports the player to any possible member of their squad, starting with their leader.
+
+	USAGE:
+		Can run locally or on server.
+
+	PARAMS:
+		0: Unit to be teleported.
+*/
+
+if (!hasInterface) exitWith {}; // Exit if not a player.
+
+private _p = _this select 0;
+private _sl = leader _p;
+private _i = 0;
+private _safezone = 150;
 
 if (count (units group _p) > 1) then {
 
@@ -27,11 +46,11 @@ if (count (units group _p) > 1) then {
 			2 cutText ["", "BLACK OUT", 1];
 			sleep 1;			
 		
-			//Teleport player	3m behind squad
+			//Teleport player 0.3m behind squad
 			_LX = (getpos _sl select 0) +
-							(3*sin ((getDir _sl) -180));
+							(0.3*sin ((getDir _sl) -180));
 			_LY = (getpos _sl select 1) +
-							(3*cos ((getDir _sl) -180));
+							(0.3*cos ((getDir _sl) -180));
 			_LZ = (getpos _sl select 2);
 			_p setpos [_LX,_LY,_LZ];
 			
