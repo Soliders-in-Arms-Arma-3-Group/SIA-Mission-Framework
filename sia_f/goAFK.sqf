@@ -18,18 +18,20 @@
 
 if (!hasInterface) exitWith {}; // Exit if not player.
 
-private _timeout = 10; // Time in seconds to temporarily suspend script after use.
+if ( captive player || !alive player || !simulationEnabled player || !isAbleToBreathe player || ((!isTouchingGround player) && (vehicle player == player )) || ((currentPilot vehicle player == player) && isEngineOn vehicle player) )  exitWIth {5 cutText ["Going AFK is not allowed at this time.","PLAIN",-1,true]};
+
+private _timeout = 30; // Time in seconds to temporarily suspend script after use.
 
 player hideObjectGlobal true; // Hide player object.
 player setCaptive true; // Set player to captive.
 if (vehicle player != player) then {moveOut player}; // If player is in a vehicle, eject player from the vehicle.
-player enableSimulationGlobal false; // Disable player movement.
-player setVariable["sia_isAFK",true]; // Update player variable.
+player enableSimulationGlobal false; // Disables player movement.
+player setVariable["sia_isAFK",true]; // Updates player variable.
 [(name player + " is now AFK.")] remoteExec ["systemChat"]; // "<player> is AFK" system chat message.
 
-5 cutText ["You are now AFK","PLAIN",-1,true];
+5 cutText ["You are now AFK\nYou may exit in " + (str _timeout) + " seconds.\nWARNING: ACE Medical is still simulated.","PLAIN",-1,true];
 
-sleep _timeout;
+sleep _timeout; // Wait before option to exit AFK is given.
 
 // Exit AFK function
 fnc_sia_exitAFK = {	
