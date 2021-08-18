@@ -24,7 +24,7 @@ private _timeout = 30; // Time in seconds to temporarily suspend script after us
 
 player hideObjectGlobal true; // Hide player object.
 player setCaptive true; // Set player to captive.
-if (vehicle player != player) then {moveOut player}; // If player is in a vehicle, eject player from the vehicle.
+//if (vehicle player != player) then {moveOut player}; // If player is in a vehicle, eject player from the vehicle.
 player enableSimulationGlobal false; // Disables player movement.
 player setVariable["sia_isAFK",true]; // Updates player variable.
 [(name player + " is now AFK.")] remoteExec ["systemChat"]; // "<player> is AFK" system chat message.

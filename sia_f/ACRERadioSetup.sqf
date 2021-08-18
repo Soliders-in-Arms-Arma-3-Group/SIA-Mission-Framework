@@ -55,8 +55,11 @@ fnc_sia_getACREHash = {
 			[([_x] call acre_api_fnc_getRadioByType), _y] call acre_api_fnc_setRadioSpatial; 
 			};
 		} forEach _hash; // Loop through saved settings, checking if player has that radio and applying the saved setting.
+<<<<<<< HEAD
 
 		//hint "Radio spatializations (ear assignment) loaded.";
+=======
+>>>>>>> b352f6854be03f34db0b2aaa29a0cbebb3b3e94c
 	};
 
 	case "resetRadioDefaultSpatials" :
