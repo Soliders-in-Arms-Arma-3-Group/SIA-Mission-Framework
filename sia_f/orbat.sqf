@@ -37,7 +37,7 @@ private _rolecolor = '';
 	_str = _str + format ["<font face='PuristaMedium' size='16' color='%2'>%1</font>", groupId _x,_sideColor] + "<br />"; // Format group callsign with side color.
 
 	{
-		_role = roleDescription _x; 
+		private _role = roleDescription _x; 
 		if (_role == "") then {_role = (getText(configFile >> "CfgVehicles" >> (typeOf _x) >> "displayName"))} else {_role = (_role splitString "@") select 0}; // If roleDescription is set, then truncate. Else use config name.
 		if (_x == player) then {_roleColor = '#B21A00'} else {_roleColor = '#ffffff'}; // Set color of player's name to tan.
 

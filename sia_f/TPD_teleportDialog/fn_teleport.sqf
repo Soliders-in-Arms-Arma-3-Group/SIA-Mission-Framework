@@ -129,7 +129,7 @@ switch (_mode) do
 	  */
 	  
 	  //Modified by McKendrick
-		[[_x],"scripts\TPD_teleportDialog\add_teleport.sqf"] remoteExec ["execVM", 0, true];
+		[[_x],"sia_f\TPD_teleportDialog\add_teleport.sqf"] remoteExec ["execVM", 0, true];
     };
   };
   case "previewPosition":

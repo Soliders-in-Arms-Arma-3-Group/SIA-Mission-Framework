@@ -6,6 +6,10 @@
 
 	#include "sia_f\TPD_teleportDialog\GUI.hpp"
 
+// AFK script
+	#include "sia_f\goAFK\defines.hpp"
+	#include "sia_f\goAFK\control.hpp"
+
 class CfgFunctions
 {
 	
@@ -31,7 +35,7 @@ disabledAI = 1;
 
 respawnTemplates[] = {"ace_spectator","Wave","Counter","Tickets"};
 
-author = "Soliders in Arms"; // Author
+author = "Soldiers in Arms"; // Author
 onLoadName = "SIA Mission Framework";
 onLoadMission = "Version 0.10";
 //loadScreen = "images\loadScreen.jpg";

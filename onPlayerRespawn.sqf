@@ -23,5 +23,5 @@ if (group player != _sqd) then {player joinSilent _sqd};
 
 // Restore ACRE PTT Assignment
 waitUntil { ([] call acre_api_fnc_isInitialized) };
-_mpttRadioList = player getVariable "mpttRadioList";
-[_mpttRadioList] call acre_api_fnc_setMultiPushToTalkAssignment;
+["loadRadioDefaultSpatials", []] execVM "sia_f\ACRERadioSetup.sqf";
+["reorderRadioMPTT", [personalRadio]] execVM "sia_f\ACRERadioSetup.sqf";

@@ -33,8 +33,8 @@ fnc_sia_getACREHash = {
 	} else {_hash};
 };
 
-switch (_mode) do
-{
+	switch (_mode) do
+	{
 	case "setRadioDefaultSpatial" :
 	{
 		private _radio = _params select 0;
@@ -56,7 +56,7 @@ switch (_mode) do
 			};
 		} forEach _hash; // Loop through saved settings, checking if player has that radio and applying the saved setting.
 
-		hint "Radio spatializations (ear assignment) loaded.";
+		//hint "Radio spatializations (ear assignment) loaded.";
 	};
 
 	case "resetRadioDefaultSpatials" :

@@ -10,23 +10,45 @@ class EditorData
 	{
 		"3denEnhanced"
 	};
+	class ItemIDProvider
+	{
+		nextID=114;
+	};
 	class Camera
 	{
-		pos[]={3896.8193,53.814835,462.76682};
-		dir[]={0.43259537,-0.30764338,-0.84758836};
-		up[]={0.13987151,0.95147771,-0.2740517};
-		aside[]={-0.89077079,-5.4808334e-007,-0.45463762};
+		pos[]={3829.335,6.3902373,462.14026};
+		dir[]={0.52959728,-0.64314735,-0.55322945};
+		up[]={0.44475263,0.76572293,-0.46459833};
+		aside[]={-0.72243744,4.0023588e-007,-0.69157439};
 	};
 };
 binarizationWanted=0;
 sourceName="SIA-Mission-Framework";
+addons[]=
+{
+	"A3_Characters_F"
+};
 class AddonsMetaData
 {
+	class List
+	{
+		items=1;
+		class Item0
+		{
+			className="A3_Characters_F";
+			name="Arma 3 Alpha - Characters and Clothing";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
+	};
 };
 randomSeed=10258519;
 class ScenarioData
 {
 	author="Liam McKendrick";
+};
+class CustomAttributes
+{
 };
 class Mission
 {
@@ -48,5 +70,38 @@ class Mission
 		minute=37;
 		startFogDecay=0.014;
 		forecastFogDecay=0.014;
+	};
+	class Entities
+	{
+		items=1;
+		class Item0
+		{
+			dataType="Group";
+			side="West";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={3846.3674,5.0014391,501.73755};
+					};
+					side="West";
+					flags=7;
+					class Attributes
+					{
+						isPlayer=1;
+					};
+					id=45;
+					type="B_Soldier_F";
+				};
+			};
+			class Attributes
+			{
+			};
+			id=44;
+		};
 	};
 };
