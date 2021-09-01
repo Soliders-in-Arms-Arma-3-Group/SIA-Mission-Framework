@@ -25,3 +25,7 @@ if (group player != _sqd) then {player joinSilent _sqd};
 waitUntil { ([] call acre_api_fnc_isInitialized) };
 ["loadRadioDefaultSpatials", []] execVM "sia_f\ACRERadioSetup.sqf";
 ["reorderRadioMPTT", [personalRadio]] execVM "sia_f\ACRERadioSetup.sqf";
+
+// Exit player from AFK if still set as AFK
+private _isAFK = player getVariable["sia_isAFK",false];
+if (_isAFK) then { [false] execVM "sia_f\goAFK\exitAFK.sqf" };

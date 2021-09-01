@@ -21,14 +21,13 @@ private _timeout = 60; // Time in seconds to temporarily suspend script after us
 
 
 private _unit = player;
-[_unit, false] remoteExec ["hideObjectGlobal", 2];
 _unit setCaptive false;
+[_unit, false] remoteExec ["hideObjectGlobal", 2];
 [_unit, true] remoteExec ["enableSimulationGlobal", 2];
-5 cutText ["","PLAIN",-1,true];
 [(name _unit + " is no longer AFK.")] remoteExec ["systemChat"]; // "<player> is AFK" system chat message.
 [] spawn { sleep 60; player setVariable["sia_isAFK",false]; }; // Time out for 60 seconds.
  
+5 cutText ["","PLAIN",-1,true];
+
 private _doTP = _this select 0;
 if (_doTP) then { [player] execVM "sia_f\teleportToSquad.sqf" };
-
-createDialog "dialogAFK";

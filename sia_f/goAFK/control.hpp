@@ -22,7 +22,7 @@ class dialogAFK
 			h = 0.07 * safezoneH;
 			tooltip = "Exit AFK state at current position"; //--- ToDo: Localize;
 			colorBackgroundActive[] = {0,0,0,0.7};
-			action = "closeDialog 1; [false]execVM 'sia_f\goAFK\exitAFK.sqf'";
+			action = "closeDialog 2; [false]execVM 'sia_f\goAFK\exitAFK.sqf'";
 		};
 		class exitAFKTPbutton: RscButton
 		{
@@ -34,7 +34,7 @@ class dialogAFK
 			h = 0.07 * safezoneH;
 			tooltip = "Exit AFK state and teleport to squad"; //--- ToDo: Localize;
 			colorBackgroundActive[] = {0,0,0,0.7};
-			action = "closeDialog 1; [true]execVM 'sia_f\goAFK\exitAFK.sqf'";
+			action = "closeDialog 2; [true]execVM 'sia_f\goAFK\exitAFK.sqf'";
 		};
 	};
 };
