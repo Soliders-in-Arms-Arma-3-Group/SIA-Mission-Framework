@@ -1,8 +1,26 @@
-// F3 - Loadout Notes
-// Credits and documentation: https://github.com/folkarps/F3/wiki
-// ====================================================================================
+/*
+
+	SIA Mission Framework (https://github.com/Soliders-in-Arms-Arma-3-Group/SIA-Mission-Framework.VR.git)
+	Author: McKendrick
+
+=====================================================================
+
+	Description:
+		Adds loadout information of player and team to briefing.
+		Credits: "F3 - Loadout Notes" from F3 (http://www.ferstaberinde.com/f3/en/), modified by McKendrick.
+
+	USAGE:
+		Run locally.
+
+	PARAMS: None
+*/
 
 if (!hasInterface || (side player == sideLogic)) exitWith {}; //Exit if not a player.
+
+// Remove old info page if there is one.
+if (!isNil "sia_loadoutInfo") then {player removeDiaryRecord ["Diary", loadoutInfo]};
+if (!isNil "sia_loadoutInfoTeam") then {player removeDiaryRecord ["Diary", loadoutInfoTeam]};
+
 // Local function to set the proper magazine count.
 private _fnc_wepMags = {
 	params [
@@ -264,6 +282,6 @@ private _text_group = "" + _text_notice;
 } forEach _units;
 // ====================================================================================
 // Create Loadout pages
-player createDiaryRecord ["diary", ["Loadout Team", _text_group]];
-player createDiaryRecord ["diary", ["Loadout", _text]];
+sia_loadoutInfoTeam = player createDiaryRecord ["diary", ["Loadout Team", _text_group]];
+sia_loadoutInfo = player createDiaryRecord ["diary", ["Loadout", _text]];
 // ====================================================================================
