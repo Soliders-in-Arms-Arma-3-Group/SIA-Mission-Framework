@@ -1,4 +1,5 @@
 startTime = date;
+setTimeMultiplier 0.1;
 
 arsenals = ((getMissionLayerEntities "Arsenals") select 0);
 publicVariable "arsenals";
