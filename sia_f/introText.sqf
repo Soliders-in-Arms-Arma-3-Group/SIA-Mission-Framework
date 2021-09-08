@@ -1,8 +1,8 @@
 
 	[ 
-		["''Voll Throttle''","font = 'PuristaSemibold'"],
+		["''Mission Name''","font = 'PuristaSemibold'"],
 		["","<br/>"],
-		["German Kommando Spezialkräfte (KSK)","font = 'PuristaSemibold'"],
+		["Faction Name","font = 'PuristaSemibold'"],
 		["","<br/>"],
-		["Eastern Europe","font = 'PuristaLight'"]
+		["Location","font = 'PuristaLight'"]
 	]  execVM "\a3\missions_f_bootcamp\Campaign\Functions\GUI\fn_SITREP.sqf";

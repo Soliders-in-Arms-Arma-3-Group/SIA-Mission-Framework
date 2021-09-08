@@ -14,6 +14,7 @@
 	PARAMS:
 		0: Array of assets for support.
 */
+
 private _str = "";
 private _assets = _this select 1;
 
@@ -32,7 +33,7 @@ private _assets = _this select 1;
 	_str = _str + "<font face='PuristaMedium'>Cargo Seats: " + "<font face='PuristaLight'>" +  str (_x emptyPositions "cargo") + "</font><br></br><br></br>";
 } forEach _assets;
 
-_str = _str + "<br></br><br></br>" + (_this select 0);
+_str = (_this select 0) + _str;
 player createDiaryRecord ["Diary",["Support",_str],taskNull,"",true];
 
 //private _icon = "z\" + getText (configfile >> "CfgVehicles" >> typeOf _x >> "picture");

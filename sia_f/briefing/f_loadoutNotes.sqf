@@ -106,7 +106,7 @@ private _fnc_loadoutDataToText = {
 	];
 
 	private _arrow = "<img image='\A3\ui_f\data\gui\rscCommon\rscTree\hiddenTexture_ca.paa' height='24'/>";
-	private _classesBlacklist = ["HandGrenade", "1Rnd_HE_Grenade_shell", "FirstAidKit"];
+	private _classesBlacklist = ["FirstAidKit"];
 
 	//Generate the loadout text from the previously defined variables.
 	private _textLong = "";

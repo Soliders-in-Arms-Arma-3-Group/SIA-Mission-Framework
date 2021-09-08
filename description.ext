@@ -33,13 +33,10 @@ class Header
 
 disabledAI = 1;
 
-respawnTemplates[] = {"ace_spectator","Wave","Counter","Tickets"};
-
-author = "Soldiers in Arms"; // Author
-onLoadName = "SIA Mission Framework";
-onLoadMission = "Version 0.10";
-//loadScreen = "images\loadScreen.jpg";
+#include "# MISSION CONFIG\missionInfo.hpp"
 
 respawn=3;
-respawnDelay=45;
 respawnOnStart=-1;
+
+// DO NOT DELETE ^^^
+// ADD YOUR OWN CODE BELOW vvv

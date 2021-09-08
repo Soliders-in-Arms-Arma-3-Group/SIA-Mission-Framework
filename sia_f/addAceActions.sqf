@@ -17,34 +17,45 @@
 
 waitUntil {!isNull player};
 
-if (!isNil "hq_button") then {
-_tphq = ["TpSL", "Teleport to Squad", "", {[_this select 1]execVM "scripts\tp.sqf"}, {true}] call ace_interact_menu_fnc_createAction; 
-[hq_button, 0, ["ACE_MainActions"], _tphq, true] call ace_interact_menu_fnc_addActionToObject;
+if (!isNil "sia_f_ACEButtons" && sia_f_enableTPToSquad) then {
+_action = ["TpSquad", "Teleport to Squad", "\A3\Ui_F\Data\IGUI\Cfg\simpleTasks\types\meet_ca.paa", {[_this select 1]execVM "sia_f\teleportToSquad.sqf"}, {true}] call ace_interact_menu_fnc_createAction; 
+{[_x, 0, ["ACE_MainActions"], _action, true] call ace_interact_menu_fnc_addActionToObject} forEach sia_f_ACEButtons;
+};
+
 
 // Manage Loadouts
-	_action = ["Loadout", "Manage Loadout", "images\gear_ca.paa", {}, {true}] call ace_interact_menu_fnc_createAction;
-	[hq_button, 0, ["ACE_MainActions"], _action, true] call ace_interact_menu_fnc_addActionToObject;
+if (sia_f_enableManageKit) then {
+	_statement = {
+		player setVariable["Saved_Loadout",getUnitLoadout player]; 
+		hint "Kit saved. Will be loaded on respawn."
+	};
+	_action = ["siaKit", "Save/Manage Kit", "\A3\Ui_F\Data\IGUI\Cfg\Actions\gear_ca.paa", _statement, {true}] call ace_interact_menu_fnc_createAction;
+	{[_x, 0, ["ACE_MainActions"], _action, true] call ace_interact_menu_fnc_addActionToObject;} forEach (sia_f_ACEButtons + sia_f_arsenals);
 
-	_action = ["SaveKit", "Save Loadout", "images\reammo_ca.paa", {player setVariable["Saved_Loadout",getUnitLoadout player]; hint "Loadout saved. Will be loaded on respawn."}, {true}] call ace_interact_menu_fnc_createAction; 
-	[hq_button, 0, ["ACE_MainActions", "Loadout"], _action, true] call ace_interact_menu_fnc_addActionToObject;
+	_action = ["SaveKit", "Save Current Kit", "\A3\Ui_F\Data\GUI\Rsc\RscDisplayArcadeMap\icon_save_ca.paa", _statement, {true}] call ace_interact_menu_fnc_createAction; 
+	{[_x, 0, ["ACE_MainActions", "siaKit"], _action, true] call ace_interact_menu_fnc_addActionToObject;} forEach (sia_f_ACEButtons + sia_f_arsenals);
 
-	_action = ["LoadKit", "Load Loadout", "z\ace\addons\disarming\UI\disarm.paa", {player setUnitLoadout(player getVariable["Saved_Loadout",[]]); hint "Loadout loaded."}, {true}] call ace_interact_menu_fnc_createAction; 
-	[hq_button, 0, ["ACE_MainActions", "Loadout"], _action, true] call ace_interact_menu_fnc_addActionToObject;
+	_action = ["LoadKit", "Load Saved Kit", "\A3\Ui_F\Data\IGUI\Cfg\Actions\reammo_ca.paa", {player setUnitLoadout(player getVariable["Saved_Loadout",[]]); hint "Saved kit loaded."}, {true}] call ace_interact_menu_fnc_createAction; 
+	{[_x, 0, ["ACE_MainActions", "siaKit"], _action, true] call ace_interact_menu_fnc_addActionToObject;} forEach (sia_f_ACEButtons + sia_f_arsenals);
 
-	_action = ["ClearKit", "Remove Saved Loadout", "z\ace\addons\arsenal\data\iconClearContainer.paa", {player setVariable["Saved_Loadout",nil]; hint "Loadout cleared. Will save loadout on death."}, {true}] call ace_interact_menu_fnc_createAction; 
-	[hq_button, 0, ["ACE_MainActions", "Loadout"], _action, true] call ace_interact_menu_fnc_addActionToObject;
+	_action = ["ClearKit", "Remove Saved Kit", "z\ace\addons\arsenal\data\iconClearContainer.paa", {player setVariable["Saved_Loadout",nil]; hint "Saved kit cleared. Will use kit from death when respawned"}, {true}] call ace_interact_menu_fnc_createAction; 
+	{[_x, 0, ["ACE_MainActions", "siaKit"], _action, true] call ace_interact_menu_fnc_addActionToObject;} forEach (sia_f_ACEButtons + sia_f_arsenals);
 };
 
 // SIA actions 
 	_action = ["SIA", "SIA Options", "sia_f\images\sia_tiny.paa", {}, {true}] call ace_interact_menu_fnc_createAction;
 	[(typeOf player), 1, ["ACE_SelfActions"], _action] call ace_interact_menu_fnc_addActionToClass;
 	
+	if (sia_f_enableGoAFK) then {
 	_action = ["SIA_AFK", "Go AFK", "", {execVM "sia_f\goAFK\goAFK.sqf"}, { !(player getVariable["sia_isAFK",false]) }] call ace_interact_menu_fnc_createAction;
 	[(typeOf player), 1, ["ACE_SelfActions", "SIA"], _action] call ace_interact_menu_fnc_addActionToClass;
-
+	};
+	
 	// SIA Radio Actions
+	if (sia_f_acreEnabled) then {
 	_action = ["SIA_ConfigACRE", "ACRE Settings", "", {}, {true}] call ace_interact_menu_fnc_createAction;
 	[(typeOf player), 1, ["ACE_SelfActions", "SIA"], _action] call ace_interact_menu_fnc_addActionToClass;
+	};
 
 {
 	private _displayName = (getText (ConfigFile >> "CfgWeapons" >> _x >> "displayName") splitString "AN/") select 0;
@@ -71,9 +82,9 @@ _tphq = ["TpSL", "Teleport to Squad", "", {[_this select 1]execVM "scripts\tp.sq
 
 // Zeus action
 _statement = {
-    hasMissionStarted = true; 
-	publicVariable "hasMissionStarted";
+    sia_f_missionStarted = true; 
+	publicVariable "sia_f_missionStarted";
 	["sia_f\startMission.sqf"] remoteExec ["execVM", 2];
 };
-_action = ["missionStart","Start Mission","",_statement,{!hasMissionStarted}] call ace_interact_menu_fnc_createAction;
+_action = ["missionStart","Start Mission","",_statement,{!sia_f_missionStarted}] call ace_interact_menu_fnc_createAction;
 [["ACE_ZeusActions"], _action] call ace_interact_menu_fnc_addActionToZeus;

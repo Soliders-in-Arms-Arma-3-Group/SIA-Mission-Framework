@@ -6,8 +6,8 @@
 =====================================================================
 
 	Description:
-		Adds weaather information to briefing. 
-		Credits: "F3 - Mission Condition briefing notes" from F3 (http://www.ferstaberinde.com/f3/en/), modifiec by McKendrick.
+		Adds weather information to briefing. 
+		Credits: "F3 - Mission Condition briefing notes" from F3 (http://www.ferstaberinde.com/f3/en/), modified by McKendrick.
 
 	USAGE:
 		Run locally.

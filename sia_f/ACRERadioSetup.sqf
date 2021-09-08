@@ -21,6 +21,8 @@
 */
 
 if (!hasInterface) exitWith {}; // Exit if not player.
+private _hasRadio = [player] call acre_api_fnc_hasRadio;
+if (!sia_f_acreEnabled) exitWith {}; // Exit if acre is set to not enabled.
 
 private ["_mode", "_params"];
 _mode   = _this param [0, "", [""]];
@@ -55,11 +57,6 @@ fnc_sia_getACREHash = {
 			[([_x] call acre_api_fnc_getRadioByType), _y] call acre_api_fnc_setRadioSpatial; 
 			};
 		} forEach _hash; // Loop through saved settings, checking if player has that radio and applying the saved setting.
-<<<<<<< HEAD
-
-		//hint "Radio spatializations (ear assignment) loaded.";
-=======
->>>>>>> b352f6854be03f34db0b2aaa29a0cbebb3b3e94c
 	};
 
 	case "resetRadioDefaultSpatials" :
@@ -82,7 +79,10 @@ fnc_sia_getACREHash = {
 	
 	case "reorderRadioMPTT" :
 	{
-		private  _radio = ([_params select 0] call acre_api_fnc_getRadioByType);
+		_radioType = (_params select 0);
+		_hasRadio = [player, _radioType] call acre_api_fnc_hasKindOfRadio;
+		if (!_hasRadio) exitWith {};
+		private  _radio = ([_radioType] call acre_api_fnc_getRadioByType);
 		private _mptt = [] call acre_api_fnc_getMultiPushToTalkAssignment;
 		private _index = _mptt find _radio;
 

@@ -20,5 +20,5 @@ if (!isServer) exitWith {}; // Exit if not server.
 if (isMultiplayer) then {setDate startTime}; // Set time to start of mission.
 setTimeMultiplier 1; // Set time acceleration to default;
 
-["sia_f\f_loadoutNotes"] remoteExec ["execVM"];
-["sia_f\introText.sqf"] remoteExec ["execVM"];
+["sia_f\briefing\f_loadoutNotes"] remoteExec ["execVM"];
+["sia_f\briefing\introText.sqf"] remoteExec ["execVM"];

@@ -26,7 +26,6 @@ private _unit = player;
 player setCaptive true; // Set player to captive.
 [_unit, true] remoteExec ["hideObjectGlobal", 2]; // Hide player object.
 [_unit, false] remoteExec ["enableSimulationGlobal", 2]; // Disables player movement.
-//if (vehicle player != player) then {moveOut player}; // If player is in a vehicle, eject player from the vehicle.
 player setVariable["sia_isAFK",true]; // Updates player variable.
 [(name player + " is now AFK.")] remoteExec ["systemChat"]; // "<player> is AFK" system chat message.
 

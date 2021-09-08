@@ -54,7 +54,6 @@ private _rolecolor = '';
 		} else {
 			_teamColor = '#FFB84C'; // If unit not in player's group, then set color to Koromiko
 		};
-
 		_rankIcon = format ["<img color='%1' image='\A3\Ui_F\Data\GUI\Cfg\Ranks\"+ (rank _x) + "_gs.paa' width='15' height='15'/>", _teamColor]; // Get icon of units' rank from config.
 		_roleIcon = format ["<img color='%1' image='\A3\Ui_F\Data\Map\VehicleIcons\"+ (getText(configFile >> "CfgVehicles" >> (typeOf _x) >> "icon")) + "_ca.paa' width='15' height='15'/>", _teamColor]; // Get icon of units' role from config.
 		_str = _str + "  " + _roleIcon + "  " + format ["<font color='%2' face='%3'>%1: </font>", _role, _roleColor,'PuristaBold'] + format ["<font  color='%2' face='%3'>%1</font>", (name _x), _teamColor, 'PuristaLight'] + "  " + _rankIcon + "  " + "<br />"; // Combine images, role, and name into one string.
