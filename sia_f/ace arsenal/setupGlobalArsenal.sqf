@@ -28,6 +28,17 @@ if (sia_f_haveBasics) then {
 	{[_x, _array, true] call ace_arsenal_fnc_addVirtualItems} forEach sia_f_arsenals;
 };
 
+if (sia_f_acreEnabled) then {
+	{
+		_acreRadios = ([] call acre_api_fnc_getAllRadios) select 0;
+		if (_x != "NONE") then {
+			_y = _x;
+			if (_x in _acreRadios) then { {[_x, [_y], true] call ace_arsenal_fnc_addVirtualItems} forEach sia_f_arsenals }
+			else {["Radio type: Invalid option: %1", _x] call BIS_fnc_error}; // Log error if wrong input given.
+		}
+	} forEach [sia_f_personalRadio, sia_f_handheldRadio, sia_f_manpackRadio];
+};
+
 if (sia_f_haveCTab) then {
 	_array = parseSimpleArray (loadfile "sia_f\ace arsenal\item pools\baseArsenalcTab.txt");
 	{[_x, _array, true] call ace_arsenal_fnc_addVirtualItems} forEach sia_f_arsenals;

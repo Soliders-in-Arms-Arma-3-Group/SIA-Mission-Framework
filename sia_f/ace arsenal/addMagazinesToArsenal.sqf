@@ -15,8 +15,8 @@
 		0: Array of objects to act as arsenals.
 */
 
+private _arsenals = _this select 0;
 
 private _mags = primaryWeaponMagazine player;
 _mags arrayIntersect (secondaryWeaponMagazine player); // Create array of player's primary and secondary weapon magazines, and add them to global arsenal.
-{if ( isClass (configFile >> "CFGMagazines" >> _x)) then {_mags pushBackUnique _x}} forEach _roleItems;
 {[_x, _mags, true] call ace_arsenal_fnc_addVirtualItems} forEach _arsenals;

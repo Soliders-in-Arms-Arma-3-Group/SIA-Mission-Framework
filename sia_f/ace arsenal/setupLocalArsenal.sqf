@@ -22,25 +22,15 @@ if (typeName _arsenals != "ARRAY") exitWith {["Incorrect format: %1", _arsenals]
 
 private _role = player getVariable ["role", "none"];
 
-// Add player's loadout to player's local arsenal
+// Add player's loadout to player's local arsenal.
 _loadout = (getUnitLoadout player);
 _loadout = str _loadout splitString "[]," joinString ",";
 _loadout = parseSimpleArray ("[" + _loadout + "]");
 _loadout = _loadout arrayIntersect _loadout select {_x isEqualType "" && {_x != ""}};
 {[_x, _loadout] call ace_arsenal_fnc_addVirtualItems} forEach _arsenals;
 
-// Run local arsenal config
+// Run local arsenal config.
 [_arsenals] execVM "# MISSION CONFIG\localArsenalConfig.sqf";
 
-// Add radios
-if (sia_f_acreEnabled) then {
-	if (sia_f_personalRadio == "ACRE_PRC343") then {player addItem sia_f_personalRadio};
-
-	if (sia_f_handheldRadio == "ACRE_PRC152" || sia_f_handheldRadio == "ACRE_PRC148") then {
-		if ((_role == "sql") || (_role == "tl") || (_role == "pltco") || (_role == "pltsgt") || (_role == "gm")) then {player addItem sia_f_handheldRadio};
-	};
-
-	if (sia_f_manpackRadio == "ACRE_PRC77" || sia_f_manpackRadio == "ACRE_PRC117F") then {
-		if ((_role == "pltco") || (_role == "pltsgt")) then {player addItem sia_f_manpackRadio};
-	};
-};
+// Add magazines to global arsenal.
+[_arsenals] execVM "sia_f\ace arsenal\addMagazinesToArsenal.sqf";
