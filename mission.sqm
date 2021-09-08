@@ -5,29 +5,29 @@ class EditorData
 	angleGridStep=0.2617994;
 	scaleGridStep=1;
 	autoGroupingDist=10;
-	toggles=1;
+	toggles=513;
 	mods[]=
 	{
 		"3denEnhanced"
 	};
 	class ItemIDProvider
 	{
-		nextID=410;
+		nextID=411;
 	};
 	class LayerIndexProvider
 	{
-		nextID=54;
+		nextID=61;
 	};
 	class Camera
 	{
-		pos[]={3905.7178,49.914429,4423.8164};
-		dir[]={0.12976709,-0.55315661,0.8229084};
-		up[]={0.086164296,0.83307725,0.54640454};
-		aside[]={0.98779356,7.4505806e-009,-0.15576836};
+		pos[]={3920.6084,80.489532,4457.022};
+		dir[]={-0.35091045,-0.78972477,0.50319213};
+		up[]={-0.45173278,0.61345935,0.6477679};
+		aside[]={0.82024604,8.1956387e-008,0.57201391};
 	};
 };
 binarizationWanted=0;
-sourceName="SIA-Mission-Framework";
+sourceName="sia-mission-framework";
 addons[]=
 {
 	"A3_Modules_F_Curator_Curator",
@@ -1188,7 +1188,7 @@ class Mission
 							dataType="Object";
 							class PositionInfo
 							{
-								position[]={3886.3677,5.8924227,4469.9355};
+								position[]={3886.3679,5.8924227,4469.936};
 							};
 							side="Empty";
 							flags=4;
@@ -1240,6 +1240,101 @@ class Mission
 								};
 								class Attribute2
 								{
+									property="ace_arsenal_attribute";
+									expression="if (!is3DEN) then {[_this, +_value] call ace_arsenal_fnc_attributeInit}";
+									class Value
+									{
+										class data
+										{
+											class type
+											{
+												type[]=
+												{
+													"ARRAY"
+												};
+											};
+											class value
+											{
+												items=2;
+												class Item0
+												{
+													class data
+													{
+														class type
+														{
+															type[]=
+															{
+																"ARRAY"
+															};
+														};
+														class value
+														{
+															items=3;
+															class Item0
+															{
+																class data
+																{
+																	class type
+																	{
+																		type[]=
+																		{
+																			"STRING"
+																		};
+																	};
+																	value="UK3CB_BHP";
+																};
+															};
+															class Item1
+															{
+																class data
+																{
+																	class type
+																	{
+																		type[]=
+																		{
+																			"STRING"
+																		};
+																	};
+																	value="hgun_Pistol_heavy_02_F";
+																};
+															};
+															class Item2
+															{
+																class data
+																{
+																	class type
+																	{
+																		type[]=
+																		{
+																			"STRING"
+																		};
+																	};
+																	value="hgun_ACPC2_F";
+																};
+															};
+														};
+													};
+												};
+												class Item1
+												{
+													class data
+													{
+														class type
+														{
+															type[]=
+															{
+																"SCALAR"
+															};
+														};
+														value=0;
+													};
+												};
+											};
+										};
+									};
+								};
+								class Attribute3
+								{
 									property="ace_cargo_size";
 									expression="[_this, _value] call ace_cargo_fnc_setSize;";
 									class Value
@@ -1257,7 +1352,7 @@ class Mission
 										};
 									};
 								};
-								nAttributes=3;
+								nAttributes=4;
 							};
 						};
 					};
@@ -4452,13 +4547,13 @@ class Mission
 									dataType="Object";
 									class PositionInfo
 									{
-										position[]={3834.6348,5.0014391,4506.9526};
+										position[]={3834.635,5.0014391,4506.9526};
 									};
 									side="East";
 									flags=7;
 									class Attributes
 									{
-										init="call{this setVariable [""role"", ""pl""];}";
+										init="call{this setVariable [""role"", ""gm""];}";
 										name="gm_opfor";
 										description="Game Master@Zeus";
 										isPlayable=1;
@@ -9504,13 +9599,13 @@ class Mission
 									dataType="Object";
 									class PositionInfo
 									{
-										position[]={3961.23,5.0014391,4505.6572};
+										position[]={3961.23,5.0014391,4505.6567};
 									};
 									side="Independent";
 									flags=7;
 									class Attributes
 									{
-										init="call{this setVariable [""role"", ""pl""];}";
+										init="call{this setVariable [""role"", ""gm""];}";
 										name="gm_independent";
 										description="Game Master@Zeus";
 										isPlayable=1;
@@ -14718,13 +14813,13 @@ class Mission
 									dataType="Object";
 									class PositionInfo
 									{
-										position[]={3901.7759,5.0014391,4509.6733};
+										position[]={3901.7759,5.0014391,4509.6738};
 									};
 									side="West";
 									flags=7;
 									class Attributes
 									{
-										init="call{this setVariable [""role"", ""pl""];}";
+										init="call{this setVariable [""role"", ""gm""];}";
 										name="gm_blufor";
 										description="Game Master@Zeus";
 										isPlayable=1;
