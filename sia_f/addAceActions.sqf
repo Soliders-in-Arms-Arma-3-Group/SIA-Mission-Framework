@@ -41,6 +41,11 @@ if (sia_f_enableManageKit) then {
 	_action = ["ClearKit", "Remove Saved Kit", "z\ace\addons\arsenal\data\iconClearContainer.paa", {player setVariable["Saved_Loadout",nil]; hint "Saved kit cleared. Will use kit from death when respawned"}, {true}] call ace_interact_menu_fnc_createAction; 
 	{[_x, 0, ["ACE_MainActions", "siaKit"], _action, true] call ace_interact_menu_fnc_addActionToObject;} forEach (sia_f_ACEButtons + sia_f_arsenals);
 };
+// Update Loadout Info
+if (sia_f_enableLoadoutInfo && sia_f_briefLoadout) then {
+	_action = ["loadoutInfo", "Update Loadout Info", "\A3\Ui_F\Data\IGUI\Cfg\simpleTasks\types\documents_ca.paa", {execVM "sia_f\briefing\f_loadoutNotes.sqf"}, {!sia_f_missionStarted}] call ace_interact_menu_fnc_createAction;
+	{[_x, 0, ["ACE_MainActions"], _action, true] call ace_interact_menu_fnc_addActionToObject;} forEach (sia_f_ACEButtons);
+};
 
 // SIA actions 
 	_action = ["SIA", "SIA Options", "sia_f\images\sia_tiny.paa", {}, {true}] call ace_interact_menu_fnc_createAction;
@@ -88,3 +93,24 @@ _statement = {
 };
 _action = ["missionStart","Start Mission","",_statement,{!sia_f_missionStarted}] call ace_interact_menu_fnc_createAction;
 [["ACE_ZeusActions"], _action] call ace_interact_menu_fnc_addActionToZeus;
+
+_action = ["setupPhase","Set Phase","", {} ,{!sia_f_missionStarted}] call ace_interact_menu_fnc_createAction;
+[["ACE_ZeusActions"], _action] call ace_interact_menu_fnc_addActionToZeus;
+
+_action = ["upperbrief","Upper-level Brief","", {["setupPhase",["The upper-level brief is commencing!","\A3\ui_f\data\IGUI\Cfg\simpleTasks\types\whiteboard_ca.paa"]] remoteExec ["BIS_fnc_showNotification"]; sia_f_setupPhase = "Upper-level Briefing"; publicVariable "sia_f_setupPhase";} ,{!sia_f_missionStarted}] call ace_interact_menu_fnc_createAction;
+[["ACE_ZeusActions", "setupPhase"], _action] call ace_interact_menu_fnc_addActionToZeus;
+
+_action = ["lowerbrief","Lower-level Brief","", {["setupPhase",["The lower-level brief is commencing!", "\A3\ui_f\data\IGUI\Cfg\simpleTasks\types\whiteboard_ca.paa"]] remoteExec ["BIS_fnc_showNotification"]; sia_f_setupPhase = "Lower-level Briefing"} ,{!sia_f_missionStarted}] call ace_interact_menu_fnc_createAction;
+[["ACE_ZeusActions", "setupPhase"], _action] call ace_interact_menu_fnc_addActionToZeus;
+
+_action = ["kitUp","Kit Up","", {["setupPhase",["Time to kit up!","\A3\ui_f\data\IGUI\Cfg\simpleTasks\types\rearm_ca.paa"]] remoteExec ["BIS_fnc_showNotification"]; sia_f_setupPhase = "Kitting Up"} ,{!sia_f_missionStarted}] call ace_interact_menu_fnc_createAction;
+[["ACE_ZeusActions", "setupPhase"], _action] call ace_interact_menu_fnc_addActionToZeus;
+
+_action = ["mountUp","Mount Up","", {["setupPhase",["Time to mount up!","\A3\ui_f\data\IGUI\Cfg\simpleTasks\types\getout_ca.paa"]] remoteExec ["BIS_fnc_showNotification"]; sia_f_setupPhase = "Mounting Up"} ,{!sia_f_missionStarted}] call ace_interact_menu_fnc_createAction;
+[["ACE_ZeusActions", "setupPhase"], _action] call ace_interact_menu_fnc_addActionToZeus;
+
+_action = ["standby","Stand By","", {["setupPhase",["Stand By","\A3\ui_f\data\IGUI\Cfg\simpleTasks\types\wait_ca.paa"]] remoteExec ["BIS_fnc_showNotification"]; sia_f_setupPhase = "Standing By"} ,{!sia_f_missionStarted}] call ace_interact_menu_fnc_createAction;
+[["ACE_ZeusActions", "setupPhase"], _action] call ace_interact_menu_fnc_addActionToZeus;
+
+
+

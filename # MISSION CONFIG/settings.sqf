@@ -21,13 +21,15 @@ sia_f_civTickets = -1;
 
 // ============================================================================================
 // Mission Info
-// Give a custom name for the faction the players will be playing as. If left blank, the name as listed in the editor will be used by default.
+// Give a custom name for the mission and faction(s) the players will be playing as. If left blank, the name as listed in the game will be used by default.
+
+sia_f_missionName = "";
 
 sia_f_bluforFactionName = "";
-sia_f_indepFactioName = "";
+sia_f_indepFactionName = "";
 sia_f_opforFactionName = "";
 
-sia_f_showStatusHint= true;
+sia_f_showStatusHint= true; // Toggle persistent info display.
 
 // ============================================================================================
 // Arsenal Options

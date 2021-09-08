@@ -21,4 +21,12 @@ if (isMultiplayer) then {setDate startTime}; // Set time to start of mission.
 setTimeMultiplier 1; // Set time acceleration to default;
 
 ["sia_f\briefing\f_loadoutNotes"] remoteExec ["execVM"];
-["sia_f\briefing\introText.sqf"] remoteExec ["execVM"];
+
+sleep 1;
+
+["setupPhase",["Mission is a go!","\A3\ui_f\data\IGUI\Cfg\simpleTasks\types\run_ca.paa"]] remoteExec ["BIS_fnc_showNotification"];
+[""] remoteExec ["hintSilent"];
+
+sleep 9;
+
+["sia_f\introText.sqf"] remoteExec ["execVM"];

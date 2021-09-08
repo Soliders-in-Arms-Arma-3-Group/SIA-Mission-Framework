@@ -1,13 +1,19 @@
+sia_f_setupComplete = false;
+publicVariable "sia_f_setupComplete";
+
 startTime = date;
 setTimeMultiplier 0.1;
 
-sia_f_missionName = missionName;
+sia_f_setupPhase = "Waiting";
+publicVariable "sia_f_setupPhase";
 
 sia_f_missionStarted = false;
 publicVariable "sia_f_missionStarted";
 
 private _script_handler = execVM "# MISSION CONFIG\settings.sqf"; // LOAD SETTINGS
 waitUntil { scriptDone _script_handler };
+
+if (sia_f_missionName == "") then { sia_f_missionName = missionName }; // Get mission name.
 
 // Publicize Variables
 	if (sia_f_acreEnabled) then {
@@ -53,3 +59,6 @@ if (!isNil "respawn_pos_civilian") then {"respawn_civilian" setMarkerPos respawn
 	["enableGlobalMessage", false] call TPD_fnc_teleport; // Disable global message
 	{ ["addActions", [_x]] call TPD_fnc_teleport; } forEach sia_f_ACEButtons; // Add 'Teleport Menu' to objects
  };
+
+sia_f_setupComplete = true;
+publicVariable "sia_f_setupComplete";
