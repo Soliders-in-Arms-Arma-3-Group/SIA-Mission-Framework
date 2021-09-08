@@ -87,4 +87,4 @@ _diaryText = _diaryText + format ["<br/><font size='16'><font color='#aaaaaa'>Mo
 
 // Insert final result into briefing
 //waitUntil {scriptDone f_script_briefing};
-player createDiaryRecord ["diary", ["Mission Conditions", _diaryText]];
+player createDiaryRecord ["diary", ["Environmental Conditions", _diaryText]];

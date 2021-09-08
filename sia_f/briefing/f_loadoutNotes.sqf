@@ -18,8 +18,8 @@
 if (!hasInterface || (side player == sideLogic)) exitWith {}; //Exit if not a player.
 
 // Remove old info page if there is one.
-if (!isNil "sia_loadoutInfo") then {player removeDiaryRecord ["Diary", loadoutInfo]};
-if (!isNil "sia_loadoutInfoTeam") then {player removeDiaryRecord ["Diary", loadoutInfoTeam]};
+if (!isNil "sia_f_loadoutInfo") then {player removeDiaryRecord ["Diary", sia_f_loadoutInfo]};
+if (!isNil "sia_f_loadoutInfoTeam") then {player removeDiaryRecord ["Diary", sia_f_loadoutInfoTeam]};
 
 // Local function to set the proper magazine count.
 private _fnc_wepMags = {
@@ -282,6 +282,6 @@ private _text_group = "" + _text_notice;
 } forEach _units;
 // ====================================================================================
 // Create Loadout pages
-sia_loadoutInfoTeam = player createDiaryRecord ["diary", ["Loadout Team", _text_group]];
-sia_loadoutInfo = player createDiaryRecord ["diary", ["Loadout", _text]];
+sia_f_loadoutInfoTeam = player createDiaryRecord ["diary", ["Loadout Team", _text_group]];
+sia_f_loadoutInfo = player createDiaryRecord ["diary", ["Loadout", _text]];
 // ====================================================================================
