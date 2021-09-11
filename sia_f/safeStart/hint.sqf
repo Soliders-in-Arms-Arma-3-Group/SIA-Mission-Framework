@@ -4,7 +4,7 @@ private _colorSecondary ="#666666";
 
 _separator = parseText "<br />------------------------<br />";
 _image = "sia_f\images\sia_tiny.paa";
-_txtHeader = text sia_f_missionName; 
+_txtHeader = text sia_f_missionName;
 _txtHeader setAttributes ["color", _colorHeader, "size", "1.4","font","PuristaSemibold", "shadow","1","shadowColor",_colorSecondary,"shadowOffset","0.07"];
 _txt1 = text "Current Phase:";
 _txt1 setAttributes ["align", "left","font","PuristaMedium"];
@@ -40,12 +40,9 @@ _txtGroupName = text (groupId (group player));
 _txtGroupName setAttributes ["align", "right","font","PuristaSemibold","color",_colorHeader];
 _groupMembers =  (units group player) apply {name _x};
 _txtGroupMembers = "";
-//_txtGroupMembers = parseText (( _groupMembers joinString ", " + sia_f_roleName + "<br/>") );
-//_txtGroupMembers setAttributes ["align", "left","color", _colorSecondary,"font","PuristaMedium"];
 
 _array = [
-	image _image, 
-	lineBreak, 
+	image _image,  
 	lineBreak, 
 	_txtHeader,
 	_separator, 
@@ -98,7 +95,6 @@ _array = [
 		_array pushBack lineBreak;
 } forEach ([leader player] + (units group player - [leader player])); // Do for all units in group, starting with the group lead.
 
-//+ format ["<font  color='%2' face='%3'>%1</font>", (name _x), _teamColor, 'PuristaLight'] + "  " + _rankIcon + "  "
 _structuredText = composeText _array;
 
 hintSilent _structuredText;

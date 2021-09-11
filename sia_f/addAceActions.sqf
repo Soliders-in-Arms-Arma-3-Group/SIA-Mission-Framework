@@ -48,7 +48,7 @@ if (sia_f_enableLoadoutInfo && sia_f_briefLoadout) then {
 };
 
 // SIA actions 
-	_action = ["SIA", "SIA Options", "sia_f\images\sia_tiny.paa", {}, {true}] call ace_interact_menu_fnc_createAction;
+	_action = ["SIA", " SIA Options", "sia_f\images\sia_tiny.paa", {}, {true}] call ace_interact_menu_fnc_createAction;
 	[(typeOf player), 1, ["ACE_SelfActions"], _action] call ace_interact_menu_fnc_addActionToClass;
 	
 	if (sia_f_enableGoAFK) then {
