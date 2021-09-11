@@ -19,3 +19,6 @@ How to use:
   11. Optionally, you can set up role specific arsenals using the "localArsenalConfig" file.
   12. Make your mission as usual.
   13. When ready, type up your briefing for the side(s) the players will be playing as.
+  
+In game:
+  The SIA Mission Framework makes use of a powerful feature, Zeus ACE Actions, which adds additional actions for the game master they can use. This includes the important "Start Mission" action which the Game Master will use to disable the safeStart script.
