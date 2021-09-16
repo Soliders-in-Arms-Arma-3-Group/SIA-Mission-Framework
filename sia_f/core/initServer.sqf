@@ -13,7 +13,14 @@ publicVariable "sia_f_missionStarted";
 private _script_handler = execVM "# MISSION CONFIG\settings.sqf"; // LOAD SETTINGS
 waitUntil { scriptDone _script_handler };
 
-if (sia_f_missionName == "") then { sia_f_missionName = missionName }; // Get mission name.
+if (sia_f_missionName == "" || isNil "sia_f_missionName") then { sia_f_missionName = missionName }; // Get mission name.
+
+if (sia_f_missionLocationName == "") then { 
+	private _arr = (toArray worldName);
+	_str = toUpper (toString [(_arr select 0)]);
+	_arr set [0, ((toArray _str) select 0)];
+	sia_f_missionLocationName = (toString _arr) 
+	};  // Get location name. Set first letter to uppercase if pulled from game files.
 
 // Publicize Variables
 	if (sia_f_acreEnabled) then {
@@ -22,6 +29,7 @@ if (sia_f_missionName == "") then { sia_f_missionName = missionName }; // Get mi
 		publicVariable "sia_f_manpackRadio";
 	};
 	publicVariable "sia_f_missionName";
+	publicVariable "sia_f_missionLocationName";
 	publicVariable "sia_f_bluforFactionName";
 	publicVariable "sia_f_indepFactioName";
 	publicVariable "sia_f_opforFactionName";
@@ -35,11 +43,22 @@ if (sia_f_missionName == "") then { sia_f_missionName = missionName }; // Get mi
 	publicVariable "sia_f_ACEButtons";
 	publicVariable "sia_f_acreEnabled";
 	publicVariable "sia_f_showStatusHint";
+	
 
  // Setup Global Arsenal
-if (sia_f_arsenalEnabled) then { 
+if (sia_f_arsenalEnabled && (!isNil "sia_f_arsenals")) then { 
 publicVariable "sia_f_arsenals";
 [sia_f_arsenals] execVM "sia_f\ace arsenal\setupGlobalArsenal.sqf";
+
+	{
+		clearBackpackCargoGlobal _x;
+		clearMagazineCargoGlobal _x;
+		clearWeaponCargoGlobal _x;
+		clearItemCargoGlobal _x;
+		[_x, false] call ace_dragging_fnc_setDraggable;
+		[_x, false] call ace_dragging_fnc_setCarryable;
+	} forEach sia_f_arsenals;
+
 };
 
 // Setup Respawns
@@ -54,11 +73,15 @@ if (!isNil "respawn_pos_civilian") then {"respawn_civilian" setMarkerPos respawn
 	if (sia_f_opforTickets > 0) then { [east, sia_f_opforTickets] call BIS_fnc_respawnTickets };
 	if (sia_f_civTickets > 0) then { [civilian, sia_f_civTickets] call BIS_fnc_respawnTickets };
 
- // Revo's TP Menu Function
- if (sia_f_enableTPMenu) then {
-	["enableGlobalMessage", false] call TPD_fnc_teleport; // Disable global message
-	{ ["addActions", [_x]] call TPD_fnc_teleport; } forEach sia_f_ACEButtons; // Add 'Teleport Menu' to objects
- };
+if (!isNil "sia_f_ACEButtons") then {
+	// Revo's TP Menu Function
+	if (sia_f_enableTPMenu) then {
+		["enableGlobalMessage", false] call TPD_fnc_teleport; // Disable global message
+		{ ["addActions", [_x]] call TPD_fnc_teleport; } forEach sia_f_ACEButtons; // Add 'Teleport Menu' to objects
+	};
+
+	{ _x setObjectTextureGlobal [0, "sia_f\images\ace_button_img.jpg"] } forEach sia_f_ACEButtons;
+};
 
 sia_f_setupComplete = true;
 publicVariable "sia_f_setupComplete";

@@ -17,7 +17,7 @@ sia_f_factionName = "";
 	if (sia_f_factionName == "") then { sia_f_factionName = getText (configfile >> "CfgFactionClasses" >> (faction player) >> "displayName") };
 
 	sia_f_roleName = roleDescription player; 
-	if (sia_f_roleName == "") then {_role = (getText(configFile >> "CfgVehicles" >> (typeOf player) >> "displayName"))} else {sia_f_roleName = (sia_f_roleName splitString "@") select 0}; // If roleDescription is set, then truncate. Else use config name.
+	if (sia_f_roleName == "") then {sia_f_roleName = (getText(configFile >> "CfgVehicles" >> (typeOf player) >> "displayName"))} else {sia_f_roleName = (sia_f_roleName splitString "@") select 0}; // If roleDescription is set, then truncate. Else use config name.
 
 
 sleep 1;
