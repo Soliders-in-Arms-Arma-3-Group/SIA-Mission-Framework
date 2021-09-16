@@ -43,7 +43,7 @@ if (sia_f_enableManageKit) then {
 };
 // Update Loadout Info
 if (sia_f_enableLoadoutInfo && sia_f_briefLoadout) then {
-	_action = ["loadoutInfo", "Update Loadout Info", "\A3\Ui_F\Data\IGUI\Cfg\simpleTasks\types\documents_ca.paa", {execVM "sia_f\briefing\f_loadoutNotes.sqf"}, {!sia_f_missionStarted}] call ace_interact_menu_fnc_createAction;
+	_action = ["loadoutInfo", "Update Loadout Info", "\A3\Ui_F\Data\IGUI\Cfg\simpleTasks\types\documents_ca.paa", {execVM "sia_f\briefing\f_loadoutNotes.sqf"; [] spawn {sleep 0.2; openMap true; player selectDiarySubject "Diary"}}, {!sia_f_missionStarted}] call ace_interact_menu_fnc_createAction;
 	{[_x, 0, ["ACE_MainActions"], _action, true] call ace_interact_menu_fnc_addActionToObject;} forEach (sia_f_ACEButtons);
 };
 
@@ -52,65 +52,78 @@ if (sia_f_enableLoadoutInfo && sia_f_briefLoadout) then {
 	[(typeOf player), 1, ["ACE_SelfActions"], _action] call ace_interact_menu_fnc_addActionToClass;
 	
 	if (sia_f_enableGoAFK) then {
-	_action = ["SIA_AFK", "Go AFK", "", {execVM "sia_f\goAFK\goAFK.sqf"}, { !(player getVariable["sia_isAFK",false]) }] call ace_interact_menu_fnc_createAction;
+	_action = ["SIA_AFK", "Go AFK", "\A3\Ui_F\Data\IGUI\Cfg\simpleTasks\types\wait_ca.paa", {execVM "sia_f\goAFK\goAFK.sqf"}, { !(player getVariable["sia_isAFK",false]) }] call ace_interact_menu_fnc_createAction;
 	[(typeOf player), 1, ["ACE_SelfActions", "SIA"], _action] call ace_interact_menu_fnc_addActionToClass;
 	};
 	
+	
+	// Mission Info Hint System
+		_action = ["SIA_Hint", "Show Mission Info", "\A3\Ui_F\Data\IGUI\Cfg\simpleTasks\types\unknown_ca.paa", {execVM "sia_f\safeStart\hint.sqf"}, {true}] call ace_interact_menu_fnc_createAction;
+		[(typeOf player), 1, ["ACE_SelfActions", "SIA"], _action] call ace_interact_menu_fnc_addActionToClass;
+
+		_statement = {
+			if (sia_f_showStatusHint) then {sia_f_showStatusHint = false; hint "Persistent Hint is now DISABLED"} else {sia_f_showStatusHint = true; hint "Persistent Hint is now ENABLED"}
+		};
+
+		_action = ["SIA_Hint_Toggle", "Toggle Persistent Hint", "", _statement, {true}] call ace_interact_menu_fnc_createAction;
+		[(typeOf player), 1, ["ACE_SelfActions", "SIA", "SIA_Hint"], _action] call ace_interact_menu_fnc_addActionToClass;
+
 	// SIA Radio Actions
-	if (sia_f_acreEnabled) then {
-	_action = ["SIA_ConfigACRE", "ACRE Settings", "", {}, {true}] call ace_interact_menu_fnc_createAction;
-	[(typeOf player), 1, ["ACE_SelfActions", "SIA"], _action] call ace_interact_menu_fnc_addActionToClass;
-	};
+		if (sia_f_acreEnabled) then {
+		_action = ["SIA_ConfigACRE", "ACRE Settings", "\A3\Ui_F\Data\IGUI\Cfg\simpleTasks\types\radio_ca.paa", {}, {true}] call ace_interact_menu_fnc_createAction;
+		[(typeOf player), 1, ["ACE_SelfActions", "SIA"], _action] call ace_interact_menu_fnc_addActionToClass;
+		};
 
-{
-	private _displayName = (getText (ConfigFile >> "CfgWeapons" >> _x >> "displayName") splitString "AN/") select 0;
-	private _configName = _x;
-	private _iconPath = getText (configfile >> "CfgWeapons" >> _x >> "picture");
-	_action = [("SIA_ConfigACRE_Radios" + _configName), _displayName, _iconPath, {}, {true}] call ace_interact_menu_fnc_createAction;
-	[(typeOf player), 1, ["ACE_SelfActions", "SIA", "SIA_ConfigACRE"], _action] call ace_interact_menu_fnc_addActionToClass;
-	 
-	{
-	_action = [("SIA_ConfigSpatial_" + _configName + _x),( "Set " + _x +  " As Default"), "", {params ["", "", "_params"]; ["setRadioDefaultSpatial", [_params select 0, _params select 1]] execVM "sia_f\ACRERadioSetup.sqf"}, {true}, {}, [_configName, _x]] call ace_interact_menu_fnc_createAction;
-	[(typeOf player), 1, ["ACE_SelfActions", "SIA", "SIA_ConfigACRE", ("SIA_ConfigACRE_Radios" + _configName)], _action] call ace_interact_menu_fnc_addActionToClass;
-	} forEach ["LEFT", "CENTER", "RIGHT"];
+		{ 
+			private _displayName = (getText (ConfigFile >> "CfgWeapons" >> _x >> "displayName") splitString "AN/") select 0;
+			private _configName = _x;
+			private _iconPath = getText (configfile >> "CfgWeapons" >> _x >> "picture");
+			_action = [("SIA_ConfigACRE_Radios" + _configName), _displayName, _iconPath, {}, {true}] call ace_interact_menu_fnc_createAction;
+			[(typeOf player), 1, ["ACE_SelfActions", "SIA", "SIA_ConfigACRE"], _action] call ace_interact_menu_fnc_addActionToClass;
+				
+				{
+				_action = [("SIA_ConfigSpatial_" + _configName + _x),( "Set " + _x +  " As Default"), "", {params ["", "", "_params"]; ["setRadioDefaultSpatial", [_params select 0, _params select 1]] execVM "sia_f\ACRERadioSetup.sqf"}, {true}, {}, [_configName, _x]] call ace_interact_menu_fnc_createAction;
+				[(typeOf player), 1, ["ACE_SelfActions", "SIA", "SIA_ConfigACRE", ("SIA_ConfigACRE_Radios" + _configName)], _action] call ace_interact_menu_fnc_addActionToClass;
+			} forEach ["LEFT", "CENTER", "RIGHT"];
 
-} forEach ["ACRE_PRC343", "ACRE_PRC148","ACRE_PRC152","ACRE_PRC77","ACRE_PRC117F"];
+		} forEach ["ACRE_PRC343", "ACRE_PRC148","ACRE_PRC152","ACRE_PRC77","ACRE_PRC117F"];
 
-	_action = ["SIA_loadSpatials", "Load Saved Settings", "", { ["loadRadioDefaultSpatials", []] execVM "sia_f\ACRERadioSetup.sqf"; ["reorderRadioMPTT", [personalRadio]] execVM "sia_f\ACRERadioSetup.sqf"; }, {true}] call ace_interact_menu_fnc_createAction;
-	[(typeOf player), 1, ["ACE_SelfActions", "SIA", "SIA_ConfigACRE"], _action] call ace_interact_menu_fnc_addActionToClass;
+		_action = ["SIA_loadSpatials", "Load Saved Settings", "", { ["loadRadioDefaultSpatials", []] execVM "sia_f\ACRERadioSetup.sqf"; ["reorderRadioMPTT", [personalRadio]] execVM "sia_f\ACRERadioSetup.sqf"; }, {true}] call ace_interact_menu_fnc_createAction;
+		[(typeOf player), 1, ["ACE_SelfActions", "SIA", "SIA_ConfigACRE"], _action] call ace_interact_menu_fnc_addActionToClass;
 
-	_action = ["SIA_resetSpatials", "Clear Saved Settings", "", { ["resetRadioDefaultSpatials", []] execVM "sia_f\ACRERadioSetup.sqf" }, {true}] call ace_interact_menu_fnc_createAction;
-	[(typeOf player), 1, ["ACE_SelfActions", "SIA", "SIA_ConfigACRE"], _action] call ace_interact_menu_fnc_addActionToClass;
+		_action = ["SIA_resetSpatials", "Clear Saved Settings", "", { ["resetRadioDefaultSpatials", []] execVM "sia_f\ACRERadioSetup.sqf" }, {true}] call ace_interact_menu_fnc_createAction;
+		[(typeOf player), 1, ["ACE_SelfActions", "SIA", "SIA_ConfigACRE"], _action] call ace_interact_menu_fnc_addActionToClass;
 
-	_action = ["SIA_getSpatials", "Print Saved Settings", "", { ["printRadioDefaultSpatials", []] execVM "sia_f\ACRERadioSetup.sqf" }, {true}] call ace_interact_menu_fnc_createAction;
-	[(typeOf player), 1, ["ACE_SelfActions", "SIA", "SIA_ConfigACRE"], _action] call ace_interact_menu_fnc_addActionToClass;
+		_action = ["SIA_getSpatials", "Print Saved Settings", "", { ["printRadioDefaultSpatials", []] execVM "sia_f\ACRERadioSetup.sqf" }, {true}] call ace_interact_menu_fnc_createAction;
+		[(typeOf player), 1, ["ACE_SelfActions", "SIA", "SIA_ConfigACRE"], _action] call ace_interact_menu_fnc_addActionToClass;
 
 // Zeus action
-_statement = {
-    sia_f_missionStarted = true; 
-	publicVariable "sia_f_missionStarted";
-	["sia_f\startMission.sqf"] remoteExec ["execVM", 2];
-};
-_action = ["missionStart","Start Mission","",_statement,{!sia_f_missionStarted}] call ace_interact_menu_fnc_createAction;
-[["ACE_ZeusActions"], _action] call ace_interact_menu_fnc_addActionToZeus;
+	_action = ["setupPhase","Set Phase","", {} ,{!sia_f_missionStarted}] call ace_interact_menu_fnc_createAction;
+	[["ACE_ZeusActions"], _action] call ace_interact_menu_fnc_addActionToZeus;
 
-_action = ["setupPhase","Set Phase","", {} ,{!sia_f_missionStarted}] call ace_interact_menu_fnc_createAction;
-[["ACE_ZeusActions"], _action] call ace_interact_menu_fnc_addActionToZeus;
+	_action = ["upperbrief","Upper-level Brief","", {["setupPhase",["The upper-level brief is commencing!","\A3\ui_f\data\IGUI\Cfg\simpleTasks\types\whiteboard_ca.paa"]] remoteExec ["BIS_fnc_showNotification"]; sia_f_setupPhase = "Upper-level Briefing"; publicVariable "sia_f_setupPhase";} ,{!sia_f_missionStarted}] call ace_interact_menu_fnc_createAction;
+	[["ACE_ZeusActions", "setupPhase"], _action] call ace_interact_menu_fnc_addActionToZeus;
 
-_action = ["upperbrief","Upper-level Brief","", {["setupPhase",["The upper-level brief is commencing!","\A3\ui_f\data\IGUI\Cfg\simpleTasks\types\whiteboard_ca.paa"]] remoteExec ["BIS_fnc_showNotification"]; sia_f_setupPhase = "Upper-level Briefing"; publicVariable "sia_f_setupPhase";} ,{!sia_f_missionStarted}] call ace_interact_menu_fnc_createAction;
-[["ACE_ZeusActions", "setupPhase"], _action] call ace_interact_menu_fnc_addActionToZeus;
+	_action = ["lowerbrief","Lower-level Brief","", {["setupPhase",["The lower-level brief is commencing!", "\A3\ui_f\data\IGUI\Cfg\simpleTasks\types\whiteboard_ca.paa"]] remoteExec ["BIS_fnc_showNotification"]; sia_f_setupPhase = "Lower-level Briefing"} ,{!sia_f_missionStarted}] call ace_interact_menu_fnc_createAction;
+	[["ACE_ZeusActions", "setupPhase"], _action] call ace_interact_menu_fnc_addActionToZeus;
 
-_action = ["lowerbrief","Lower-level Brief","", {["setupPhase",["The lower-level brief is commencing!", "\A3\ui_f\data\IGUI\Cfg\simpleTasks\types\whiteboard_ca.paa"]] remoteExec ["BIS_fnc_showNotification"]; sia_f_setupPhase = "Lower-level Briefing"} ,{!sia_f_missionStarted}] call ace_interact_menu_fnc_createAction;
-[["ACE_ZeusActions", "setupPhase"], _action] call ace_interact_menu_fnc_addActionToZeus;
+	_action = ["kitUp","Kit Up","", {["setupPhase",["Time to kit up!","\A3\ui_f\data\IGUI\Cfg\simpleTasks\types\rearm_ca.paa"]] remoteExec ["BIS_fnc_showNotification"]; sia_f_setupPhase = "Kitting Up"} ,{!sia_f_missionStarted}] call ace_interact_menu_fnc_createAction;
+	[["ACE_ZeusActions", "setupPhase"], _action] call ace_interact_menu_fnc_addActionToZeus;
 
-_action = ["kitUp","Kit Up","", {["setupPhase",["Time to kit up!","\A3\ui_f\data\IGUI\Cfg\simpleTasks\types\rearm_ca.paa"]] remoteExec ["BIS_fnc_showNotification"]; sia_f_setupPhase = "Kitting Up"} ,{!sia_f_missionStarted}] call ace_interact_menu_fnc_createAction;
-[["ACE_ZeusActions", "setupPhase"], _action] call ace_interact_menu_fnc_addActionToZeus;
+	_action = ["mountUp","Mount Up","", {["setupPhase",["Time to mount up!","\A3\ui_f\data\IGUI\Cfg\simpleTasks\types\getout_ca.paa"]] remoteExec ["BIS_fnc_showNotification"]; sia_f_setupPhase = "Mounting Up"} ,{!sia_f_missionStarted}] call ace_interact_menu_fnc_createAction;
+	[["ACE_ZeusActions", "setupPhase"], _action] call ace_interact_menu_fnc_addActionToZeus;
 
-_action = ["mountUp","Mount Up","", {["setupPhase",["Time to mount up!","\A3\ui_f\data\IGUI\Cfg\simpleTasks\types\getout_ca.paa"]] remoteExec ["BIS_fnc_showNotification"]; sia_f_setupPhase = "Mounting Up"} ,{!sia_f_missionStarted}] call ace_interact_menu_fnc_createAction;
-[["ACE_ZeusActions", "setupPhase"], _action] call ace_interact_menu_fnc_addActionToZeus;
+	_action = ["standby","Stand By","", {["setupPhase",["Stand By","\A3\ui_f\data\IGUI\Cfg\simpleTasks\types\wait_ca.paa"]] remoteExec ["BIS_fnc_showNotification"]; sia_f_setupPhase = "Standing By"} ,{!sia_f_missionStarted}] call ace_interact_menu_fnc_createAction;
+	[["ACE_ZeusActions", "setupPhase"], _action] call ace_interact_menu_fnc_addActionToZeus;
 
-_action = ["standby","Stand By","", {["setupPhase",["Stand By","\A3\ui_f\data\IGUI\Cfg\simpleTasks\types\wait_ca.paa"]] remoteExec ["BIS_fnc_showNotification"]; sia_f_setupPhase = "Standing By"} ,{!sia_f_missionStarted}] call ace_interact_menu_fnc_createAction;
-[["ACE_ZeusActions", "setupPhase"], _action] call ace_interact_menu_fnc_addActionToZeus;
+	_statement = {
+		sia_f_missionStarted = true; 
+		publicVariable "sia_f_missionStarted";
+		["sia_f\startMission.sqf"] remoteExec ["execVM", 2];
+	};
+
+	_action = ["missionStart","Start Mission","",_statement,{!sia_f_missionStarted}] call ace_interact_menu_fnc_createAction;
+	[["ACE_ZeusActions"], _action] call ace_interact_menu_fnc_addActionToZeus;
 
 
 
