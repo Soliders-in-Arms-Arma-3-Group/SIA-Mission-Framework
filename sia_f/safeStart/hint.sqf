@@ -1,15 +1,39 @@
+/*
+
+	SIA Mission Framework (https://github.com/Soliders-in-Arms-Arma-3-Group/SIA-Mission-Framework.VR.git)
+	Author: McKendrick
+
+=====================================================================
+
+	Description: Formats and displays information about the current mission in the form of a hint.
+
+	USAGE: Private
+
+	PARAMS: None
+*/
+
+if (!hasInterface || !sia_f_showStatusHint) exitWith {}; // Exit if not a player or if player has disabled status hint.
+
 private _colorHeader = "#FFB84C";
 private _colorPrimary = "#FFFFFF";
 private _colorSecondary ="#666666";
+private _SystemTime = systemTimeUTC; // Cache System's current time.
 
-_separator = parseText "<br />------------------------<br />";
+_separator = parseText "<br />------------------------------<br />";
 _image = "sia_f\images\sia_tiny.paa";
 _txtHeader = text sia_f_missionName;
 _txtHeader setAttributes ["color", _colorHeader, "size", "1.4","font","PuristaSemibold", "shadow","1","shadowColor",_colorSecondary,"shadowOffset","0.07"];
-_txt1 = text "Current Phase:";
-_txt1 setAttributes ["align", "left","font","PuristaMedium"];
-_txt2 = text sia_f_setupPhase;
-_txt2 setAttributes ["align", "right","font","PuristaMedium"];
+_txtSetup = text "Current Phase:";
+_txtSetup setAttributes ["align", "left","font","PuristaMedium"];
+_txtSetupPhase = text sia_f_setupPhase;
+_txtSetupPhase setAttributes ["align", "right","font","PuristaMedium"];
+_txtLocation = text (sia_f_missionLocationName + "     " + str (date select 1) + "-" + str (date select 2) + "-" + str (date select 0) + "     " + ([daytime, "HH:MM"] call BIS_fnc_timeToString));
+_txtLocation setAttributes ["center", "left","color", _colorSecondary,"font","PuristaLight","size","0.8"];
+_txtSystemTime = text "System Time:";
+_txtSystemTime setAttributes ["align", "left","font","PuristaMedium"];
+_dayLight = 5; if ( (_SystemTime select 1) >= 3 && (_SystemTime select 1) <= 11 ) then { _dayLight = 4 }; // Quick and dirty DST adjustment.
+_txtTime = text (([(((_SystemTime select 3) - _dayLight) + ((_SystemTime select 4) / 60)), "HH:MM"] call BIS_fnc_timeToString) + " EST");  
+_txtTime setAttributes ["align", "right","font","PuristaMedium"];
 _txt3 = text "CTab:";
 _txt3 setAttributes ["align", "left","color", _colorSecondary,"font","PuristaLight"];
 _txt4 = text toUpper (str  sia_f_haveCTab);
@@ -45,8 +69,12 @@ _array = [
 	image _image,  
 	lineBreak, 
 	_txtHeader,
+	lineBreak, 
+	_txtLocation,
 	_separator, 
-	_txt1, _txt2,
+	_txtSetup, _txtSetupPhase,
+	lineBreak, 
+	_txtSystemTime, _txtTime,
 	lineBreak, 
 	lineBreak, 
 	_txtArsenal,_txtArsenalEnabled,

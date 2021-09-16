@@ -19,7 +19,7 @@ if (!sia_f_missionStarted) then
 		[] spawn {
 			while {!sia_f_missionStarted} do {
 			["sia_f\safeStart\hint.sqf"] remoteExec ["execVM"];
-			sleep 10; // Refresh every 10 seconds
+			sleep 30; // Refresh every 10 seconds
 			};
 		};
 	};
