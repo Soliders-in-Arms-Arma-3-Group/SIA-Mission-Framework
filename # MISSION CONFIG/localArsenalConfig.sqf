@@ -22,7 +22,7 @@ if (!hasInterface) exitWith {}; // Exit if not player
 private _arsenals = _this select 0;
 if (typeName _arsenals != "ARRAY") exitWith {["Incorrect format: %1", _arsenals] call BIS_fnc_error}; // Exit if array not given.
 private _role = player getVariable ["role", "none"];
-private _roleItems = "";
+private _roleItems = [];
 
 // DO NOT DELETE OR EDIT ^^^
 // =======================================================================================
@@ -52,7 +52,7 @@ switch (_role) do
 	case "at" : { _roleItems = [] };
 
 	// Heavy Anti-tank
-	case "at" : { _roleItems = [] };
+	case "hat" : { _roleItems = [] };
 
 	// Team Leader
 	case "tl" : { _roleItems = [] };
