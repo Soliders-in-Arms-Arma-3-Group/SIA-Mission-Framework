@@ -100,4 +100,4 @@ switch (_role) do
 // =======================================================================================
 // DO NOT DELETE OR EDIT vvv
 
-{[_x, _roleItems] call ace_arsenal_fnc_addVirtualItems} forEach sia_f_arsenals;
+{[_x, _roleItems, false] call ace_arsenal_fnc_addVirtualItems} forEach sia_f_arsenals;
