@@ -20,9 +20,10 @@ sia_f_factionName = "";
 	if (sia_f_roleName == "") then {sia_f_roleName = (getText(configFile >> "CfgVehicles" >> (typeOf player) >> "displayName"))} else {sia_f_roleName = (sia_f_roleName splitString "@") select 0}; // If roleDescription is set, then truncate. Else use config name.
 
 
-sleep 1;
-[] call BIS_fnc_showMissionStatus;
-[[playerSide], [west, east, civilian, independent] - [playerSide]] call ace_spectator_fnc_updateSides;
+sleep 1; // Redundant sleep
+
+if (([(side player)] call BIS_fnc_respawnTickets) > 0) then {[] call BIS_fnc_showMissionStatus}; // Check if tickets are avaliable, if so displaythem
+[[playerSide], [west, east, civilian, independent] - [playerSide]] call ace_spectator_fnc_updateSides; // Update ACE Spectator to hide enemy sides.
 execVM "sia_f\addAceActions.sqf";
 
 player removeItem "ACE_EarPlugs";
@@ -30,7 +31,6 @@ player unassignItem "ItemGPS";
 player removeItem "ItemGPS";
 removeGoggles player;
 player addItem "ACE_EarPlugs";
-
 
 sleep 3; // Redundant sleep
 
@@ -40,7 +40,8 @@ waitUntil { scriptDone _script_handler };
 private _script_handler = [] execVM "sia_f\giveACRERadios.sqf";
 waitUntil { scriptDone _script_handler };
 
-waitUntil { ([] call acre_api_fnc_isInitialized) };
+// Setup and load ACRE Settings
 ["loadRadioDefaultSpatials", []] execVM "sia_f\ACRERadioSetup.sqf";
 ["reorderRadioMPTT", [sia_f_personalRadio]] execVM "sia_f\ACRERadioSetup.sqf";
 
+["ace_arsenal_displayClosed", {["loadRadioDefaultSpatials",[]] execVM "sia_f\ACRERadioSetup.sqf"; ["reorderRadioMPTT", [sia_f_personalRadio]] execVM "sia_f\ACRERadioSetup.sqf" }] call CBA_fnc_addEventHandler;
