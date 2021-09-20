@@ -88,7 +88,7 @@ if (sia_f_enableLoadoutInfo && sia_f_briefLoadout) then {
 
 		} forEach ["ACRE_PRC343", "ACRE_PRC148","ACRE_PRC152","ACRE_PRC77","ACRE_PRC117F"];
 
-		_action = ["SIA_loadSpatials", "Load Saved Settings", "", { ["loadRadioDefaultSpatials", []] execVM "sia_f\ACRERadioSetup.sqf"; ["reorderRadioMPTT", [personalRadio]] execVM "sia_f\ACRERadioSetup.sqf"; }, {true}] call ace_interact_menu_fnc_createAction;
+		_action = ["SIA_loadSpatials", "Load Saved Settings", "", { ["loadRadioDefaultSpatials", []] execVM "sia_f\ACRERadioSetup.sqf"; ["reorderRadioMPTT", [sia_f_personalRadio]] execVM "sia_f\ACRERadioSetup.sqf"; }, {true}] call ace_interact_menu_fnc_createAction;
 		[(typeOf player), 1, ["ACE_SelfActions", "SIA", "SIA_ConfigACRE"], _action] call ace_interact_menu_fnc_addActionToClass;
 
 		_action = ["SIA_resetSpatials", "Clear Saved Settings", "", { ["resetRadioDefaultSpatials", []] execVM "sia_f\ACRERadioSetup.sqf" }, {true}] call ace_interact_menu_fnc_createAction;
@@ -116,13 +116,7 @@ if (sia_f_enableLoadoutInfo && sia_f_briefLoadout) then {
 	_action = ["standby","Stand By","", {["setupPhase",["Stand By","\A3\ui_f\data\IGUI\Cfg\simpleTasks\types\wait_ca.paa"]] remoteExec ["BIS_fnc_showNotification"]; sia_f_setupPhase = "Standing By"} ,{!sia_f_missionStarted}] call ace_interact_menu_fnc_createAction;
 	[["ACE_ZeusActions", "setupPhase"], _action] call ace_interact_menu_fnc_addActionToZeus;
 
-	_statement = {
-		sia_f_missionStarted = true; 
-		publicVariable "sia_f_missionStarted";
-		["sia_f\startMission.sqf"] remoteExec ["execVM", 2];
-	};
-
-	_action = ["missionStart","Start Mission","",_statement,{!sia_f_missionStarted}] call ace_interact_menu_fnc_createAction;
+	_action = ["missionStart","Start Mission","",{ ["sia_f\startMission.sqf"] remoteExec ["execVM", 2] }, {!sia_f_missionStarted}] call ace_interact_menu_fnc_createAction;
 	[["ACE_ZeusActions"], _action] call ace_interact_menu_fnc_addActionToZeus;
 
 

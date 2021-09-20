@@ -20,9 +20,10 @@
 		1: Params - Parameter changes according to mode.
 */
 
-if (!hasInterface) exitWith {}; // Exit if not player.
-private _hasRadio = [player] call acre_api_fnc_hasRadio;
-if (!sia_f_acreEnabled) exitWith {}; // Exit if acre is set to not enabled.
+if (!hasInterface || !sia_f_acreEnabled) exitWith {}; // Exit if not player or if ACRE is set to disabled.
+waitUntil { ([] call acre_api_fnc_isInitialized) }; // Wait until player's radios are initlialized.
+
+private _hasRadio = [player] call acre_api_fnc_hasRadio; // Get variable if player has radio.
 
 private ["_mode", "_params"];
 _mode   = _this param [0, "", [""]];
