@@ -38,7 +38,7 @@ sia_f_showStatusHint= true; // Toggle persistent info display.
 
 sia_f_arsenalEnabled = true; 
 
-sia_f_disableArsenalOnRespawn = false; 
+sia_f_disableArsenalOnRespawn = false; // CURRENTLY NO FUNCTIONALITY
 
 sia_f_haveBasics = true; // Add basic items such as compasses, maps, and bandages.
 sia_f_haveCTab = true; // Add CTab items such as the helmat cham and rugged tablet.

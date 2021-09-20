@@ -33,6 +33,9 @@ if (sia_f_missionLocationName == "") then {
 	publicVariable "sia_f_bluforFactionName";
 	publicVariable "sia_f_indepFactioName";
 	publicVariable "sia_f_opforFactionName";
+	publicVariable "sia_f_arsenalEnabled";
+	publicVariable "sia_f_haveCTab";
+	publicVariable "sia_f_haveKATMedical";
 	publicVariable "sia_f_enableTPToSquad";
 	publicVariable "sia_f_enableManageKit";
 	publicVariable "sia_f_enableLoadoutInfo";

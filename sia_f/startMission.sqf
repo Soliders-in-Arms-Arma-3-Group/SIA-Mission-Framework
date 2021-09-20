@@ -18,15 +18,19 @@
 if (!isServer) exitWith {}; // Exit if not server.
 
 if (isMultiplayer) then {setDate startTime}; // Set time to start of mission.
-setTimeMultiplier 1; // Set time acceleration to default;
+setTimeMultiplier 1; // Set time acceleration to default.
 
-["sia_f\briefing\f_loadoutNotes"] remoteExec ["execVM"];
+// Update variable.
+sia_f_missionStarted = true; 
+publicVariable "sia_f_missionStarted";
+
+if (sia_f_briefLoadout) then { ["sia_f\briefing\f_loadoutNotes"] remoteExec ["execVM"] }; // Refresh loadout information
 
 sleep 1;
 
 ["setupPhase",["Mission is a go!","\A3\ui_f\data\IGUI\Cfg\simpleTasks\types\run_ca.paa"]] remoteExec ["BIS_fnc_showNotification"];
 [""] remoteExec ["hintSilent"];
 
-sleep 9;
+sleep 10;
 
 ["sia_f\introText.sqf"] remoteExec ["execVM"];
