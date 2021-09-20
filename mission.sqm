@@ -12,18 +12,18 @@ class EditorData
 	};
 	class ItemIDProvider
 	{
-		nextID=694;
+		nextID=696;
 	};
 	class LayerIndexProvider
 	{
-		nextID=75;
+		nextID=96;
 	};
 	class Camera
 	{
-		pos[]={3920.6084,80.489532,4457.022};
-		dir[]={-0.3509095,-0.7897225,0.5031907};
-		up[]={-0.45173153,0.61346424,0.64776558};
-		aside[]={0.82024455,1.4901161e-008,0.57201302};
+		pos[]={3856.4685,11.271936,4501.2061};
+		dir[]={-0.93985021,-0.30647081,0.15094487};
+		up[]={-0.30260167,0.95187658,0.048599586};
+		aside[]={0.1585747,2.0225343e-007,0.98736072};
 	};
 };
 binarizationWanted=0;
@@ -309,14 +309,14 @@ class Mission
 	};
 	class Entities
 	{
-		items=1;
+		items=2;
 		class Item0
 		{
 			dataType="Layer";
 			name="SIA-Mission-Framework-Template";
 			class Entities
 			{
-				items=21;
+				items=20;
 				class Item0
 				{
 					dataType="Logic";
@@ -16631,134 +16631,6 @@ class Mission
 				};
 				class Item16
 				{
-					dataType="Logic";
-					class PositionInfo
-					{
-						position[]={3901.5247,5,4432.9297};
-					};
-					id=411;
-					type="acre_api_basicMissionSetup";
-					class CustomAttributes
-					{
-						class Attribute0
-						{
-							property="acre_api_basicMissionSetup_DefaultRadio";
-							expression="_this setVariable ['DefaultRadio',_value,true];";
-							class Value
-							{
-								class data
-								{
-									class type
-									{
-										type[]=
-										{
-											"STRING"
-										};
-									};
-									value="";
-								};
-							};
-						};
-						class Attribute1
-						{
-							property="acre_api_basicMissionSetup_BabelSetup";
-							expression="_this setVariable ['BabelSetup',_value,true];";
-							class Value
-							{
-								class data
-								{
-									class type
-									{
-										type[]=
-										{
-											"SCALAR"
-										};
-									};
-									value=0;
-								};
-							};
-						};
-						class Attribute2
-						{
-							property="acre_api_basicMissionSetup_RadioSetup";
-							expression="_this setVariable ['RadioSetup',_value,true];";
-							class Value
-							{
-								class data
-								{
-									class type
-									{
-										type[]=
-										{
-											"BOOL"
-										};
-									};
-									value=1;
-								};
-							};
-						};
-						class Attribute3
-						{
-							property="acre_api_basicMissionSetup_DefaultRadio_Three";
-							expression="_this setVariable ['DefaultRadio_Three',_value,true];";
-							class Value
-							{
-								class data
-								{
-									class type
-									{
-										type[]=
-										{
-											"STRING"
-										};
-									};
-									value="";
-								};
-							};
-						};
-						class Attribute4
-						{
-							property="acre_api_basicMissionSetup_DefaultRadio_Four";
-							expression="_this setVariable ['DefaultRadio_Four',_value,true];";
-							class Value
-							{
-								class data
-								{
-									class type
-									{
-										type[]=
-										{
-											"STRING"
-										};
-									};
-									value="";
-								};
-							};
-						};
-						class Attribute5
-						{
-							property="acre_api_basicMissionSetup_DefaultRadio_Two";
-							expression="_this setVariable ['DefaultRadio_Two',_value,true];";
-							class Value
-							{
-								class data
-								{
-									class type
-									{
-										type[]=
-										{
-											"STRING"
-										};
-									};
-									value="";
-								};
-							};
-						};
-						nAttributes=6;
-					};
-				};
-				class Item17
-				{
 					dataType="Comment";
 					class PositionInfo
 					{
@@ -16768,7 +16640,7 @@ class Mission
 					description="These objects are used for the HQ's ACE Interactions. (ex: Teleport to Squad, Manage Kit, etc). They are not required for functionality but recommended." \n "" \n "If you change the object type, you must update their settings in the mission config.";
 					id=688;
 				};
-				class Item18
+				class Item17
 				{
 					dataType="Comment";
 					class PositionInfo
@@ -16779,7 +16651,7 @@ class Mission
 					description="These objects (along with any other objects in the ""Arsenals"" layer) will be used for the ACE Arsenal. " \n "You may build the arsenal with these arsenals in the editor, and/or via the framework's configuration file." \n "" \n "You may also change the objects with any object of your choice.";
 					id=689;
 				};
-				class Item19
+				class Item18
 				{
 					dataType="Comment";
 					class PositionInfo
@@ -16790,7 +16662,7 @@ class Mission
 					description="Do not edit unless needed.";
 					id=691;
 				};
-				class Item20
+				class Item19
 				{
 					dataType="Comment";
 					class PositionInfo
@@ -16803,6 +16675,134 @@ class Mission
 				};
 			};
 			id=693;
+		};
+		class Item1
+		{
+			dataType="Logic";
+			class PositionInfo
+			{
+				position[]={3901.5969,5,4431.6519};
+			};
+			id=695;
+			type="acre_api_basicMissionSetup";
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="acre_api_basicMissionSetup_DefaultRadio";
+					expression="_this setVariable ['DefaultRadio',_value,true];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"STRING"
+								};
+							};
+							value="";
+						};
+					};
+				};
+				class Attribute1
+				{
+					property="acre_api_basicMissionSetup_BabelSetup";
+					expression="_this setVariable ['BabelSetup',_value,true];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"SCALAR"
+								};
+							};
+							value=2;
+						};
+					};
+				};
+				class Attribute2
+				{
+					property="acre_api_basicMissionSetup_RadioSetup";
+					expression="_this setVariable ['RadioSetup',_value,true];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"BOOL"
+								};
+							};
+							value=1;
+						};
+					};
+				};
+				class Attribute3
+				{
+					property="acre_api_basicMissionSetup_DefaultRadio_Three";
+					expression="_this setVariable ['DefaultRadio_Three',_value,true];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"STRING"
+								};
+							};
+							value="";
+						};
+					};
+				};
+				class Attribute4
+				{
+					property="acre_api_basicMissionSetup_DefaultRadio_Four";
+					expression="_this setVariable ['DefaultRadio_Four',_value,true];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"STRING"
+								};
+							};
+							value="";
+						};
+					};
+				};
+				class Attribute5
+				{
+					property="acre_api_basicMissionSetup_DefaultRadio_Two";
+					expression="_this setVariable ['DefaultRadio_Two',_value,true];";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"STRING"
+								};
+							};
+							value="";
+						};
+					};
+				};
+				nAttributes=6;
+			};
 		};
 	};
 };
