@@ -69,6 +69,9 @@ switch (_role) do
 	// Helicopter Pilot
 	case "heli_pilot" : { _roleItems = [] };
 
+	// Crewman
+	case "crewman" : { _roleItems = [] };
+
 	// Sniper
 	case "sniper" : { _roleItems = [] };
 
