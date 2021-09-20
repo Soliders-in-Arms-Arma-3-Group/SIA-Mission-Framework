@@ -58,8 +58,8 @@ publicVariable "sia_f_arsenals";
 		clearMagazineCargoGlobal _x;
 		clearWeaponCargoGlobal _x;
 		clearItemCargoGlobal _x;
-		[_x, false] call ace_dragging_fnc_setDraggable;
-		[_x, false] call ace_dragging_fnc_setCarryable;
+		[_x, false] remoteExecCall ["ace_dragging_fnc_setDraggable"];
+		[_x, false] remoteExecCall ["ace_dragging_fnc_setCarryable"];
 	} forEach sia_f_arsenals;
 
 };
