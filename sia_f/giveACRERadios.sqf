@@ -15,7 +15,7 @@
 		NONE
 */
 
-if (!isServer || !sia_f_acreEnabled) exitWith {}; // Exit if player or if ACRE is set to disabled.
+if (!hasInterface || !sia_f_acreEnabled) exitWith {}; // Exit if not player or if ACRE is set to disabled.
 
 private _role = player getVariable ["role", "none"];
 
