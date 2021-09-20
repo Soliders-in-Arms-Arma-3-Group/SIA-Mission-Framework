@@ -30,7 +30,9 @@ sia_f_bluforFactionName = "";
 sia_f_indepFactionName = "";
 sia_f_opforFactionName = "";
 
-sia_f_showStatusHint= true; // Toggle persistent info display.
+sia_f_showStatusHint = true; // Toggle persistent info display.
+
+sia_f_showIntroText = true; // Show cinematic intro text on mission start.
 
 // ============================================================================================
 // Arsenal Options
@@ -46,13 +48,13 @@ sia_f_haveKATMedical = "FULL"; // "NONE"/"LIMITED"/"FULL"
 
 // ============================================================================================
 // ACRE Radio Options
-// 
+// Define the radio classnames to be used. Change the quotations to be empty to set as none.
 
 sia_f_acreEnabled = true;
 
-sia_f_personalRadio = "ACRE_PRC343"; // "NONE"/"ACRE_PRC343"
-sia_f_handheldRadio = "ACRE_PRC152"; // "NONE"/"ACRE_PRC148"/"ACRE_PRC152"
-sia_f_manpackRadio = "ACRE_PRC117F"; // "NONE"/"ACRE_PRC77"/"ACRE_PRC117F"
+sia_f_personalRadio = "ACRE_PRC343"; // "ACRE_PRC343"
+sia_f_handheldRadio = "ACRE_PRC152"; // "ACRE_PRC148"/"ACRE_PRC152"
+sia_f_manpackRadio = "ACRE_PRC117F"; // "ACRE_PRC77"/"ACRE_PRC117F"
 
 // ============================================================================================
 // ACE Actions Options
