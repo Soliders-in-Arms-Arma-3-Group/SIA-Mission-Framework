@@ -23,7 +23,7 @@ if (typeName _arsenals != "ARRAY") exitWith {["Incorrect format: %1", _arsenals]
 private _role = player getVariable ["role", "none"];
 
 // Add player's loadout to player's local arsenal.
-_loadout = (getUnitLoadout player);
+private _loadout = (getUnitLoadout player);
 _loadout = str _loadout splitString "[]," joinString ",";
 _loadout = parseSimpleArray ("[" + _loadout + "]");
 _loadout = _loadout arrayIntersect _loadout select {_x isEqualType "" && {_x != ""}};
@@ -33,4 +33,4 @@ _loadout = _loadout arrayIntersect _loadout select {_x isEqualType "" && {_x != 
 [_arsenals] execVM "# MISSION CONFIG\localArsenalConfig.sqf";
 
 // Add magazines to global arsenal.
-[_arsenals] execVM "sia_f\ace arsenal\addMagazinesToArsenal.sqf";
+//[_arsenals] execVM "sia_f\ace arsenal\addMagazinesToArsenal.sqf";
