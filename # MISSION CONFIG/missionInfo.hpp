@@ -19,6 +19,6 @@ onLoadName = "SIA Mission Framework"; // THE MISSION'S NAME
 
 onLoadMission = "Version 0.10"; // LOADING SCREEN TEXT
 
-//loadScreen = "images\loadScreen.jpg"; // OPTIONAL LOADING SCREEN IMAGE (must be a 2:1 .JPG or .PAA file in your mission folder)
+//loadScreen = "loadScreen.jpg"; // OPTIONAL LOADING SCREEN IMAGE (must be a 2:1 .JPG or .PAA file in your mission folder)
 
 respawnDelay=60; // RESPAWN TIMER IN SECONDS. NOTE: IF USING TEMPLATE "Wave", RESPAWN DELAY IS THE MEDIAN RESPAWN TIME, NOT MAX 
