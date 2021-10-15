@@ -1,4 +1,5 @@
 waitUntil {!isNull player};
+waitUntil {!isNil "sia_f_setupComplete"};
 waitUntil {sia_f_setupComplete};
 
 sia_f_factionName = "";
