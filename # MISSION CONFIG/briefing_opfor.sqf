@@ -31,12 +31,12 @@ _signal = "";
 // =======================================================================================
 // DO NOT DELETE OR EDIT vvv
 
-if (sia_f_briefLoadout) then {
+if (sia_f_briefWeather) then {
 	_script_handler = execVM "sia_f\briefing\f_conditionNotes.sqf";
 	waitUntil { scriptDone _script_handler };
 };
 
-if (sia_f_briefWeather) then {
+if (sia_f_briefLoadout) then {
 	_script_handler = execVM "sia_f\briefing\f_loadoutNotes.sqf";
 	waitUntil { scriptDone _script_handler };
 };
