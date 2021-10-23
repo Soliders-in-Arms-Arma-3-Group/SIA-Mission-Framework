@@ -71,10 +71,10 @@ if (!isNil "respawn_pos_indep") then { "respawn_guerilla" setMarkerPos respawn_p
 if (!isNil "respawn_pos_civilian") then {"respawn_civilian" setMarkerPos respawn_pos_civilian };
 
 // Setup Respawn tickets
-	if (sia_f_bluforTickets > 0) then { [west, sia_f_bluforTickets] call BIS_fnc_respawnTickets };
-	if (sia_f_indepTickets > 0) then { [independent, sia_f_indepTickets] call BIS_fnc_respawnTickets };
-	if (sia_f_opforTickets > 0) then { [east, sia_f_opforTickets] call BIS_fnc_respawnTickets };
-	if (sia_f_civTickets > 0) then { [civilian, sia_f_civTickets] call BIS_fnc_respawnTickets };
+	if (sia_f_bluforTickets != 0) then { [west, sia_f_bluforTickets] call BIS_fnc_respawnTickets };
+	if (sia_f_indepTickets != 0) then { [independent, sia_f_indepTickets] call BIS_fnc_respawnTickets };
+	if (sia_f_opforTickets != 0) then { [east, sia_f_opforTickets] call BIS_fnc_respawnTickets };
+	if (sia_f_civTickets != 0) then { [civilian, sia_f_civTickets] call BIS_fnc_respawnTickets };
 
 if (!isNil "sia_f_ACEButtons") then {
 	// Revo's TP Menu Function

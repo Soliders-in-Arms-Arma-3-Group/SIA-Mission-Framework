@@ -12,7 +12,7 @@
 
 // ============================================================================================
 // Respawn Tickets
-// Sets the NUMBER of avalible respawn tickets for a side. Leave as "0" to for no change.
+// Sets the NUMBER of avalible respawn tickets for a side. Leave as "0" to for no change. Set to -1 to disable respawn for that side (tickets can still be added later).
 
 sia_f_bluforTickets = 0;
 sia_f_indepTickets = 0;
