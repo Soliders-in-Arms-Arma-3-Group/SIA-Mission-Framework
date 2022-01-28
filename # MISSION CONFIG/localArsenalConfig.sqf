@@ -24,6 +24,9 @@ if (typeName _arsenals != "ARRAY") exitWith {["Incorrect format: %1", _arsenals]
 private _role = player getVariable ["role", "none"];
 private _roleItems = [];
 
+switch (_role) do
+{
+	
 // DO NOT DELETE OR EDIT ^^^
 // =======================================================================================
 
@@ -31,8 +34,6 @@ private _roleItems = [];
 // Enter classnames of items in the brackets with quotation marks and seperated by a comma. You can also add your own roles by following the format.
 // Example: case "r" : { _roleItems = ["RHS_M4","Binoculars","SmokeGrenade"] };
 
-switch (_role) do
-{
 	// Rifleman
 	case "r" : { _roleItems = [] };
 
@@ -96,11 +97,12 @@ switch (_role) do
 	// No role given
 	case "none" : { _roleItems = [] };
 
-	// Role not listed error
-	case default { [" Role not listed in config: %1", _role] call BIS_fnc_error }; // Log error if role not listed.
-};
 
 // =======================================================================================
 // DO NOT DELETE OR EDIT vvv
+
+	// Role not listed error
+	case default { [" Role not listed in config: %1", _role] call BIS_fnc_error }; // Log error if role not listed.
+};
 
 {[_x, _roleItems, false] call ace_arsenal_fnc_addVirtualItems} forEach sia_f_arsenals;

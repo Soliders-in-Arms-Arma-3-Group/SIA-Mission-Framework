@@ -41,11 +41,6 @@ if (sia_f_enableManageKit) then {
 	_action = ["ClearKit", "Remove Saved Kit", "z\ace\addons\arsenal\data\iconClearContainer.paa", {player setVariable["Saved_Loadout",nil]; hint "Saved kit cleared. Will use kit from death when respawned"}, {true}] call ace_interact_menu_fnc_createAction; 
 	{[_x, 0, ["ACE_MainActions", "siaKit"], _action, true] call ace_interact_menu_fnc_addActionToObject;} forEach (sia_f_ACEButtons + sia_f_arsenals);
 };
-// Update Loadout Info
-if (sia_f_enableLoadoutInfo && sia_f_briefLoadout) then {
-	_action = ["loadoutInfo", "Update Loadout Info", "\A3\Ui_F\Data\IGUI\Cfg\simpleTasks\types\documents_ca.paa", {execVM "sia_f\briefing\f_loadoutNotes.sqf"; [] spawn {sleep 0.2; openMap true; player selectDiarySubject "Diary"}}, {!sia_f_missionStarted}] call ace_interact_menu_fnc_createAction;
-	{[_x, 0, ["ACE_MainActions"], _action, true] call ace_interact_menu_fnc_addActionToObject;} forEach (sia_f_ACEButtons);
-};
 
 // SIA actions 
 	_action = ["SIA", " SIA Options", "sia_f\images\sia_tiny.paa", {}, {true}] call ace_interact_menu_fnc_createAction;
@@ -55,6 +50,13 @@ if (sia_f_enableLoadoutInfo && sia_f_briefLoadout) then {
 	_action = ["SIA_AFK", "Go AFK", "\A3\Ui_F\Data\IGUI\Cfg\simpleTasks\types\wait_ca.paa", {execVM "sia_f\goAFK\goAFK.sqf"}, { !(player getVariable["sia_isAFK",false]) }] call ace_interact_menu_fnc_createAction;
 	[(typeOf player), 1, ["ACE_SelfActions", "SIA"], _action] call ace_interact_menu_fnc_addActionToClass;
 	};
+
+
+	// Update Loadout Info
+		if (sia_f_enableLoadoutInfo && sia_f_briefLoadout) then {
+			_action = ["loadoutInfo", "Update Team Loadout Info", "\A3\Ui_F\Data\IGUI\Cfg\simpleTasks\types\documents_ca.paa", {execVM "sia_f\briefing\f_loadoutNotes.sqf"; [] spawn {sleep 0.2; openMap true; player selectDiarySubject "Diary"}}, {!sia_f_missionStarted}] call ace_interact_menu_fnc_createAction;
+			[(typeOf player), 1, ["ACE_SelfActions", "SIA"], _action] call ace_interact_menu_fnc_addActionToClass;
+		};
 	
 	
 	// Mission Info Hint System
@@ -70,7 +72,7 @@ if (sia_f_enableLoadoutInfo && sia_f_briefLoadout) then {
 
 	// SIA Radio Actions
 		if (sia_f_acreEnabled) then {
-		_action = ["SIA_ConfigACRE", "ACRE Settings", "\A3\Ui_F\Data\IGUI\Cfg\simpleTasks\types\radio_ca.paa", {}, {true}] call ace_interact_menu_fnc_createAction;
+		_action = ["SIA_ConfigACRE", "ACRE Settings", "\A3\Ui_F\Data\IGUI\Cfg\simpleTasks\types\radio_ca.paa", { ["loadRadioDefaultSpatials", []] execVM "sia_f\ACRERadioSetup.sqf"; ["reorderRadioMPTT", [sia_f_personalRadio]] execVM "sia_f\ACRERadioSetup.sqf"; hint "Saved settings loaded." }, {true}] call ace_interact_menu_fnc_createAction;
 		[(typeOf player), 1, ["ACE_SelfActions", "SIA"], _action] call ace_interact_menu_fnc_addActionToClass;
 		};
 
@@ -116,11 +118,18 @@ if (sia_f_enableLoadoutInfo && sia_f_briefLoadout) then {
 	_action = ["standby","Stand By","\A3\ui_f\data\IGUI\Cfg\simpleTasks\types\wait_ca.paa", {["setupPhase",["Stand By","\A3\ui_f\data\IGUI\Cfg\simpleTasks\types\wait_ca.paa"]] remoteExec ["BIS_fnc_showNotification"]; sia_f_setupPhase = "Standing By"; publicVariable "sia_f_setupPhase"; } ,{!sia_f_missionStarted}] call ace_interact_menu_fnc_createAction;
 	[["ACE_ZeusActions", "setupPhase"], _action] call ace_interact_menu_fnc_addActionToZeus;
 
+	// Start Mission Action + Confirmation
 	_action = ["missionStart","Start Mission","\A3\ui_f\data\IGUI\Cfg\simpleTasks\types\getin_ca.paa",{}, {!sia_f_missionStarted}] call ace_interact_menu_fnc_createAction;
 	[["ACE_ZeusActions"], _action] call ace_interact_menu_fnc_addActionToZeus;
 
-	_action = ["missionStartConfirm","Confirm","",{ ["sia_f\startMission.sqf"] remoteExec ["execVM", 2] }, {!sia_f_missionStarted}] call ace_interact_menu_fnc_createAction;
+	_action = ["missionStartConfirm","Confirm","",{ [[player],"sia_f\startMission.sqf"] remoteExec ["execVM", 2] }, {!sia_f_missionStarted}] call ace_interact_menu_fnc_createAction;
 	[["ACE_ZeusActions", "missionStart"], _action] call ace_interact_menu_fnc_addActionToZeus;
 
+	// End Mission Action + Confirmation
+	_action = ["missionEnd","End Mission","\A3\ui_f\data\IGUI\Cfg\simpleTasks\types\getOut_ca.paa",{}, {sia_f_missionStarted}] call ace_interact_menu_fnc_createAction;
+	[["ACE_ZeusActions"], _action] call ace_interact_menu_fnc_addActionToZeus;
+
+	_action = ["missionEndConfirm","Confirm","",{ ["sia_f\endMission.sqf"] remoteExec ["execVM", 2] }, {sia_f_missionStarted}] call ace_interact_menu_fnc_createAction;
+	[["ACE_ZeusActions", "missionEnd"], _action] call ace_interact_menu_fnc_addActionToZeus;
 
 
