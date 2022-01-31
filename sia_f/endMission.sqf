@@ -23,7 +23,7 @@ if (sia_f_showReplay) then {
 
 	[player] remoteExec ["ace_medical_treatment_fnc_fullHealLocal"]; // Fully heal all players
 	[player, false] remoteExec ["allowDamage"]; // Disable damage for all players
-	if (!isNil "respawn_pos_blufor") then {_pos = (getPosASL respawn_pos_blufor); [player] remoteExec ["moveOut"]; [player, _pos] remoteExec ["setPosASL"] }; // Moves all players to blufor spawn (NEEDS IMPROVEMENT)
+	if (!isNil "respawn_pos_blufor") then { _pos = (getPosASL respawn_pos_blufor); [player] remoteExec ["moveOut"]; {_x setPosASL _pos} forEach allPlayers; }; // Moves all players to blufor spawn (NEEDS IMPROVEMENT)
 	[0] remoteExec ["setPlayerRespawnTime"]; // Respawn all players.
 	[player, 1] remoteExec ["BIS_fnc_respawnTickets", -2];
 
