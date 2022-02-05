@@ -9,7 +9,7 @@
 		Actions for the player to configure and setup their ACRE 2 radio settings.
 
 	USAGE:
-		Example: ["setRadioDefaultSpatial", ["ACRE_PRC152", "LEFT"]] execVM "sia_f\ACRERadioSetup.sqf"
+		Example: ["setRadioDefaultSpatial", ["ACRE_PRC152", "LEFT"]] execVM "sia_f\radios\ACRERadioSetup.sqf"
 	PARAMS:
 		0: Mode, can be:
 			"setRadioDefaultSpatial" - Updates and applies setting for given radio and ear.

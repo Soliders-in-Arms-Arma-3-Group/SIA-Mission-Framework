@@ -38,11 +38,11 @@ sleep 3; // Redundant sleep
 private _script_handler = [sia_f_arsenals] execVM "sia_f\ace arsenal\setupLocalArsenal.sqf";
 waitUntil { scriptDone _script_handler };
 
-private _script_handler = [] execVM "sia_f\giveACRERadios.sqf";
+private _script_handler = [] execVM "sia_f\radios\giveACRERadios.sqf";
 waitUntil { scriptDone _script_handler };
 
 // Setup and load ACRE Settings
-["loadRadioDefaultSpatials", []] execVM "sia_f\ACRERadioSetup.sqf";
-["reorderRadioMPTT", [sia_f_personalRadio]] execVM "sia_f\ACRERadioSetup.sqf";
+["loadRadioDefaultSpatials", []] execVM "sia_f\radios\ACRERadioSetup.sqf";
+["reorderRadioMPTT", [sia_f_personalRadio]] execVM "sia_f\radios\ACRERadioSetup.sqf";
 
-["ace_arsenal_displayClosed", {["loadRadioDefaultSpatials",[]] execVM "sia_f\ACRERadioSetup.sqf"; ["reorderRadioMPTT", [sia_f_personalRadio]] execVM "sia_f\ACRERadioSetup.sqf" }] call CBA_fnc_addEventHandler;
+["ace_arsenal_displayClosed", {["loadRadioDefaultSpatials",[]] execVM "sia_f\radios\ACRERadioSetup.sqf"; ["reorderRadioMPTT", [sia_f_personalRadio]] execVM "sia_f\radios\ACRERadioSetup.sqf" }] call CBA_fnc_addEventHandler;
