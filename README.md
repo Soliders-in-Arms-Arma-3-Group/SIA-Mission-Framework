@@ -1,4 +1,4 @@
-# SIA-Mission-Framework (Alpha v0.5.2)
+# SIA-Mission-Framework (Alpha v0.5.3)
 
   The SIA Mission Framework is a comprehensive template for mission makers, allowing for the easy addition and configuration of numerous scripts and QoL features.
 
