@@ -8,7 +8,7 @@
 	Description:
 		Adds briefing for blufor players to the mission.
 		For more information on briefing formatting, see https://community.bistudio.com/wiki/Arma_3:_Briefing
-		For an example of a briefing, see https://docs.google.com/document/d/11zSTSHv8v64CqT0mSXw441630pR9oYmi0KlSHdoXYW0/edit#heading=h.8vcpjemrohvy
+		For an example of a briefing, see https://docs.google.com/document/d/1o6i-wvIkhs4APs_QetKSZI35yEy8_7CHz8u_ZGcM_3g/edit?usp=sharing
 
 	USAGE:
 		Run locally.
@@ -31,4 +31,4 @@ _signal = "";
 // =======================================================================================
 // DO NOT DELETE OR EDIT vvv
 
-[["Signal", _signal], ["Support", _support], ["Execution", _execution], ["Mission", _mission], ["Situation", _situation]] execVM "sia_f\briefing\createBriefing.sqf";
+[[["Signal", _signal], ["Support", _support], ["Execution", _execution], ["Mission", _mission], ["Situation", _situation]]] execVM "sia_f\briefing\createBriefing.sqf";
