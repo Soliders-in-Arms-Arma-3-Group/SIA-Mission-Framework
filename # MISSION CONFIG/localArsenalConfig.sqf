@@ -6,7 +6,7 @@
 =====================================================================
 
 	Description:
-		Optional configuration option to add items to the arsenals' of specific roles.
+		Configuration option to add items to the arsenals' of specific roles.
 		Note that the gear each player spawns in with is already added to their local arsenal.
 
 	USAGE:
@@ -23,13 +23,36 @@ private _arsenals = _this select 0;
 if (typeName _arsenals != "ARRAY") exitWith {["Incorrect format: %1", _arsenals] call BIS_fnc_error}; // Exit if array not given.
 private _role = player getVariable ["role", "none"];
 private _roleItems = [];
+private _presetInfantry =[];
+private _presetLeads =[];
+private _infantryRoles = [];
+private _presets = [];
 
-switch (_role) do
-{
-	
+
+_presets = [
 // DO NOT DELETE OR EDIT ^^^
 // =======================================================================================
+// Configure presets. You may also define what roles are considered infantry below, or create additional presets using the same format. 
 
+	// Infantry Preset
+	[
+		["ItemCompass","SmokeShell"], // Classnames of items to to add, seperated by a comma.
+		["r","ar","aar","mg","lat","at","hat","tl","sql","medic","pltsgt","pltco","engy"] // Roles to apply it to.
+	],
+	
+	// Leadership Preset
+	[
+		["Binocular"],
+		["tl","sql","pltsgt","pltco"]
+	]
+
+// =======================================================================================
+// DO NOT DELETE OR EDIT vvv
+];
+switch (_role) do
+{
+// DO NOT DELETE OR EDIT ^^^
+// =======================================================================================
 // Configure role-specific local arsenals.
 // Enter classnames of items in the brackets with quotation marks and seperated by a comma. You can also add your own roles by following the format.
 // Example: case "r" : { _roleItems = ["RHS_M4","Binoculars","SmokeGrenade"] };
@@ -106,3 +129,11 @@ switch (_role) do
 };
 
 {[_x, _roleItems, false] call ace_arsenal_fnc_addVirtualItems} forEach sia_f_arsenals;
+
+{
+	_presetItems = _x select 0;
+	_presetRoles = _x select 1;
+
+	if (_role in _presetRoles) then  {{[_x, _presetItems, false] call ace_arsenal_fnc_addVirtualItems} forEach sia_f_arsenals};
+
+} forEach _presets;
