@@ -23,9 +23,6 @@ private _arsenals = _this select 0;
 if (typeName _arsenals != "ARRAY") exitWith {["Incorrect format: %1", _arsenals] call BIS_fnc_error}; // Exit if array not given.
 private _role = player getVariable ["role", "none"];
 private _roleItems = [];
-private _presetInfantry =[];
-private _presetLeads =[];
-private _infantryRoles = [];
 private _presets = [];
 
 
