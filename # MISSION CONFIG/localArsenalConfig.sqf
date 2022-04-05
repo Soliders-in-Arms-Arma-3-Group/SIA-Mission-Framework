@@ -6,8 +6,8 @@
 =====================================================================
 
 	Description:
-		Configuration option to add items to the arsenals' of specific roles.
-		Note that the gear each player spawns in with is already added to their local arsenal.
+		Configuration option to add items to the arsenals' of specific roles and/or to the arsenal globally.
+		NOTE that the gear each player spawns in with is already added to their local arsenal.
 
 	USAGE:
 		Run locally.
@@ -24,12 +24,16 @@ if (typeName _arsenals != "ARRAY") exitWith {["Incorrect format: %1", _arsenals]
 private _role = player getVariable ["role", "none"];
 private _roleItems = [];
 private _presets = [];
+private _globalArsenal = [];
 
-
-_presets = [
 // DO NOT DELETE OR EDIT ^^^
 // =======================================================================================
-// Configure presets. You may also define what roles are considered infantry below, or create additional presets using the same format. 
+// Declare items to add to the arsenal globally (for everyone), in the brackets with quotation marks and seperated by a comma.
+// Compatible with the "Export" function on the in-game attribute Arsenal editor.
+_globalArsenal = ["ItemWatch"];
+
+// Configure presets. You may also define what roles are considered infantry below, or create additional presets using the same format.
+_presets = [
 
 	// Infantry Preset
 	[
@@ -43,9 +47,9 @@ _presets = [
 		["tl","sql","pltsgt","pltco"]
 	]
 
+];
 // =======================================================================================
 // DO NOT DELETE OR EDIT vvv
-];
 switch (_role) do
 {
 // DO NOT DELETE OR EDIT ^^^
@@ -124,8 +128,8 @@ switch (_role) do
 	// Role not listed error
 	case default { [" Role not listed in config: %1", _role] call BIS_fnc_error }; // Log error if role not listed.
 };
-
-{[_x, _roleItems, false] call ace_arsenal_fnc_addVirtualItems} forEach sia_f_arsenals;
+private _arsenalContents = _roleItems + _globalArsenal;
+{[_x, _arsenalContents, false] call ace_arsenal_fnc_addVirtualItems} forEach sia_f_arsenals;
 
 {
 	_presetItems = _x select 0;
