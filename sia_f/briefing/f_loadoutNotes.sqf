@@ -15,11 +15,12 @@
 	PARAMS: None
 */
 
-if (!hasInterface || (side player == sideLogic)) exitWith {}; //Exit if not a player.
+if (!hasInterface || (side player == sideLogic)) exitWith {}; // Exit if not a player.
+// 2nd part of if statement unnecessary?
 
 // Remove old info page if there is one.
-if (!isNil "sia_f_loadoutInfo") then {player removeDiaryRecord ["Diary", sia_f_loadoutInfo]};
-if (!isNil "sia_f_loadoutInfoTeam") then {player removeDiaryRecord ["Diary", sia_f_loadoutInfoTeam]};
+if (!isNil "sia_f_loadoutInfo") then { player removeDiaryRecord ["Diary", sia_f_loadoutInfo] };
+if (!isNil "sia_f_loadoutInfoTeam") then { player removeDiaryRecord ["Diary", sia_f_loadoutInfoTeam] };
 
 // Local function to set the proper magazine count.
 private _fnc_wepMags = {
@@ -35,12 +36,12 @@ private _fnc_wepMags = {
 	private _magArr = [];
 	{
 		// findInPairs returns the first index that matches the checked for magazine
-		private _index = [_mags,_x] call BIS_fnc_findInPairs;
+		private _index = [_mags, _x] call BIS_fnc_findInPairs;
 
 		//If we have a match
 		if (_index != -1) then {
 			// Add the number of magazines to the list
-			_magArr pushBack ([_mags,[_index, 1]] call BIS_fnc_returnNestedElement);
+			_magArr pushBack ([_mags, [_index, 1]] call BIS_fnc_returnNestedElement);
 
 			// Remove the entry
 			_mags deleteAt _index;
@@ -54,21 +55,21 @@ private _fnc_wepMags = {
 // Local function to get the name and picture of a weapon/item
 private _fnc_name = {
 	params [
-		["_name", "", [""]], 
+		["_name", "", [""]],
 		["_type", "CfgWeapons", [""]],
 		["_prefix", "", [""]],
 		["_short", false, [false]]
 	];
 
 	private _picture = getText (configFile >> _type >> _name >> "picture");
-	if ! (_picture isEqualTo "") then {
+	if !(_picture isEqualTo "") then {
 		if (_picture find ".paa" == -1) then {
 			_picture = _picture + ".paa"
 		};
 		_picture = format ["<img image='%1' height='24'/>", _picture];
 	};
 
-	format[
+	format [
 		["%1%2%3 ", "%1%2 "] select _short,
 		_prefix,
 		_picture,
@@ -86,7 +87,9 @@ private _fnc_nameShort = {
 
 // Local function to format the text for magazine counts
 private _fnc_magArrText = {
-	params [["_magArr", [], [[]]]];
+	params [
+		["_magArr", [], [[]]]
+	];
 	if (count _magArr > 0) exitWith {
 		format ["[%1]", _magArr joinString "+"]
 	};
@@ -156,7 +159,7 @@ private _fnc_loadoutDataToText = {
 		_textLong = _textLong + "<br/><font size='18'>BACKPACK [%FULL]:</font><br/>";
 		private _bpText = ([_bp, "CfgVehicles"] call _fnc_name);
 		if (getContainerMaxLoad _bp > 0) then {
-			_bpText = _bpText + format["[%1%2]",round _bpLoad,"%"];
+			_bpText = _bpText + format ["[%1%2]", round _bpLoad, "%"];
 		} else {
 			//For the short version: only show special non-cargo backpacks
 			_textShrt = _textShrt + _bpText + "<br/>";
@@ -166,8 +169,8 @@ private _fnc_loadoutDataToText = {
 
 	// OTHER 
 	if (! _full) then {
-		_mags  = _mags  select {private _class = _x select 0; {_class isKindOf [_x, configfile >> "CfgMagazines"]} count _classesBlacklist == 0 };
-		_items = _items select {private _class = _x select 0; {_class isKindOf [_x, configfile >> "CfgWeapons"  ]} count _classesBlacklist == 0 };
+		_mags  = _mags  select { private _class = _x select 0; {_class isKindOf [_x, configfile >> "CfgMagazines"] } count _classesBlacklist == 0 };
+		_items = _items select { private _class = _x select 0; {_class isKindOf [_x, configfile >> "CfgWeapons"  ] } count _classesBlacklist == 0 };
 	};
 	if (count _mags > 0 || count _items > 0 || count _items_assigned > 0) then {
 		_textLong = _textLong + "<br/><font size='18'>OTHER [#]:</font>";
@@ -177,8 +180,8 @@ private _fnc_loadoutDataToText = {
 				["_className", "", [""]],
 				["_num", 0, [0]]
 			];
-			_textLong = _textLong + "<br/>" + ([_className, "CfgMagazines"] call _fnc_name) + format[" [%1]", _num];
-			_textShrt = _textShrt + ([_className, "CfgMagazines"] call _fnc_nameShort) + format[" [%1]", _num];
+			_textLong = _textLong + "<br/>" + ([_className, "CfgMagazines"] call _fnc_name) + format [" [%1]", _num];
+			_textShrt = _textShrt + ([_className, "CfgMagazines"] call _fnc_nameShort) + format [" [%1]", _num];
 		} forEach _mags;
 
 		{
@@ -186,7 +189,7 @@ private _fnc_loadoutDataToText = {
 				["_className", "", [""]],
 				["_num", 0, [0]]
 			];
-			_textLong = _textLong + "<br/>" + ([_className, "CfgWeapons"] call _fnc_name) + format[" [%1]",_num];
+			_textLong = _textLong + "<br/>" + ([_className, "CfgWeapons"] call _fnc_name) + format[" [%1]", _num];
 			_textShrt = _textShrt + ([_className, "CfgWeapons"] call _fnc_nameShort) + format[" [%1]", _num];
 		} forEach _items;
 
@@ -198,12 +201,11 @@ private _fnc_loadoutDataToText = {
 		{
 			_textLong = _textLong + "<br/>" + ([_x, "CfgWeapons"] call _fnc_name);
 		} forEach _items_assigned;
-		
 	};
 
 
 	//return value
-	if (_full) exitWith {_textLong};
+	if (_full) exitWith { _textLong };
 
 	_textShrt
 };
@@ -230,22 +232,22 @@ private _fnc_getLoadout = {
 
 	// All weapons minus the field glasses
 	private _weps = (weapons _unit);
-	_weps = _weps select {(toLower (getText(configFile >> "CfgWeapons" >> _x >> "simulation"))) != "binocular"};
+	_weps = _weps select { (toLower (getText (configFile >> "CfgWeapons" >> _x >> "simulation"))) != "binocular" };
 	_weps = _weps apply {
 		// Magazines
 		private _magArr = [_x, _mags] call _fnc_wepMags;
 
 		// Check if weapon has an underslung grenade launcher
-		private _muzzles = getArray(configFile >> "CfgWeapons" >> _x >> "muzzles") apply {toLower _x};
-		private _ugls = [configFile >> "CfgWeapons" >> _x,0,true] call BIS_fnc_returnChildren;
+		private _muzzles = getArray(configFile >> "CfgWeapons" >> _x >> "muzzles") apply { toLower _x };
+		private _ugls = [configFile >> "CfgWeapons" >> _x, 0, true] call BIS_fnc_returnChildren;
 		_ugls = _ugls select {"GrenadeLauncher" in ([_x,true] call BIS_fnc_returnParents)};
-		_ugls = _ugls apply {configName _x};
-		_ugls = _ugls select {(toLower _x) in _muzzles};
-		_ugls = _ugls apply {["UGL_F", _mags] call _fnc_wepMags};
+		_ugls = _ugls apply { configName _x };
+		_ugls = _ugls select { (toLower _x) in _muzzles };
+		_ugls = _ugls apply { ["UGL_F", _mags] call _fnc_wepMags };
 
 		// List weapon attachments
 		// Get attached items
-		private _attachments = _wepItems select (([_wepItems,_x] call BIS_fnc_findNestedElement) select 0);
+		private _attachments = _wepItems select (([_wepItems, _x] call BIS_fnc_findNestedElement) select 0);
 		_attachments deleteAt 0; // Remove the first element as it points to the weapon itself
 		_attachments = _attachments select { !(_x isEqualType []) && {_x != ""} };
 
@@ -273,8 +275,12 @@ private _text = _text_notice + ([player] call _fnc_getLoadout);
 private _units = (units (group player));
 private _text_group = "" + _text_notice;
 {
-	private _role = roleDescription _x; 
-	if (_role == "") then {_role = (getText(configFile >> "CfgVehicles" >> (typeOf _x) >> "displayName"))} else {_role = (_role splitString "@") select 0};
+	private _role = roleDescription _x;
+	if (_role == "") then {
+		_role = getText (configFile >> "CfgVehicles" >> (typeOf _x) >> "displayName");
+	} else {
+		_role = (_role splitString "@") select 0;
+	};
 
 	private _text_loadout = [_x, false] call _fnc_getLoadout;
 	private _unit_name = format ["<font face='PuristaBold'>%1</font><font face='PuristaLight'> (%2):</font><br/>", name _x, _role];

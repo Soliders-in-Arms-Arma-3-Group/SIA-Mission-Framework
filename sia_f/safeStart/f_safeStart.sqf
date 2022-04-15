@@ -11,31 +11,31 @@
 // If a value was set for the mission-timer, begin the safe-start loop and turn on invincibility
 
 sleep 10; // Give everything a second to settle;
+// ToDo: replace with a waitUntil
 
-if (!sia_f_missionStarted) then
-{
-	// The server will handle the loop and notifications
-	if (isServer && sia_f_showStatusHint) then {
-		[] spawn {
-			while {!sia_f_missionStarted} do {
+if (sia_f_missionStarted) exitWith {};
+
+// The server will handle the loop and notifications
+if (isServer && sia_f_showStatusHint) then {
+	[] spawn {
+		while { !sia_f_missionStarted } do {
 			["sia_f\safeStart\hint.sqf"] remoteExec ["execVM"];
-			sleep 30; // Refresh every 10 seconds
-			};
+			sleep 30; // Refresh every 30 seconds
 		};
 	};
+};
 
-	// Enable invincibility for players
-	if (hasInterface) then {
+// Enable invincibility for players
+if (hasInterface) then {
 
-		player allowDamage false;
-		
-		while {!sia_f_missionStarted} do {
-			{[ACE_player, _x, true] call ace_safemode_fnc_setWeaponSafety} forEach (weapons ACE_player);
-			sleep 1; 
-		};
+	player allowDamage false;
 
-		{[ACE_player, _x, false] call ace_safemode_fnc_setWeaponSafety} forEach (weapons ACE_player);
-
-		player allowDamage true;
+	while {!sia_f_missionStarted} do {
+		{ [ACE_player, _x, true] call ace_safemode_fnc_setWeaponSafety } forEach (weapons ACE_player);
+		sleep 1;
 	};
+
+	{ [ACE_player, _x, false] call ace_safemode_fnc_setWeaponSafety } forEach (weapons ACE_player);
+
+	player allowDamage true;
 };

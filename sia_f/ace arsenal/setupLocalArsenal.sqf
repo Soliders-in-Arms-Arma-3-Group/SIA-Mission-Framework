@@ -17,8 +17,10 @@
 
 if (!hasInterface) exitWith {}; // Exit if not player
 
-private _arsenals = _this select 0;
-if (typeName _arsenals != "ARRAY") exitWith {["Incorrect format: %1", _arsenals] call BIS_fnc_error}; // Exit if array not given.
+params [
+	["_arsenals", [], [[]]]
+];
+if (_arsenals isEqualTo []) exitWith { ["setupLocalArsenal Error: Invalid Parameters: %1", _this select 0] call BIS_fnc_error }; // Exit if array not given.
 
 private _role = player getVariable ["role", "none"];
 
@@ -26,8 +28,8 @@ private _role = player getVariable ["role", "none"];
 private _loadout = (getUnitLoadout player);
 _loadout = str _loadout splitString "[]," joinString ",";
 _loadout = parseSimpleArray ("[" + _loadout + "]");
-_loadout = _loadout arrayIntersect _loadout select {_x isEqualType "" && {_x != ""}};
-{[_x, _loadout, false] call ace_arsenal_fnc_addVirtualItems} forEach _arsenals;
+_loadout = _loadout arrayIntersect _loadout select { _x isEqualType "" && { _x != "" } };
+{ [_x, _loadout, false] call ace_arsenal_fnc_addVirtualItems } forEach _arsenals;
 
 // Run local arsenal config.
 [_arsenals] execVM "# MISSION CONFIG\localArsenalConfig.sqf";

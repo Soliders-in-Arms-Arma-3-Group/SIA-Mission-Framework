@@ -17,45 +17,50 @@
 
 if (!isServer) exitWith {}; // Exit if player.
 
-private _arsenals = _this select 0;
-private _array = [];
-if (typeName _arsenals != "ARRAY") exitWith {["Incorrect format: %1", _arsenals] call BIS_fnc_error}; // Exit if array not given.
+params [
+	["_arsenals", [], [[]]]
+];
+if (_arsenals isEqualTo []) exitWith { ["setupGlobalArsenal Error: Invalid Parameters: %1", _this select 0] call BIS_fnc_error }; // Exit if array not given.
 
-{[_x, false, true] call ace_arsenal_fnc_initBox}  forEach _arsenals; // Initialize arsenals.
+private _array = [];
+{ [_x, false, true] call ace_arsenal_fnc_initBox } forEach _arsenals; // Initialize arsenals.
 
 if (sia_f_haveBasics) then {
 	_array = parseSimpleArray (loadfile "sia_f\ace arsenal\item pools\baseArsenalBasics.txt");
-	{[_x, _array, true] call ace_arsenal_fnc_addVirtualItems} forEach sia_f_arsenals;
+	{ [_x, _array, true] call ace_arsenal_fnc_addVirtualItems } forEach sia_f_arsenals;
 };
 
 if (sia_f_acreEnabled) then {
 	{
-		_acreRadios = ([] call acre_api_fnc_getAllRadios) select 0;
+		private _acreRadios = ([] call acre_api_fnc_getAllRadios) select 0;
 		if (_x != "NONE") then {
-			_y = _x;
-			if (_x in _acreRadios) then { {[_x, [_y], true] call ace_arsenal_fnc_addVirtualItems} forEach sia_f_arsenals }
-			else {["Radio type: Invalid option: %1", _x] call BIS_fnc_error}; // Log error if wrong input given.
-		}
+			private _y = _x;
+			if (_x in _acreRadios) then {
+				{ [_x, [_y], true] call ace_arsenal_fnc_addVirtualItems } forEach sia_f_arsenals;
+			} else {
+				["setupGlobalArsenal Error: Radio type - Invalid option: %1", _x] call BIS_fnc_error; // Log error if wrong input given.
+			};
+		};
 	} forEach [sia_f_personalRadio, sia_f_handheldRadio, sia_f_manpackRadio];
 };
 
 if (sia_f_haveCTab) then {
 	_array = parseSimpleArray (loadfile "sia_f\ace arsenal\item pools\baseArsenalcTab.txt");
-	{[_x, _array, true] call ace_arsenal_fnc_addVirtualItems} forEach sia_f_arsenals;
+	{ [_x, _array, true] call ace_arsenal_fnc_addVirtualItems } forEach sia_f_arsenals;
 };
 
 switch (sia_f_haveKATMedical) do {
 
 	case "FULL" : 
 	{
-	_array = parseSimpleArray (loadfile "sia_f\ace arsenal\item pools\baseArsenalKATFull.txt");
-	{[_x, _array, true] call ace_arsenal_fnc_addVirtualItems} forEach sia_f_arsenals; 
+		_array = parseSimpleArray (loadfile "sia_f\ace arsenal\item pools\baseArsenalKATFull.txt");
+		{ [_x, _array, true] call ace_arsenal_fnc_addVirtualItems } forEach sia_f_arsenals;
 	};
 
 	case "LIMITED" :
 	{ 
-	_array = parseSimpleArray (loadfile "sia_f\ace arsenal\item pools\baseArsenalKATLimited.txt");
-	{[_x, _array, true] call ace_arsenal_fnc_addVirtualItems} forEach sia_f_arsenals;
+		_array = parseSimpleArray (loadfile "sia_f\ace arsenal\item pools\baseArsenalKATLimited.txt");
+		{ [_x, _array, true] call ace_arsenal_fnc_addVirtualItems } forEach sia_f_arsenals;
 	};
 
 	case "NONE" : {};
@@ -65,4 +70,3 @@ switch (sia_f_haveKATMedical) do {
 		["sia_f_haveKATMedical: Invalid option: %1", sia_f_haveKATMedical] call BIS_fnc_error; // Log error if wrong input given.
 	};
 }
- 

@@ -27,6 +27,6 @@ if (sia_f_briefLoadout) then {
 	waitUntil { scriptDone _script_handler };
 };
 
-{ player createDiaryRecord ["Diary",[(_x select 0), (_x select 1)],taskNull,"",true] } forEach _briefing;
+{ player createDiaryRecord ["Diary", [(_x select 0), (_x select 1)], taskNull, "", true] } forEach _briefing;
 
-if (sia_f_briefORBAT) then {["sia_f\briefing\orbat.sqf"] remoteExec ["execVM"]};
+if (sia_f_briefORBAT) then { ["sia_f\briefing\orbat.sqf"] remoteExec ["execVM"] };

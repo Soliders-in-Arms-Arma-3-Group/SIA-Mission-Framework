@@ -15,11 +15,11 @@
 		NONE
 */
 
-if (!hasInterface || !sia_f_acreEnabled) exitWith {}; // Exit if not player or if ACRE is set to disabled.
+if (!sia_f_acreEnabled || !hasInterface) exitWith {}; // Exit if not player or if ACRE is set to disabled.
 
 private _role = player getVariable ["role", "none"];
 
-private _rolesWithHandheldRadio = ["sql","tl","pltco","pltsgt","gm","drone_op","spotter","sniper","medic"];
+private _rolesWithHandheldRadio = ["sql", "tl", "pltco", "pltsgt", "gm", "drone_op", "spotter", "sniper", "medic"];
 private _rolesManpackRadio = [];
 
 player addItem sia_f_personalRadio;
