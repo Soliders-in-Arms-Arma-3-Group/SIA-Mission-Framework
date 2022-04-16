@@ -41,10 +41,10 @@ private _script_handler = [] execVM "sia_f\radios\giveACRERadios.sqf";
 waitUntil { scriptDone _script_handler };
 
 // Setup and load ACRE Settings
-["loadRadioDefaultSpatials", []] execVM "sia_f\radios\ACRERadioSetup.sqf";
-["reorderRadioMPTT", [sia_f_personalRadio]] execVM "sia_f\radios\ACRERadioSetup.sqf";
+["loadRadioDefaultSpatials", []] spawn sia_f_fnc_ACRERadioSetup;
+["reorderRadioMPTT", [sia_f_personalRadio]] spawn sia_f_fnc_ACRERadioSetup;
 
 ["ace_arsenal_displayClosed", {
-	["loadRadioDefaultSpatials", []] execVM "sia_f\radios\ACRERadioSetup.sqf";
-	["reorderRadioMPTT", [sia_f_personalRadio]] execVM "sia_f\radios\ACRERadioSetup.sqf";
+	["loadRadioDefaultSpatials", []] spawn sia_f_fnc_ACRERadioSetup;
+	["reorderRadioMPTT", [sia_f_personalRadio]] spawn sia_f_fnc_ACRERadioSetup;
 }] call CBA_fnc_addEventHandler;

@@ -9,7 +9,7 @@
 		Actions for the player to configure and setup their ACRE 2 radio settings.
 
 	USAGE:
-		Example: ["setRadioDefaultSpatial", ["ACRE_PRC152", "LEFT"]] execVM "sia_f\radios\ACRERadioSetup.sqf"
+		Example: ["setRadioDefaultSpatial", ["ACRE_PRC152", "LEFT"]] spawn sia_f_fnc_ACRERadioSetup
 	PARAMS:
 		0: Mode, can be:
 			"setRadioDefaultSpatial" - Updates and applies setting for given radio and ear.
@@ -31,11 +31,9 @@ params [
 ];
 
 fnc_sia_getACREHash = {
-	private _hash = profileNamespace getVariable "SIA_F_ACREDefaultSpatial"; // Load player's current default spatial settings.
-	if (isNil "_hash") then {
+	profileNamespace getVariable ["SIA_F_ACREDefaultSpatial", 
 		["ACRE_PRC343", "ACRE_PRC148", "ACRE_PRC152", "ACRE_PRC77", "ACRE_PRC117F"] createHashMapFromArray ["RIGHT", "LEFT", "LEFT", "LEFT", "LEFT"] // If player has no default settings, then load a blank template.
-	};
-	_hash;
+	]; // Load player's current default spatial settings.
 };
 
 switch (_mode) do {
@@ -44,7 +42,7 @@ switch (_mode) do {
 	{
 		private _radio = _params select 0;
 		private _ear = _params select 1;
-		private _hash = _this call fnc_sia_getACREHash; // Get hash of settings.
+		private _hash = call fnc_sia_getACREHash; // Get hash of settings.
 		_hash set [_radio, _ear]; // Change new setting.
 		profileNamespace setVariable ["SIA_F_ACREDefaultSpatial", _hash]; // Update player's settings.
 		saveProfileNamespace;
@@ -54,7 +52,7 @@ switch (_mode) do {
 
 	case "loadRadioDefaultSpatials" :
 	{
-		private _hash = _this call fnc_sia_getACREHash; // Get hash of settings.
+		private _hash = call fnc_sia_getACREHash; // Get hash of settings.
 		{
 			if ([player, _x] call acre_api_fnc_hasKindOfRadio) then {
 				[([_x] call acre_api_fnc_getRadioByType), _y] call acre_api_fnc_setRadioSpatial;
@@ -72,7 +70,7 @@ switch (_mode) do {
 
 	case "printRadioDefaultSpatials" :
 	{
-		private _hash = _this call fnc_sia_getACREHash; // Get hash of settings.
+		private _hash = call fnc_sia_getACREHash; // Get hash of settings.
 		private _str = ""; // Initialize empty string.
 		{
 			_str = (_str + (getText (ConfigFile >> "CfgWeapons" >> _x >> "displayName")) + " : " + _y + "\n");

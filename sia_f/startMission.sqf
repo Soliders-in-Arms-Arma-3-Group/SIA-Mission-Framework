@@ -24,7 +24,7 @@ setTimeMultiplier 1; // Set time acceleration to default.
 sia_f_missionStarted = true;
 publicVariable "sia_f_missionStarted";
 
-if (sia_f_briefLoadout) then { ["sia_f\briefing\f_loadoutNotes.sqf"] remoteExec ["execVM"] }; // Refresh loadout information if enabled.
+if (sia_f_briefLoadout) then { remoteExec ["sia_f_fnc_loadoutNotes"] }; // Refresh loadout information if enabled.
 
 sleep 1;
 

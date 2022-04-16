@@ -12,7 +12,7 @@
 	PARAMS: None
 */
 
-if (!hasInterface || !sia_f_showStatusHint) exitWith {}; // Exit if not a player or if player has disabled status hint.
+if (!sia_f_showStatusHint || !hasInterface) exitWith {}; // Exit if not a player or if player has disabled status hint.
 
 private _colorHeader = "#FFB84C"; // light orange
 private _colorPrimary = "#FFFFFF"; // white

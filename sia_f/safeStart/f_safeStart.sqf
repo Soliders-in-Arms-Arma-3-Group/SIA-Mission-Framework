@@ -19,7 +19,7 @@ if (sia_f_missionStarted) exitWith {};
 if (isServer && sia_f_showStatusHint) then {
 	[] spawn {
 		while { !sia_f_missionStarted } do {
-			["sia_f\safeStart\hint.sqf"] remoteExec ["execVM"];
+			remoteExec ["sia_f_fnc_hint"];
 			sleep 30; // Refresh every 30 seconds
 		};
 	};

@@ -73,4 +73,4 @@ private _rolecolor = '';
 	_str = _str + "<br />" // Add extra line break after each group.
 } forEach _allGroupsWithPlayers;
 
-orbat = player createDiaryRecord ["Diary", ["ORBAT", "<execute expression='execVM ""sia_f\briefing\orbat.sqf"";'>Refresh</execute><br></br><br></br>" + _str]]; // Add ORBAT text to diary along with "Refresh" button.
+orbat = player createDiaryRecord ["Diary", ["ORBAT", "<execute expression='call sia_f_fnc_orbat;'>Refresh</execute><br></br><br></br>" + _str]]; // Add ORBAT text to diary along with "Refresh" button.

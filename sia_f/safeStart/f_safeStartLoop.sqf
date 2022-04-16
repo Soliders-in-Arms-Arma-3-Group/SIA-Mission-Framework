@@ -7,7 +7,7 @@ if !(isServer) exitWith {};
 
 while { !sia_f_missionStarted } do {
 	// Update mission information
-	["sia_f\safeStart\hint.sqf"] remoteExec ["execVM"];
+	remoteExec ["sia_f_fnc_hint"];
 
 	uisleep 60; // Sleep 60 seconds
 

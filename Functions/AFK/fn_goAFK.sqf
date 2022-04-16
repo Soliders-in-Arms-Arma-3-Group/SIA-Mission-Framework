@@ -11,7 +11,7 @@
 
 	USAGE:
 		Add action locally to call script.
-		Example: (in initPlayerLocal.sqf) player addAction ["Go AFK", {"execVM "sia_f\goAFK.sqf"}];
+		Example: (in initPlayerLocal.sqf) player addAction ["Go AFK", {[] spawn sia_f_fnc_goAFK}];
 
 	PARAMS: None
 */
@@ -46,8 +46,8 @@ createDialog "dialogAFK"; // Open Exit Dialog
 _display = findDisplay 3289;
 
 // Exit AFK if player closes dialog with escape key.
-_display displayAddEventhandler ["KeyDown", {
+_display displayAddEventHandler ["KeyDown", {
 	params ["_display","_key"];
-	if (_key == 1) exitWith { [false] execVM "sia_f\goAFK\exitAFK.sqf" };// ESC pressed while dialog is open, overwrite default behaviour
+	if (_key == 1) exitWith { [false] spawn sia_f_fnc_exitAFK }; // ESC pressed while dialog is open, overwrite default behavior
 	false
 }];

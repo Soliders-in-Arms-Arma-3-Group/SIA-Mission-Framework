@@ -33,4 +33,4 @@ _unit setCaptive false;
 
 5 cutText ["", "PLAIN", -1, true];
 
-if (_doTP) then { [player] execVM "sia_f\teleportToSquad.sqf" };
+if (_doTP) then { [player] spawn sia_f_fnc_teleportToSquad };
