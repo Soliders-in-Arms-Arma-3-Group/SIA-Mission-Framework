@@ -8,8 +8,11 @@ class sia_f
 
 	class AFK
 	{
+		class deserializeState {}; // sia_f_fnc_deserializeState
+		class encodeJSON {}; // sia_f_fnc_encodeJSON
 		class exitAFK {}; // sia_f_fnc_exitAFK
 		class goAFK {}; // sia_f_fnc_goAFK
+		class serializeState {}; // sia_f_fnc_serializeState
 	};
 	
 	class radios

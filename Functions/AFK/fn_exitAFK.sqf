@@ -21,13 +21,14 @@ params [
 	["_doTP", false, [false]]
 ];
 
-private _timeout = 60; // Time in seconds to temporarily suspend script after use.
-
-
 private _unit = player;
+private _serializedMedStatus = player getVariable ["serializedMedStatus", "{}"];
+
 _unit setCaptive false;
 [_unit, false] remoteExec ["hideObjectGlobal", 2];
 [_unit, true] remoteExec ["enableSimulationGlobal", 2];
+[_unit, _serializedMedStatus] call sia_f_fnc_deserializeState;
+
 [(name _unit + " is no longer AFK.")] remoteExec ["systemChat"]; // "<player> is AFK" system chat message.
 [] spawn { sleep 60; player setVariable ["sia_isAFK", false]; }; // Time out for 60 seconds.
 
