@@ -39,14 +39,15 @@ class cfgNotifications
 class CfgFunctions
 {
 	#include "node_modules\@gruppe-adler\replay\cfgFunctions.hpp"
-	
+	#include "Functions\cfgFunctions.hpp"
+
 	class TPD
 	{
 		tag = "TPD";
 		class Initialize
 		{
 			file = "sia_f\TPD_teleportDialog";
-			class teleport;
+			class teleport; // TPD_fnc_teleport
 		};
 	};
 };

@@ -11,7 +11,7 @@
 
 	USAGE:
 		Add action locally to call script.
-		Example: (in initPlayerLocal.sqf) player addAction ["Go AFK", {"execVM "sia_f\goAFK.sqf"}];
+		Example: (in initPlayerLocal.sqf) player addAction ["Go AFK", {[] spawn sia_f_fnc_goAFK}];
 
 	PARAMS: None
 */
@@ -30,13 +30,19 @@ if (
 private _timeout = 15; // Time in seconds to temporarily suspend script after use.
 
 private _unit = player;
+private _serializedMedStatus = [_unit] call sia_f_fnc_serializeState;
+
 player setCaptive true; // Set player to captive.
 [_unit, true] remoteExec ["hideObjectGlobal", 2]; // Hide player object.
 [_unit, false] remoteExec ["enableSimulationGlobal", 2]; // Disables player movement.
+
+player setVariable ["serializedMedStatus", _serializedMedStatus];
 player setVariable ["sia_isAFK", true]; // Updates player variable.
+[objNull, player] call ace_medical_treatment_fnc_fullHeal;
+
 [(name player + " is now AFK.")] remoteExec ["systemChat"]; // "<player> is AFK" system chat message.
 
-5 cutText ["You are now AFK\nYou may exit in " + (str _timeout) + " seconds.\nWARNING: ACE Medical is still simulated.", "PLAIN", -1, true];
+5 cutText ["You are now AFK\nYou may exit in " + (str _timeout) + " seconds.", "PLAIN", -1, true];
 
 sleep _timeout; // Pause until exit dialog is opened.
 
@@ -46,8 +52,8 @@ createDialog "dialogAFK"; // Open Exit Dialog
 _display = findDisplay 3289;
 
 // Exit AFK if player closes dialog with escape key.
-_display displayAddEventhandler ["KeyDown", {
+_display displayAddEventHandler ["KeyDown", {
 	params ["_display","_key"];
-	if (_key == 1) exitWith { [false] execVM "sia_f\goAFK\exitAFK.sqf" };// ESC pressed while dialog is open, overwrite default behaviour
+	if (_key == 1) exitWith { [false] spawn sia_f_fnc_exitAFK }; // ESC pressed while dialog is open, overwrite default behavior
 	false
 }];

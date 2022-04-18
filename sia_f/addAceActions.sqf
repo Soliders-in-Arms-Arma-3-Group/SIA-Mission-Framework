@@ -20,7 +20,7 @@ waitUntil { !isNull player };
 private ["_action", "_statement"];
 
 if (!isNil "sia_f_ACEButtons" && sia_f_enableTPToSquad) then {
-	_action = ["TpSquad", "Teleport to Squad", "\A3\Ui_F\Data\IGUI\Cfg\simpleTasks\types\meet_ca.paa", { [_this select 1] execVM "sia_f\teleportToSquad.sqf" }, { true }] call ace_interact_menu_fnc_createAction;
+	_action = ["TpSquad", "Teleport to Squad", "\A3\Ui_F\Data\IGUI\Cfg\simpleTasks\types\meet_ca.paa", { [_this select 1] spawn sia_f_fnc_teleportToSquad }, { true }] call ace_interact_menu_fnc_createAction;
 	{ [_x, 0, ["ACE_MainActions"], _action, true] call ace_interact_menu_fnc_addActionToObject } forEach sia_f_ACEButtons;
 };
 
@@ -48,14 +48,14 @@ _action = ["SIA", " SIA Options", "sia_f\images\sia_tiny.paa", {}, { true }] cal
 [(typeOf player), 1, ["ACE_SelfActions"], _action] call ace_interact_menu_fnc_addActionToClass;
 
 if (sia_f_enableGoAFK) then {
-	_action = ["SIA_AFK", "Go AFK", "\A3\Ui_F\Data\IGUI\Cfg\simpleTasks\types\wait_ca.paa", { execVM "sia_f\goAFK\goAFK.sqf" }, { !(player getVariable ["sia_isAFK", false]) }] call ace_interact_menu_fnc_createAction;
+	_action = ["SIA_AFK", "Go AFK", "\A3\Ui_F\Data\IGUI\Cfg\simpleTasks\types\wait_ca.paa", { [] spawn sia_f_fnc_goAFK }, { !(player getVariable ["sia_isAFK", false]) }] call ace_interact_menu_fnc_createAction;
 	[(typeOf player), 1, ["ACE_SelfActions", "SIA"], _action] call ace_interact_menu_fnc_addActionToClass;
 };
 
 // Update Loadout Info
 if (sia_f_enableLoadoutInfo && sia_f_briefLoadout) then {
 	_action = ["loadoutInfo", "Update Team Loadout Info", "\A3\Ui_F\Data\IGUI\Cfg\simpleTasks\types\documents_ca.paa", {
-		execVM "sia_f\briefing\f_loadoutNotes.sqf";
+		call sia_f_fnc_loadoutNotes;
 		[] spawn {
 			sleep 0.2; openMap true;
 			player selectDiarySubject "Diary";
@@ -65,7 +65,7 @@ if (sia_f_enableLoadoutInfo && sia_f_briefLoadout) then {
 };
 
 // Mission Info Hint System
-_action = ["SIA_Hint", "Show Mission Info", "\A3\Ui_F\Data\IGUI\Cfg\simpleTasks\types\unknown_ca.paa", { execVM "sia_f\safeStart\hint.sqf" }, { true }] call ace_interact_menu_fnc_createAction;
+_action = ["SIA_Hint", "Show Mission Info", "\A3\Ui_F\Data\IGUI\Cfg\simpleTasks\types\unknown_ca.paa", { call sia_f_fnc_hint }, { true }] call ace_interact_menu_fnc_createAction;
 [(typeOf player), 1, ["ACE_SelfActions", "SIA"], _action] call ace_interact_menu_fnc_addActionToClass;
 
 _statement = {
@@ -84,8 +84,8 @@ _action = ["SIA_Hint_Toggle", "Toggle Persistent Hint", "", _statement, { true }
 // SIA Radio Actions
 if (sia_f_acreEnabled) then {
 	_action = ["SIA_ConfigACRE", "ACRE Settings", "\A3\Ui_F\Data\IGUI\Cfg\simpleTasks\types\radio_ca.paa", {
-		["loadRadioDefaultSpatials", []] execVM "sia_f\radios\ACRERadioSetup.sqf";
-		["reorderRadioMPTT", [sia_f_personalRadio]] execVM "sia_f\radios\ACRERadioSetup.sqf";
+		["loadRadioDefaultSpatials", []] spawn sia_f_fnc_ACRERadioSetup;
+		["reorderRadioMPTT", [sia_f_personalRadio]] spawn sia_f_fnc_ACRERadioSetup;
 		hint "Saved settings loaded.";
 	}, { true }] call ace_interact_menu_fnc_createAction;
 	[(typeOf player), 1, ["ACE_SelfActions", "SIA"], _action] call ace_interact_menu_fnc_addActionToClass;
@@ -101,7 +101,7 @@ if (sia_f_acreEnabled) then {
 	{
 		_action = [("SIA_ConfigSpatial_" + _configName + _x), ( "Set " + _x +  " As Default"), "", {
 			params ["", "", "_params"];
-			["setRadioDefaultSpatial", [_params select 0, _params select 1]] execVM "sia_f\radios\ACRERadioSetup.sqf";
+			["setRadioDefaultSpatial", [_params select 0, _params select 1]] spawn sia_f_fnc_ACRERadioSetup;
 		}, { true }, {}, [_configName, _x]] call ace_interact_menu_fnc_createAction;
 		[(typeOf player), 1, ["ACE_SelfActions", "SIA", "SIA_ConfigACRE", ("SIA_ConfigACRE_Radios" + _configName)], _action] call ace_interact_menu_fnc_addActionToClass;
 	} forEach ["LEFT", "CENTER", "RIGHT"];
@@ -109,15 +109,15 @@ if (sia_f_acreEnabled) then {
 } forEach ["ACRE_PRC343", "ACRE_PRC148","ACRE_PRC152","ACRE_PRC77","ACRE_PRC117F"];
 
 _action = ["SIA_loadSpatials", "Load Saved Settings", "", {
-	["loadRadioDefaultSpatials", []] execVM "sia_f\radios\ACRERadioSetup.sqf";
-	["reorderRadioMPTT", [sia_f_personalRadio]] execVM "sia_f\radios\ACRERadioSetup.sqf";
+	["loadRadioDefaultSpatials", []] spawn sia_f_fnc_ACRERadioSetup;
+	["reorderRadioMPTT", [sia_f_personalRadio]] spawn sia_f_fnc_ACRERadioSetup;
 }, { true }] call ace_interact_menu_fnc_createAction;
 [(typeOf player), 1, ["ACE_SelfActions", "SIA", "SIA_ConfigACRE"], _action] call ace_interact_menu_fnc_addActionToClass;
 
-_action = ["SIA_resetSpatials", "Clear Saved Settings", "", { ["resetRadioDefaultSpatials", []] execVM "sia_f\radios\ACRERadioSetup.sqf" }, { true }] call ace_interact_menu_fnc_createAction;
+_action = ["SIA_resetSpatials", "Clear Saved Settings", "", { ["resetRadioDefaultSpatials", []] spawn sia_f_fnc_ACRERadioSetup; }, { true }] call ace_interact_menu_fnc_createAction;
 [(typeOf player), 1, ["ACE_SelfActions", "SIA", "SIA_ConfigACRE"], _action] call ace_interact_menu_fnc_addActionToClass;
 
-_action = ["SIA_getSpatials", "Print Saved Settings", "", { ["printRadioDefaultSpatials", []] execVM "sia_f\radios\ACRERadioSetup.sqf" }, { true }] call ace_interact_menu_fnc_createAction;
+_action = ["SIA_getSpatials", "Print Saved Settings", "", { ["printRadioDefaultSpatials", []] spawn sia_f_fnc_ACRERadioSetup; }, { true }] call ace_interact_menu_fnc_createAction;
 [(typeOf player), 1, ["ACE_SelfActions", "SIA", "SIA_ConfigACRE"], _action] call ace_interact_menu_fnc_addActionToClass;
 
 // === Zeus actions ===

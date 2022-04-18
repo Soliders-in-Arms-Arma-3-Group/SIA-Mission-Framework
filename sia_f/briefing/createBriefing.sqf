@@ -23,10 +23,9 @@ if (sia_f_briefWeather) then {
 };
 
 if (sia_f_briefLoadout) then {
-	_script_handler = execVM "sia_f\briefing\f_loadoutNotes.sqf";
-	waitUntil { scriptDone _script_handler };
+	call sia_f_fnc_loadoutNotes;
 };
 
 { player createDiaryRecord ["Diary", [(_x select 0), (_x select 1)], taskNull, "", true] } forEach _briefing;
 
-if (sia_f_briefORBAT) then { ["sia_f\briefing\orbat.sqf"] remoteExec ["execVM"] };
+if (sia_f_briefORBAT) then { remoteExec ["sia_f_fnc_orbat"] };
