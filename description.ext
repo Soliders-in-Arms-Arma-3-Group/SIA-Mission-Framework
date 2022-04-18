@@ -39,16 +39,17 @@ class cfgNotifications
 class CfgFunctions
 {
 	#include "node_modules\@gruppe-adler\replay\cfgFunctions.hpp"
-	
+	#include "Functions\cfgFunctions.hpp"
+
 	class TPD
-  {
-	tag = "TPD";
-	class Initialize
 	{
-	  file = "sia_f\TPD_teleportDialog";
-	  class teleport;
+		tag = "TPD";
+		class Initialize
+		{
+			file = "sia_f\TPD_teleportDialog";
+			class teleport; // TPD_fnc_teleport
+		};
 	};
-  };
 };
 
 
@@ -67,14 +68,14 @@ disabledAI = 1;
 #include "node_modules\@gruppe-adler\replay\ui\dialog.hpp"
 
 class GRAD_Replay {
-    precision = 4;                                    // precision of replay, 5 means every 5 seconds one snapshot (number)
-    trackedSides[] = {"west", "east", "independent"};    // defines the sides that will be tracked (possible are "west", "east", "independent", "civilian") (array)
-    stepsPerTick = 1;                                 // defines steps played back at once (number)
-    trackedVehicles = 0;                              // defines if empty and AI steered vehicles will be tracked (0/1)
-    trackedAI = 1;                                    // defines if AI will be tracked (0/1)
-    sendingChunkSize = 15;                            // higher number means replay loading is faster, but might cause instability / lags during loading (number)
-    trackShots = 1;                                   // defines if shots will be tracked (0/1)
-    upload = 0;                                       // defines if replay data will be uploaded to replay.gruppe-adler.de (0/1)
+	precision = 4;                                    // precision of replay, 5 means every 5 seconds one snapshot (number)
+	trackedSides[] = {"west", "east", "independent"};    // defines the sides that will be tracked (possible are "west", "east", "independent", "civilian") (array)
+	stepsPerTick = 1;                                 // defines steps played back at once (number)
+	trackedVehicles = 0;                              // defines if empty and AI steered vehicles will be tracked (0/1)
+	trackedAI = 1;                                    // defines if AI will be tracked (0/1)
+	sendingChunkSize = 15;                            // higher number means replay loading is faster, but might cause instability / lags during loading (number)
+	trackShots = 1;                                   // defines if shots will be tracked (0/1)
+	upload = 0;                                       // defines if replay data will be uploaded to replay.gruppe-adler.de (0/1)
 };
 
 #include "# MISSION CONFIG\missionInfo.hpp"

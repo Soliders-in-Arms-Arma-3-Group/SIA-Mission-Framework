@@ -18,15 +18,15 @@
 //=======================================================================================
 // Put briefing in the quotations below. 
 
-_situation = "";
+private _situation = "";
 
-_mission = "";
+private _mission = "";
 
-_execution = "";
+private _execution = "";
 
-_support = "";
+private _support = "";
 
-_signal = "";
+private _signal = "";
 
 // =======================================================================================
 // DO NOT DELETE OR EDIT vvv
