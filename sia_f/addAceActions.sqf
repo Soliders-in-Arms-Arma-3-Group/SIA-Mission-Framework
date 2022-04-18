@@ -120,7 +120,7 @@ _action = ["SIA_resetSpatials", "Clear Saved Settings", "", { ["resetRadioDefaul
 _action = ["SIA_getSpatials", "Print Saved Settings", "", { ["printRadioDefaultSpatials", []] spawn sia_f_fnc_ACRERadioSetup; }, { true }] call ace_interact_menu_fnc_createAction;
 [(typeOf player), 1, ["ACE_SelfActions", "SIA", "SIA_ConfigACRE"], _action] call ace_interact_menu_fnc_addActionToClass;
 
-// === Zeus actions ===
+// === Zeus/Plt actions ===
 _action = ["setupPhase", "Set Phase", "\A3\ui_f\data\IGUI\Cfg\simpleTasks\types\use_ca.paa", {}, { !sia_f_missionStarted }] call ace_interact_menu_fnc_createAction;
 [["ACE_ZeusActions"], _action] call ace_interact_menu_fnc_addActionToZeus;
 if ((player getVariable ["role", ""]) == "pltco") then { [(typeOf player), 1, ["ACE_SelfActions", "SIA"], _action] call ace_interact_menu_fnc_addActionToClass; }; // Give plt leader access to phase change.
