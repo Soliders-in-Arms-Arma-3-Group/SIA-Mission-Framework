@@ -2,7 +2,7 @@
 
   The SIA Mission Framework is a comprehensive template for mission makers, allowing for the easy addition and configuration of numerous scripts and QoL features.
 
-  The SIA Mission Framework is intended to be used with the "SIA Mission Framework Template" avaliable off the Steam Workshop here: https://steamcommunity.com/sharedfiles/filedetails/?id=2595033761
+  The SIA Mission Framework is intended to be used with the "SIA Mission Framework Template" available off the Steam Workshop here: https://steamcommunity.com/sharedfiles/filedetails/?id=2595033761
 
 How to use:
 

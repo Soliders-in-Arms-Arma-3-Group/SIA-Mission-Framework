@@ -15,10 +15,10 @@
 		0: Unit to be teleported.
 */
 
-while {true} do {
+while { true } do {
 	{
 		private _grp = _x;
 		if ( {alive _x} count units _grp == 0 ) then { units _grp apply {[_x, 1] call BIS_fnc_respawnTickets} }
 	} forEach allGroups;
 	sleep 5;
-}; 
+};

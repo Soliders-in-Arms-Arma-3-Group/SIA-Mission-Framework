@@ -12,16 +12,16 @@
 		Should only be ran on the server.
 
 	PARAMS:
-		None
+		0: Object - the zeus, used to display Zeus's name in intro text if enabled.
 */
 
 if (!isServer) exitWith {}; // Exit if not server.
 
-if (isMultiplayer) then {setDate startTime}; // Set time to start of mission.
+if (isMultiplayer) then { setDate startTime }; // Set time to start of mission.
 setTimeMultiplier 1; // Set time acceleration to default.
 
 // Update variable.
-sia_f_missionStarted = true; 
+sia_f_missionStarted = true;
 publicVariable "sia_f_missionStarted";
 
 if (sia_f_briefLoadout) then { ["sia_f\briefing\f_loadoutNotes.sqf"] remoteExec ["execVM"] }; // Refresh loadout information if enabled.
@@ -30,19 +30,16 @@ sleep 1;
 
 // Update phase to "Mission Started".
 sia_f_setupPhase = "In Progress";
-["setupPhase",["Mission is a go!","\A3\ui_f\data\IGUI\Cfg\simpleTasks\types\run_ca.paa"]] remoteExec ["BIS_fnc_showNotification"];
+["setupPhase", ["Mission is a go!", "\A3\ui_f\data\IGUI\Cfg\simpleTasks\types\run_ca.paa"]] remoteExec ["BIS_fnc_showNotification"];
 [""] remoteExec ["hintSilent"];
 
 if (sia_f_showReplay) then { [] remoteExec ["GRAD_replay_fnc_init", 0, true] }; // Start GRAD replay recording if enabled.
 
 // Display intro text if enabled.
-if (sia_f_showIntroText) then { 
+if (sia_f_showIntroText) then {
 	sleep 3;
-	private _zeus = _this select 0; 
+	private _zeus = _this select 0;
 	[sia_f_missionName] remoteExec ["BIS_fnc_moduleMissionName", _zeus];
 	sleep 10;
 	["sia_f\introText.sqf"] remoteExec ["execVM"];
 };
-
-
-
