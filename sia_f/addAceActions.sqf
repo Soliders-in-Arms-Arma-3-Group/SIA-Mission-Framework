@@ -123,6 +123,7 @@ _action = ["SIA_getSpatials", "Print Saved Settings", "", { ["printRadioDefaultS
 // === Zeus actions ===
 _action = ["setupPhase", "Set Phase", "\A3\ui_f\data\IGUI\Cfg\simpleTasks\types\use_ca.paa", {}, { !sia_f_missionStarted }] call ace_interact_menu_fnc_createAction;
 [["ACE_ZeusActions"], _action] call ace_interact_menu_fnc_addActionToZeus;
+if ((player getVariable ["role", ""]) == "pltco") then { [(typeOf player), 1, ["ACE_SelfActions", "SIA"], _action] call ace_interact_menu_fnc_addActionToClass; }; // Give plt leader access to phase change.
 
 _action = ["upperbrief", "Upper-level Brief", "\A3\ui_f\data\IGUI\Cfg\simpleTasks\types\whiteboard_ca.paa", {
 	["setupPhase", ["The upper-level brief is commencing!", "\A3\ui_f\data\IGUI\Cfg\simpleTasks\types\whiteboard_ca.paa"]] remoteExec ["BIS_fnc_showNotification"];
@@ -130,6 +131,7 @@ _action = ["upperbrief", "Upper-level Brief", "\A3\ui_f\data\IGUI\Cfg\simpleTask
 	publicVariable "sia_f_setupPhase";
 }, { !sia_f_missionStarted }] call ace_interact_menu_fnc_createAction;
 [["ACE_ZeusActions", "setupPhase"], _action] call ace_interact_menu_fnc_addActionToZeus;
+[(typeOf player), 1, ["ACE_SelfActions", "SIA", "setupPhase"], _action] call ace_interact_menu_fnc_addActionToClass;
 
 _action = ["lowerbrief", "Lower-level Brief", "\A3\ui_f\data\IGUI\Cfg\simpleTasks\types\whiteboard_ca.paa", {
 	["setupPhase", ["The lower-level brief is commencing!", "\A3\ui_f\data\IGUI\Cfg\simpleTasks\types\whiteboard_ca.paa"]] remoteExec ["BIS_fnc_showNotification"];
@@ -137,6 +139,7 @@ _action = ["lowerbrief", "Lower-level Brief", "\A3\ui_f\data\IGUI\Cfg\simpleTask
 	publicVariable "sia_f_setupPhase";
 }, { !sia_f_missionStarted }] call ace_interact_menu_fnc_createAction;
 [["ACE_ZeusActions", "setupPhase"], _action] call ace_interact_menu_fnc_addActionToZeus;
+[(typeOf player), 1, ["ACE_SelfActions", "SIA", "setupPhase"], _action] call ace_interact_menu_fnc_addActionToClass;
 
 _action = ["kitUp", "Kit Up", "\A3\ui_f\data\IGUI\Cfg\simpleTasks\types\rearm_ca.paa", {
 	["setupPhase", ["Time to kit up!", "\A3\ui_f\data\IGUI\Cfg\simpleTasks\types\rearm_ca.paa"]] remoteExec ["BIS_fnc_showNotification"];
@@ -144,6 +147,7 @@ _action = ["kitUp", "Kit Up", "\A3\ui_f\data\IGUI\Cfg\simpleTasks\types\rearm_ca
 	publicVariable "sia_f_setupPhase";
 }, { !sia_f_missionStarted }] call ace_interact_menu_fnc_createAction;
 [["ACE_ZeusActions", "setupPhase"], _action] call ace_interact_menu_fnc_addActionToZeus;
+[(typeOf player), 1, ["ACE_SelfActions", "SIA", "setupPhase"], _action] call ace_interact_menu_fnc_addActionToClass;
 
 _action = ["mountUp", "Mount Up", "\A3\ui_f\data\IGUI\Cfg\HoldActions\holdAction_loadDevice_ca.paa", {
 	["setupPhase", ["Time to mount up!", "\A3\ui_f\data\IGUI\Cfg\HoldActions\holdAction_loadDevice_ca.paa"]] remoteExec ["BIS_fnc_showNotification"];
@@ -151,6 +155,7 @@ _action = ["mountUp", "Mount Up", "\A3\ui_f\data\IGUI\Cfg\HoldActions\holdAction
 	publicVariable "sia_f_setupPhase";
 }, { !sia_f_missionStarted }] call ace_interact_menu_fnc_createAction;
 [["ACE_ZeusActions", "setupPhase"], _action] call ace_interact_menu_fnc_addActionToZeus;
+[(typeOf player), 1, ["ACE_SelfActions", "SIA", "setupPhase"], _action] call ace_interact_menu_fnc_addActionToClass;
 
 _action = ["standby", "Stand By", "\A3\ui_f\data\IGUI\Cfg\simpleTasks\types\wait_ca.paa", {
 	["setupPhase", ["Stand By", "\A3\ui_f\data\IGUI\Cfg\simpleTasks\types\wait_ca.paa"]] remoteExec ["BIS_fnc_showNotification"];
@@ -158,6 +163,7 @@ _action = ["standby", "Stand By", "\A3\ui_f\data\IGUI\Cfg\simpleTasks\types\wait
 	publicVariable "sia_f_setupPhase";
 }, { !sia_f_missionStarted }] call ace_interact_menu_fnc_createAction;
 [["ACE_ZeusActions", "setupPhase"], _action] call ace_interact_menu_fnc_addActionToZeus;
+[(typeOf player), 1, ["ACE_SelfActions", "SIA", "setupPhase"], _action] call ace_interact_menu_fnc_addActionToClass;
 
 // Start Mission Action + Confirmation
 _action = ["missionStart", "Start Mission", "\A3\ui_f\data\IGUI\Cfg\simpleTasks\types\getin_ca.paa", {}, { !sia_f_missionStarted }] call ace_interact_menu_fnc_createAction;
