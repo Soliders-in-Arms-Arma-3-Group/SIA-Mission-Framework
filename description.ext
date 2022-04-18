@@ -39,7 +39,7 @@ class cfgNotifications
 class CfgFunctions
 {
 	#include "node_modules\@gruppe-adler\replay\cfgFunctions.hpp"
-	#include "Functions\cfgFunctions.hpp"
+	#include "sia_f\functions\cfgFunctions.hpp"
 
 	class TPD
 	{
