@@ -1,5 +1,6 @@
 // F3 - Safe Start, Safety Toggle
 // Credits: Please see the F3 online manual (http://www.ferstaberinde.com/f3/en/)
+// UNUSED IN SIA MISSION FRAMEWORK !!!
 //=====================================================================================
 
 //Exit if server
