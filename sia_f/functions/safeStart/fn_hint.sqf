@@ -72,10 +72,10 @@ _txtKAT setAttributes ["align", "left", "color", _colorSecondary, "font", _fontP
 private _txtKATState = text toUpper sia_f_haveKATMedical;
 _txtKATState setAttributes ["align", "right", "color", _colorSecondary, "font", _fontPrimary];
 
-private _txtfaction = text "Faction:";
-_txtfaction setAttributes ["align", "left", "font", _fontPrimary];
-private _txtfactionName = text sia_f_factionName;
-_txtfactionName setAttributes ["align", "right", "font", _fontPrimary];
+private _txtFaction = text "Faction:";
+_txtFaction setAttributes ["align", "left", "font", _fontPrimary];
+private _txtFactionName = text sia_f_factionName;
+_txtFactionName setAttributes ["align", "right", "font", _fontPrimary];
 
 private _txtRole = text "Role:";
 _txtRole setAttributes ["align", "left", "font", _fontPrimary];
@@ -110,7 +110,7 @@ private _array = [
 	_txtKAT,_txtKATState,
 	lineBreak,
 	lineBreak,
-	_txtfaction, _txtfactionName,
+	_txtFaction, _txtFactionName,
 	lineBreak,
 	_txtRole, _txtRoleName,
 	//_txtRadioType, _txtRadioInfo,

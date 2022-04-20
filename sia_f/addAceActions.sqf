@@ -94,7 +94,7 @@ if (sia_f_acreEnabled) then {
 {
 	private _displayName = (getText (ConfigFile >> "CfgWeapons" >> _x >> "displayName") splitString "AN/") select 0;
 	private _configName = _x;
-	private _iconPath = getText (configfile >> "CfgWeapons" >> _x >> "picture");
+	private _iconPath = getText (configFile >> "CfgWeapons" >> _x >> "picture");
 	_action = [("SIA_ConfigACRE_Radios" + _configName), _displayName, _iconPath, {}, { true }] call ace_interact_menu_fnc_createAction;
 	[(typeOf player), 1, ["ACE_SelfActions", "SIA", "SIA_ConfigACRE"], _action] call ace_interact_menu_fnc_addActionToClass;
 

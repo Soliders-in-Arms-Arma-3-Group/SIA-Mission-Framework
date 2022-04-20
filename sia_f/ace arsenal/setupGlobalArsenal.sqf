@@ -26,7 +26,7 @@ private _array = [];
 { [_x, false, true] call ace_arsenal_fnc_initBox } forEach _arsenals; // Initialize arsenals.
 
 if (sia_f_haveBasics) then {
-	_array = parseSimpleArray (loadfile "sia_f\ace arsenal\item pools\baseArsenalBasics.txt");
+	_array = parseSimpleArray (loadFile "sia_f\ace arsenal\item pools\baseArsenalBasics.txt");
 	{ [_x, _array, true] call ace_arsenal_fnc_addVirtualItems } forEach sia_f_arsenals;
 };
 
@@ -45,7 +45,7 @@ if (sia_f_acreEnabled) then {
 };
 
 if (sia_f_haveCTab) then {
-	_array = parseSimpleArray (loadfile "sia_f\ace arsenal\item pools\baseArsenalcTab.txt");
+	_array = parseSimpleArray (loadFile "sia_f\ace arsenal\item pools\baseArsenalcTab.txt");
 	{ [_x, _array, true] call ace_arsenal_fnc_addVirtualItems } forEach sia_f_arsenals;
 };
 
@@ -53,13 +53,13 @@ switch (sia_f_haveKATMedical) do {
 
 	case "FULL" : 
 	{
-		_array = parseSimpleArray (loadfile "sia_f\ace arsenal\item pools\baseArsenalKATFull.txt");
+		_array = parseSimpleArray (loadFile "sia_f\ace arsenal\item pools\baseArsenalKATFull.txt");
 		{ [_x, _array, true] call ace_arsenal_fnc_addVirtualItems } forEach sia_f_arsenals;
 	};
 
 	case "LIMITED" :
 	{ 
-		_array = parseSimpleArray (loadfile "sia_f\ace arsenal\item pools\baseArsenalKATLimited.txt");
+		_array = parseSimpleArray (loadFile "sia_f\ace arsenal\item pools\baseArsenalKATLimited.txt");
 		{ [_x, _array, true] call ace_arsenal_fnc_addVirtualItems } forEach sia_f_arsenals;
 	};
 

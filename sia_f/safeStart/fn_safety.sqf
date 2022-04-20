@@ -4,7 +4,7 @@
 //=====================================================================================
 
 //Exit if server
-if (isDedicated) exitwith {};
+if (isDedicated) exitWith {};
 
 switch (_this select 0) do
 {
@@ -13,7 +13,7 @@ switch (_this select 0) do
 	{
 		// Delete bullets from fired weapons
 		if (isNil "f_eh_safetyMan") then {
-			f_eh_safetyMan = player addEventHandler["Fired", {deletevehicle (_this select 6);}];
+			f_eh_safetyMan = player addEventHandler["Fired", {deleteVehicle (_this select 6);}];
 		};
 
 		// Disable guns and damage for vehicles if player is crewing a vehicle
@@ -22,7 +22,7 @@ switch (_this select 0) do
 			(player getVariable "f_var_safetyVeh") allowDamage false;
 
 			if (isNil "f_eh_safetyVeh") then {
-				f_eh_safetyVeh = (player getVariable "f_var_safetyVeh") addEventHandler["Fired", { deletevehicle (_this select 6); }];
+				f_eh_safetyVeh = (player getVariable "f_var_safetyVeh") addEventHandler["Fired", { deleteVehicle (_this select 6); }];
 			};
 		};
 
@@ -34,12 +34,12 @@ switch (_this select 0) do
 	default {
 		//Allow player to fire weapons
 		if !(isNil "f_eh_safetyMan") then {
-			player removeEventhandler ["Fired", f_eh_safetyMan];
+			player removeEventHandler ["Fired", f_eh_safetyMan];
 			f_eh_safetyMan = nil;
 		};
 
 		// Re-enable guns and damage for vehicles if they were disabled
-		if !(isNull (player getVariable ["f_var_safetyVeh", objnull])) then {
+		if !(isNull (player getVariable ["f_var_safetyVeh", objNull])) then {
 			(player getVariable "f_var_safetyVeh") allowDamage true;
 
 			if !(isNil "f_eh_safetyVeh") then {

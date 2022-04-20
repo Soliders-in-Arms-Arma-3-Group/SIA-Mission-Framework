@@ -57,10 +57,10 @@ if (vehicle _sl == _sl) then {
 	sleep 1;
 
 	//Teleport player 0.3m behind squad
-	_LX = (getpos _sl select 0) + (0.3 * sin ((getDir _sl) - 180));
-	_LY = (getpos _sl select 1) + (0.3 * cos ((getDir _sl) - 180));
-	_LZ = (getpos _sl select 2);
-	_p setpos [_LX, _LY, _LZ];
+	_LX = (getPos _sl select 0) + (0.3 * sin ((getDir _sl) - 180));
+	_LY = (getPos _sl select 1) + (0.3 * cos ((getDir _sl) - 180));
+	_LZ = (getPos _sl select 2);
+	_p setPos [_LX, _LY, _LZ];
 
 	//Teleport effects
 	sleep 0.5;

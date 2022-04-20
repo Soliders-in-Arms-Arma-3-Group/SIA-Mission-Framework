@@ -21,7 +21,7 @@
 */
 
 if ( !sia_f_acreEnabled || !hasInterface ) exitWith {}; // Exit if not player or if ACRE is set to disabled.
-waitUntil { ([] call acre_api_fnc_isInitialized) }; // Wait until player's radios are initlialized.
+waitUntil { ([] call acre_api_fnc_isInitialized) }; // Wait until player's radios are initialized.
 
 private _hasRadio = [player] call acre_api_fnc_hasRadio; // Get variable if player has radio.
 

@@ -6,13 +6,13 @@
 =====================================================================
 
 	Description:
-		Options avalible for mission makers to configure their missions. The comments to the right of each option are the valid entries.
+		Options available for mission makers to configure their missions. The comments to the right of each option are the valid entries.
 		Entries are case sensitive.
 */
 
 // ============================================================================================
 // Respawn Tickets
-// Sets the NUMBER of avalible respawn tickets for a side. Leave as "0" to for no change. Set to -1 to disable respawn for that side (tickets can still be added later).
+// Sets the NUMBER of available respawn tickets for a side. Leave as "0" to for no change. Set to -1 to disable respawn for that side (tickets can still be added later).
 
 sia_f_bluforTickets = 0;
 sia_f_indepTickets = 0;
@@ -45,7 +45,7 @@ sia_f_arsenalEnabled = true;
 sia_f_disableArsenalOnRespawn = false; // CURRENTLY NO FUNCTIONALITY
 
 sia_f_haveBasics = true; // Add basic items such as compasses, maps, and bandages.
-sia_f_haveCTab = true; // Add CTab items such as the helmat cham and rugged tablet.
+sia_f_haveCTab = true; // Add CTab items such as the helmet cam and rugged tablet.
 sia_f_haveKATMedical = "FULL"; // "NONE"/"LIMITED"/"FULL"
 
 // ============================================================================================
@@ -70,11 +70,11 @@ sia_f_enableLoadoutInfo = true; // Enable 'Update Loadout Info' on ACE Buttons.
 sia_f_enableGoAFK = true; // Enable Self ACE Action to go AFK.
 
 // ============================================================================================
-// Briefing Additionals Settings
+// Briefing Additional Settings
 // 
 
 sia_f_briefORBAT = true; // Add ORBAT information to briefing.
-sia_f_briefWeather = true; // Add weather report to breifing.
+sia_f_briefWeather = true; // Add weather report to briefing.
 sia_f_briefLoadout = true; // Add loadout information to briefing.
 
 // ============================================================================================
