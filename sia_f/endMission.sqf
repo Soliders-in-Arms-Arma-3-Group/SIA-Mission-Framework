@@ -17,6 +17,8 @@
 
 if (!isServer) exitWith {}; // Exit if not server.
 
+execVM "sia_f/missionEnd/exportScoreboard.sqf";
+
 if (sia_f_showReplay) then {
 	["Starting replay..."] remoteExec ["hint"];
 
@@ -39,7 +41,7 @@ if (sia_f_showReplay) then {
 	[{
 		REPLAY_FINISHED
 	}, {
-		["Replay finished!"] remoteExec ["hint"];
+		["end1", true, true] remoteExecCall ["BIS_fnc_endMission", 0];
 	}, []] call CBA_fnc_waitUntilAndExecute;
 } else {
 	["end1", true, true] remoteExecCall ["BIS_fnc_endMission", 0];

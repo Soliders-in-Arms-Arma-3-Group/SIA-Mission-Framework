@@ -21,9 +21,8 @@ private _arr = [];
 
 } forEach allPlayers - entities "HeadlessClient_F";
 
-// Export data to admin's clipboard.
+// Print data to server log/console.
 // ! - THIS IS TEMP TILL BETTER SOLUTION IS IMPLEMENTED
 
-if (serverCommandAvailable "#logout" /*|| !isDedicated // FOR DEBUGING */ ) then  {
-	copyToClipboard (str _arr);
-};
+diag_log format ["SCOREBOARD FOR %1", sia_f_missionName];
+diag_log _arr;
