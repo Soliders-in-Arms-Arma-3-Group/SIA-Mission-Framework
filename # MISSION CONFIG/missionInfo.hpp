@@ -17,7 +17,7 @@ author = "Soldiers in Arms"; // YOUR NAME
 
 onLoadName = "SIA Mission Framework"; // THE MISSION'S NAME
 
-onLoadMission = "Version 0.7.0"; // LOADING SCREEN TEXT
+onLoadMission = "Version 0.7.1"; // LOADING SCREEN TEXT
 
 // loadScreen = "loadScreen.jpg"; // OPTIONAL LOADING SCREEN IMAGE (must be a .JPG or .PAA file in your mission folder, HIGHLY recommended: 2:1 aspect ratio)
 
