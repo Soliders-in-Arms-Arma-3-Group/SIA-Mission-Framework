@@ -11,6 +11,8 @@
 
 	PARAMS: None
 */
+#include "..\..\..\# MISSION CONFIG\Settings\arsenal.hpp"
+#include "..\..\..\# MISSION CONFIG\Settings\radio.hpp"
 
 if (!sia_f_showStatusHint || !hasInterface) exitWith {}; // Exit if not a player or if player has disabled status hint.
 
@@ -54,22 +56,22 @@ _txtTime setAttributes ["align", "right", "font", _fontHeader];
 
 private _txt3 = text "CTab:";
 _txt3 setAttributes ["align", "left", "color", _colorSecondary, "font", _fontPrimary];
-private _txt4 = text toUpper (str sia_f_haveCTab);
+private _txt4 = text toUpper (str SIA_HAVE_CTAB);
 _txt4 setAttributes ["align", "right", "color", _colorSecondary, "font", _fontPrimary];
 
 private _txtArsenal = text "Arsenals:";
 _txtArsenal setAttributes ["align", "left", "color", _colorSecondary, "font", _fontPrimary];
-private _txtArsenalEnabled = text toUpper (str sia_f_arsenalEnabled);
+private _txtArsenalEnabled = text toUpper (str SIA_ARSENAL_ENABLED);
 _txtArsenalEnabled setAttributes ["align", "right", "color", _colorSecondary, "font", _fontPrimary];
 
 private _txt5 = text "Radios:";
 _txt5 setAttributes ["align", "left", "color", _colorSecondary, "font", _fontPrimary];
-private _txt6 = text toUpper (str sia_f_acreEnabled);
+private _txt6 = text toUpper (str SIA_ACRE_ENABLED);
 _txt6 setAttributes ["align", "right", "color", _colorSecondary, "font", _fontPrimary];
 
 private _txtKAT = text "KAT Medical:";
 _txtKAT setAttributes ["align", "left", "color", _colorSecondary, "font", _fontPrimary];
-private _txtKATState = text toUpper sia_f_haveKATMedical;
+private _txtKATState = text toUpper SIA_HAVE_KAT_MEDICAL;
 _txtKATState setAttributes ["align", "right", "color", _colorSecondary, "font", _fontPrimary];
 
 private _txtFaction = text "Faction:";

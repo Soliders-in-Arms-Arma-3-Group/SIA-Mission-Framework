@@ -14,18 +14,19 @@
 	PARAMS:
 		0: ARRAY (Example: [["Situation", "The sky is cloudy."]]).
 */
+#include "..\..\# MISSION CONFIG\Settings\briefing.hpp"
 
 private _briefing = _this select 0;
 
-if (sia_f_briefWeather) then {
+if (SIA_BRIEF_WEATHER) then {
 	_script_handler = execVM "sia_f\briefing\f_conditionNotes.sqf";
 	waitUntil { scriptDone _script_handler };
 };
 
-if (sia_f_briefLoadout) then {
+if (SIA_BRIEF_LOADOUT) then {
 	call sia_f_fnc_loadoutNotes;
 };
 
 { player createDiaryRecord ["Diary", [(_x select 0), (_x select 1)], taskNull, "", true] } forEach _briefing;
 
-if (sia_f_briefORBAT) then { remoteExec ["sia_f_fnc_orbat"] };
+if (SIA_BRIEF_ORBAT) then { remoteExec ["sia_f_fnc_orbat"] };

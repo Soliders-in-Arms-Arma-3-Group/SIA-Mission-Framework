@@ -14,14 +14,15 @@
 	PARAMS:
 		NONE
 */
+#include "..\..\# MISSION CONFIG\Settings\radio.hpp"
 
-if (!sia_f_acreEnabled || !hasInterface) exitWith {}; // Exit if not player or if ACRE is set to disabled.
+if (!SIA_ACRE_ENABLED || !hasInterface) exitWith {}; // Exit if not player or if ACRE is set to disabled.
 
 private _role = player getVariable ["role", "none"];
 
 private _rolesWithHandheldRadio = ["sql", "tl", "pltco", "pltsgt", "gm", "drone_op", "spotter", "sniper", "medic"];
 private _rolesManpackRadio = [];
 
-player addItem sia_f_personalRadio;
-if (_role in _rolesWithHandheldRadio) then { player addItem sia_f_handheldRadio };
-if (_role in _rolesManpackRadio) then { player addItem sia_f_manpackRadio };
+player addItem SIA_PERSONAL_RADIO;
+if (_role in _rolesWithHandheldRadio) then { player addItem SIA_HANDHELD_RADIO };
+if (_role in _rolesManpackRadio) then { player addItem SIA_MANPACK_RADIO };
