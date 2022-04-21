@@ -2,7 +2,7 @@
 #include "..\..\# MISSION CONFIG\Settings\radio.hpp"
 
 waitUntil {!isNull player};
-waitUntil {!isNil "sia_f_setupComplete"}; // Test if this is needed
+waitUntil {!isNil "sia_f_setupComplete"};
 waitUntil {sia_f_setupComplete};
 
 sia_f_factionName = "";

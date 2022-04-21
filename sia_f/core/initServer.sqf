@@ -1,5 +1,6 @@
 #include "..\..\# MISSION CONFIG\Settings\aceActions.hpp"
 #include "..\..\# MISSION CONFIG\Settings\arsenal.hpp"
+#include "..\..\# MISSION CONFIG\Settings\missionInfo.hpp"
 #include "..\..\# MISSION CONFIG\Settings\tickets.hpp"
 
 sia_f_setupComplete = false;
@@ -27,13 +28,13 @@ if (sia_f_missionLocationName == "") then {
 	};  // Get location name. Set first letter to uppercase if pulled from game files.
 
 // Publicize Variables
-	publicVariable "sia_f_missionName";
-	publicVariable "sia_f_missionLocationName";
-	publicVariable "sia_f_ACEButtons";
-	publicVariable "sia_f_showStatusHint";
-	// ToDo: make server-side functions that take over the client's using of these variables
-		// either process whatever the client would process with these or have the server send the variable
-		// see https://community.bistudio.com/wiki/Code_Optimisation#Multiplayer_recommendations
+publicVariable "sia_f_missionName";
+publicVariable "sia_f_missionLocationName";
+publicVariable "sia_f_ACEButtons";
+{ player setVariable ["sia_showStatusHint", SIA_SHOW_STATUS_HINT]; } remoteExec ["call", [0, -2] select isDedicated];
+// ToDo: make server-side functions that take over the client's using of these variables
+	// either process whatever the client would process with these or have the server send the variable
+	// see https://community.bistudio.com/wiki/Code_Optimisation#Multiplayer_recommendations
 
 
  // Setup Global Arsenal

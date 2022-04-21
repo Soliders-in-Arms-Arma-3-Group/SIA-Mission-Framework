@@ -11,12 +11,9 @@
 */
 
 // Mission Info
-// Give a custom name for the mission and faction(s) the players will be playing as. If left blank, the name as listed in the game will be used by default.
+// Give a custom name for the mission. If left blank, the name as listed in the game will be used by default.
 sia_f_missionName = "";
 sia_f_missionLocationName = "";
-
-// ToDo: change this to use player's namespace when changing
-sia_f_showStatusHint = true; // Toggle persistent info display.
 
 /*
 Private Settings
@@ -25,7 +22,6 @@ Private Settings
 
 // ============================================================================================
 // ACE Button Settings
-// 
 
 sia_f_ACEButtons = ((getMissionLayerEntities "ACE Buttons") select 0);
 // ============================================================================================

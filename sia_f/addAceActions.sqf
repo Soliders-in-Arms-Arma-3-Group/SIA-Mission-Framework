@@ -72,11 +72,11 @@ _action = ["SIA_Hint", "Show Mission Info", "\A3\Ui_F\Data\IGUI\Cfg\simpleTasks\
 [(typeOf player), 1, ["ACE_SelfActions", "SIA"], _action] call ace_interact_menu_fnc_addActionToClass;
 
 _statement = {
-	if (sia_f_showStatusHint) then {
-		sia_f_showStatusHint = false;
+	if (_player getVariable ["sia_showStatusHint", true]) then {
+		_player setVariable ["sia_showStatusHint", false];
 		hint "Persistent Hint is now DISABLED";
 	} else {
-		sia_f_showStatusHint = true;
+		_player setVariable ["sia_showStatusHint", true];
 		hint "Persistent Hint is now ENABLED";
 	};
 };
