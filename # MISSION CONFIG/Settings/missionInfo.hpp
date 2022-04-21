@@ -8,4 +8,4 @@
 
 #define SIA_SHOW_INTRO_TEXT true // Show cinematic intro text on mission start.
 #define SIA_SHOW_REPLAY true // Record and playback the mission using the GRAD Replay system.
-#define SIA_SHOW_STATUS_HINT true // Toggle persistent info display. 
+#define SIA_SHOW_STATUS_HINT true // Toggle persistent info display.
