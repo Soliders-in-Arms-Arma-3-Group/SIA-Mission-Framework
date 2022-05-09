@@ -17,7 +17,7 @@
 
 if (!isServer) exitWith {}; // Exit if not server.
 
-execVM "sia_f/missionEnd/exportScoreboard.sqf";
+execVM "sia_f\missionEnd\exportScoreboard.sqf";
 
 if (sia_f_showReplay) then {
 	["Starting replay..."] remoteExec ["hint"];
