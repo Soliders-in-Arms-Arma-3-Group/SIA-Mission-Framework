@@ -47,7 +47,7 @@ private _timezoneName = "EST";
 if ( (_systemTime select 1) >= 3 && (_systemTime select 1) <= 11 ) then { _timezoneOffset = -4; _timezoneName = "EDT" }; // Quick and dirty DST adjustment.
 
 private _hour = _systemTime select 3;
-_hour = if (_hour <= 11) then [{ _hour + 24 + _timezoneOffset }, { _hour + _timezoneOffset }]; // Adjust hour of day for UTC being a day ahead of ET.
+_hour = if (_hour <= 12) then [{ _hour + 24 + _timezoneOffset }, { _hour + _timezoneOffset }]; // Adjust hour of day for UTC being a day ahead of ET.
 
 _txtTime = text (([(_hour + ((_systemTime select 4) / 60)), "HH:MM"] call BIS_fnc_timeToString) + " " + _timezoneName);
 _txtTime setAttributes ["align", "right", "font", _fontHeader];
