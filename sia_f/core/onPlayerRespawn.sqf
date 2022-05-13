@@ -1,3 +1,5 @@
+#include "..\..\# MISSION CONFIG\Settings\radio.hpp"
+
 // Load saved player loadout
 _loadout = player getVariable "Saved_Loadout";
 
@@ -23,7 +25,7 @@ if (group player != _sqd) then { player joinSilent _sqd };
 // Restore ACRE PTT Assignment
 waitUntil { ([] call acre_api_fnc_isInitialized) };
 ["loadRadioDefaultSpatials", []] spawn sia_f_fnc_ACRERadioSetup;
-["reorderRadioMPTT", [sia_f_personalRadio]] spawn sia_f_fnc_ACRERadioSetup;
+["reorderRadioMPTT", [SIA_PERSONAL_RADIO]] spawn sia_f_fnc_ACRERadioSetup;
 
 // Exit player from AFK if still set as AFK
 private _isAFK = player getVariable ["sia_isAFK",false];

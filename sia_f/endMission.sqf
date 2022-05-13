@@ -14,12 +14,13 @@
 	PARAMS:
 		None
 */
+#include "..\# MISSION CONFIG\Settings\missionInfo.hpp"
 
 if (!isServer) exitWith {}; // Exit if not server.
 
 execVM "sia_f\missionEnd\exportScoreboard.sqf";
 
-if (sia_f_showReplay) then {
+if (SIA_SHOW_REPLAY) then {
 	["Starting replay..."] remoteExec ["hint"];
 
 	[player] remoteExec ["ace_medical_treatment_fnc_fullHealLocal"]; // Fully heal all players

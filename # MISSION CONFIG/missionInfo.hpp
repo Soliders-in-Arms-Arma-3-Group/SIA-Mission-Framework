@@ -22,3 +22,12 @@ onLoadMission = "Version 0.7.2"; // LOADING SCREEN TEXT
 // loadScreen = "loadScreen.jpg"; // OPTIONAL LOADING SCREEN IMAGE (must be a .JPG or .PAA file in your mission folder, HIGHLY recommended: 2:1 aspect ratio)
 
 respawnDelay = 60; // RESPAWN TIMER IN SECONDS. NOTE: IF USING TEMPLATE "Wave", RESPAWN DELAY IS THE MEDIAN RESPAWN TIME, NOT MAX
+
+// ==================================================================================
+
+class Header
+{
+	gameType =  Coop; // Game type - see https://community.bistudio.com/wiki/Multiplayer_Game_Types#Available_Types for possible types
+	minPlayers =  1; // minimum number of players the mission supports
+	maxPlayers = 40; // maximum number of players the mission supports
+};

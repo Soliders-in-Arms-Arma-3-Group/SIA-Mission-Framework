@@ -1,3 +1,8 @@
+#include "..\..\# MISSION CONFIG\Settings\aceActions.hpp"
+#include "..\..\# MISSION CONFIG\Settings\arsenal.hpp"
+#include "..\..\# MISSION CONFIG\Settings\missionInfo.hpp"
+#include "..\..\# MISSION CONFIG\Settings\tickets.hpp"
+
 sia_f_setupComplete = false;
 publicVariable "sia_f_setupComplete";
 
@@ -23,36 +28,17 @@ if (sia_f_missionLocationName == "") then {
 	};  // Get location name. Set first letter to uppercase if pulled from game files.
 
 // Publicize Variables
-	if (sia_f_acreEnabled) then {
-		publicVariable "sia_f_personalRadio";
-		publicVariable "sia_f_handheldRadio";
-		publicVariable "sia_f_manpackRadio";
-	};
-	publicVariable "sia_f_missionName";
-	publicVariable "sia_f_missionLocationName";
-	publicVariable "sia_f_bluforFactionName";
-	publicVariable "sia_f_indepFactionName";
-	publicVariable "sia_f_opforFactionName";
-	publicVariable "sia_f_arsenalEnabled";
-	publicVariable "sia_f_haveCTab";
-	publicVariable "sia_f_haveKATMedical";
-	publicVariable "sia_f_enableTPToSquad";
-	publicVariable "sia_f_enableManageKit";
-	publicVariable "sia_f_enableLoadoutInfo";
-	publicVariable "sia_f_enableGoAFK";
-	publicVariable "sia_f_briefORBAT";
-	publicVariable "sia_f_briefWeather";
-	publicVariable "sia_f_briefLoadout";
-	publicVariable "sia_f_ACEButtons";
-	publicVariable "sia_f_acreEnabled";
-	publicVariable "sia_f_showStatusHint";
-	// ToDo: make server-side functions that take over the client's using of these variables
-		// either process whatever the client would process with these or have the server send the variable
-		// see https://community.bistudio.com/wiki/Code_Optimisation#Multiplayer_recommendations
+publicVariable "sia_f_missionName";
+publicVariable "sia_f_missionLocationName";
+publicVariable "sia_f_ACEButtons";
+{ player setVariable ["sia_showStatusHint", SIA_SHOW_STATUS_HINT]; } remoteExec ["call", [0, -2] select isDedicated];
+// ToDo: make server-side functions that take over the client's using of these variables
+	// either process whatever the client would process with these or have the server send the variable
+	// see https://community.bistudio.com/wiki/Code_Optimisation#Multiplayer_recommendations
 
 
  // Setup Global Arsenal
-if (sia_f_arsenalEnabled && (!isNil "sia_f_arsenals")) then {
+if (SIA_ARSENAL_ENABLED && (!isNil "sia_f_arsenals")) then {
 	publicVariable "sia_f_arsenals";
 	[sia_f_arsenals] execVM "sia_f\ace arsenal\setupGlobalArsenal.sqf";
 
@@ -73,14 +59,14 @@ if (!isNil "respawn_pos_indep") then { "respawn_guerilla" setMarkerPos respawn_p
 if (!isNil "respawn_pos_civilian") then {"respawn_civilian" setMarkerPos respawn_pos_civilian };
 
 // Setup Respawn tickets
-if (sia_f_bluforTickets != 0) then { [west, sia_f_bluforTickets] call BIS_fnc_respawnTickets };
-if (sia_f_indepTickets != 0) then { [independent, sia_f_indepTickets] call BIS_fnc_respawnTickets };
-if (sia_f_opforTickets != 0) then { [east, sia_f_opforTickets] call BIS_fnc_respawnTickets };
-if (sia_f_civTickets != 0) then { [civilian, sia_f_civTickets] call BIS_fnc_respawnTickets };
+if (SIA_BLUFOR_TICKETS != 0) then { [west, SIA_BLUFOR_TICKETS] call BIS_fnc_respawnTickets };
+if (SIA_INDEP_TICKETS != 0) then { [independent, SIA_INDEP_TICKETS] call BIS_fnc_respawnTickets };
+if (SIA_OPFOR_TICKETS != 0) then { [east, SIA_OPFOR_TICKETS] call BIS_fnc_respawnTickets };
+if (SIA_CIV_TICKETS != 0) then { [civilian, SIA_CIV_TICKETS] call BIS_fnc_respawnTickets };
 
 if (!isNil "sia_f_ACEButtons") then {
 	// Revo's TP Menu Function
-	if (sia_f_enableTPMenu) then {
+	if (SIA_ENABLE_TP_MENU) then {
 		["enableGlobalMessage", false] call TPD_fnc_teleport; // Disable global message
 		{ ["addActions", [_x]] call TPD_fnc_teleport; } forEach sia_f_ACEButtons; // Add 'Teleport Menu' to objects
 	};

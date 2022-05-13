@@ -52,14 +52,6 @@ class CfgFunctions
 	};
 };
 
-
-class Header
-{
-	gameType =  Coop;
-	minPlayers =  1;
-	maxPlayers = 40;
-};
-
 disabledAI = 1;
 
 // Add GRAD Replay functionality and settings

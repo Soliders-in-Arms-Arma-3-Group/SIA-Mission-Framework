@@ -19,8 +19,9 @@
 			"reorderRadioMPTT" - Sets the given radio to push to talk one.
 		1: Params - Parameter changes according to mode.
 */
+#include "..\..\..\# MISSION CONFIG\Settings\radio.hpp"
 
-if ( !sia_f_acreEnabled || !hasInterface ) exitWith {}; // Exit if not player or if ACRE is set to disabled.
+if ( !SIA_ACRE_ENABLED || !hasInterface ) exitWith {}; // Exit if not player or if ACRE is set to disabled.
 waitUntil { ([] call acre_api_fnc_isInitialized) }; // Wait until player's radios are initialized.
 
 private _hasRadio = [player] call acre_api_fnc_hasRadio; // Get variable if player has radio.
