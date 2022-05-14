@@ -28,11 +28,11 @@ _allGroupsWithPlayers = [_allGroupsWithPlayers, [], { groupId _x }] call BIS_fnc
 // Init variables
 private _str = ""; 
 private _teamColor = '';
-private _rolecolor = '';
+private _roleColor = '';
 
 {
 	private _sideColor = [side  _x] call BIS_fnc_sideColor; // Get RGBA color value of group's side.
-	_sideColor = (_sideColor apply { _x * 2 }) call BIS_fnc_colorRGBAtoHTML; // Brigthen the color and convert it to HEX/HTML.
+	_sideColor = (_sideColor apply { _x * 2 }) call BIS_fnc_colorRGBAtoHTML; // Brighten the color and convert it to HEX/HTML.
 	_str = _str + format ["<font face='PuristaMedium' size='16' color='%2'>%1</font>", groupId _x, _sideColor] + "<br />"; // Format group callsign with side color.
 
 	{

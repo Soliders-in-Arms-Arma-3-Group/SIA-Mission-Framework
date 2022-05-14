@@ -9,6 +9,7 @@
 
 // BEGIN SAFE-START LOOP
 // If a value was set for the mission-timer, begin the safe-start loop and turn on invincibility
+#include "..\..\# MISSION CONFIG\Settings\missionInfo.hpp"
 
 sleep 10; // Give everything a second to settle;
 // ToDo: replace with a waitUntil
@@ -16,7 +17,7 @@ sleep 10; // Give everything a second to settle;
 if (sia_f_missionStarted) exitWith {};
 
 // The server will handle the loop and notifications
-if (isServer && sia_f_showStatusHint) then {
+if (isServer && SIA_SHOW_STATUS_HINT) then {
 	[] spawn {
 		while { !sia_f_missionStarted } do {
 			remoteExec ["sia_f_fnc_hint"];

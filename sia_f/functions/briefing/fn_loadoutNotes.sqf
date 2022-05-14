@@ -73,7 +73,7 @@ private _fnc_name = {
 		["%1%2%3 ", "%1%2 "] select _short,
 		_prefix,
 		_picture,
-		getText (configFile >> _type >> _name >> "displayname")
+		getText (configFile >> _type >> _name >> "displayName")
 	]
 };
 private _fnc_nameShort = {
@@ -169,8 +169,8 @@ private _fnc_loadoutDataToText = {
 
 	// OTHER 
 	if (! _full) then {
-		_mags  = _mags  select { private _class = _x select 0; {_class isKindOf [_x, configfile >> "CfgMagazines"] } count _classesBlacklist == 0 };
-		_items = _items select { private _class = _x select 0; {_class isKindOf [_x, configfile >> "CfgWeapons"  ] } count _classesBlacklist == 0 };
+		_mags  = _mags  select { private _class = _x select 0; {_class isKindOf [_x, configFile >> "CfgMagazines"] } count _classesBlacklist == 0 };
+		_items = _items select { private _class = _x select 0; {_class isKindOf [_x, configFile >> "CfgWeapons"  ] } count _classesBlacklist == 0 };
 	};
 	if (count _mags > 0 || count _items > 0 || count _items_assigned > 0) then {
 		_textLong = _textLong + "<br/><font size='18'>OTHER [#]:</font>";
