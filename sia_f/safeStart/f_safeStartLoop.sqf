@@ -9,7 +9,7 @@ while { !sia_f_missionStarted } do {
 	// Update mission information
 	remoteExec ["sia_f_fnc_hint"];
 
-	uisleep 60; // Sleep 60 seconds
+	uiSleep 60; // Sleep 60 seconds
 
 	// If mission timer has been terminated by admin briefing, simply exit
 	//if (sia_f_missionStarted) exitWith {};

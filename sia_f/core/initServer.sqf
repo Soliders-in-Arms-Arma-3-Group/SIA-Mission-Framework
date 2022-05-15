@@ -31,7 +31,7 @@ if (sia_f_missionLocationName == "") then {
 	publicVariable "sia_f_missionName";
 	publicVariable "sia_f_missionLocationName";
 	publicVariable "sia_f_bluforFactionName";
-	publicVariable "sia_f_indepFactioName";
+	publicVariable "sia_f_indepFactionName";
 	publicVariable "sia_f_opforFactionName";
 	publicVariable "sia_f_arsenalEnabled";
 	publicVariable "sia_f_haveCTab";

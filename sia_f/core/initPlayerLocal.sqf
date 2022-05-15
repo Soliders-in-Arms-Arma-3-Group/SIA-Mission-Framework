@@ -13,9 +13,9 @@ sia_f_factionName = "";
 		case independent: { sia_f_factionName = sia_f_indepFactionName; execVM "# MISSION CONFIG\briefing_independent.sqf" };
 
 		default {};
-	}; // could do this by renaming bluefor, opfor, and indep in these vars/files to west, east, and independent, then just parse each of them.
+	}; // could do this by renaming blufor, opfor, and indep in these vars/files to west, east, and independent, then just parse each of them.
 
-	if (sia_f_factionName == "") then { sia_f_factionName = getText (configfile >> "CfgFactionClasses" >> (faction player) >> "displayName") };
+	if (sia_f_factionName == "") then { sia_f_factionName = getText (configFile >> "CfgFactionClasses" >> (faction player) >> "displayName") };
 
 	sia_f_roleName = roleDescription player;
 	if (sia_f_roleName != "") then { // If roleDescription is set, then truncate. Else use config name.
@@ -24,7 +24,7 @@ sia_f_factionName = "";
 		sia_f_roleName = getText (configFile >> "CfgVehicles" >> (typeOf player) >> "displayName");
 	};
 
-if (([(side player)] call BIS_fnc_respawnTickets) > 0) then { [] call BIS_fnc_showMissionStatus }; // Check if tickets are avaliable, if so, display them
+if (([(side player)] call BIS_fnc_respawnTickets) > 0) then { [] call BIS_fnc_showMissionStatus }; // Check if tickets are available, if so, display them
 [[playerSide], [west, east, civilian, independent] - [playerSide]] call ace_spectator_fnc_updateSides; // Update ACE Spectator to hide enemy sides.
 execVM "sia_f\addAceActions.sqf";
 

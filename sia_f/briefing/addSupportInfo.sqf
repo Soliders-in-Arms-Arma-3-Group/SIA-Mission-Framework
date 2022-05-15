@@ -6,7 +6,7 @@
 =====================================================================
 
 	Description:
-		Generates support tab information regarding avaliable assets and their ammo.
+		Generates support tab information regarding available assets and their ammo.
 		! Unused
 	USAGE:
 		Run locally.
@@ -25,12 +25,12 @@ if (_assets isEqualTo []) exitWith { ["addSupportInfo Error: Invalid Parameters:
 private _str = "";
 
 {
-	_str = _str + "<font face='PuristaBold' size = '16'>" + getText (configfile >> "CfgVehicles" >> typeOf _x >> "displayName") + "</font><br></br>";
+	_str = _str + "<font face='PuristaBold' size = '16'>" + getText (configFile >> "CfgVehicles" >> typeOf _x >> "displayName") + "</font><br></br>";
 	{
 		if (str (_x select 4) != "-1") then {
 			_str = _str + 
 				"<font face='PuristaMedium' color='#FFB84C'>" + // light orange
-				getText (configfile >> "CfgMagazines" >> (_x select 3) >> "displayName") +
+				getText (configFile >> "CfgMagazines" >> (_x select 3) >> "displayName") +
 				"</font><font face='PuristaLight'>: x" +
 				str (_x select 4) +
 				" rounds</font><br></br>"
@@ -42,5 +42,5 @@ private _str = "";
 _str = _support + _str;
 player createDiaryRecord ["Diary", ["Support", _str], taskNull, "", true];
 
-//private _icon = "z\" + getText (configfile >> "CfgVehicles" >> typeOf _x >> "picture");
+//private _icon = "z\" + getText (configFile >> "CfgVehicles" >> typeOf _x >> "picture");
 //_str = _str + format ["<img image=%1/>",_icon];
