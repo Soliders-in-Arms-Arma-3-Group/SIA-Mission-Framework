@@ -1,4 +1,5 @@
 class dialogAFK {
+	onUnload = "[] spawn sia_f_fnc_exitAFK;";
 	idd = 3289
 	class controls {
 		class AFK_background: RscPicture
@@ -35,7 +36,7 @@ class dialogAFK {
 		{
 			idc = 1600;
 			colorBackgroundActive[] = {0,0,0,0.7};
-			action = "closeDialog 2; [false] spawn sia_f_fnc_exitAFK";
+			action = "closeDialog 2;";
 
 			text = "Exit"; //--- ToDo: Localize;
 			x = 0.427812 * safezoneW + safezoneX;
@@ -48,7 +49,7 @@ class dialogAFK {
 		{
 			idc = 1601;
 			colorBackgroundActive[] = {0,0,0,0.7};
-			action = "closeDialog 2; [true] spawn sia_f_fnc_exitAFK";
+			action = "closeDialog 2; [player] spawn sia_f_fnc_teleportToSquad;";
 
 			text = "Exit & TP"; //--- ToDo: Localize;
 			x = 0.510312 * safezoneW + safezoneX;
