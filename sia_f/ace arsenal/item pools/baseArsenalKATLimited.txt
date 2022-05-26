@@ -1,1 +1,1 @@
-["kat_guedel","kat_larynx","kat_chestSeal","kat_Painkiller"]
+["kat_guedel","kat_larynx","kat_chestSeal","kat_Painkiller","kat_IV_16","kat_AED"]
