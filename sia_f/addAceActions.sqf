@@ -24,7 +24,7 @@ if (!isNil "sia_f_ACEButtons" && sia_f_enableTPToSquad) then {
 	{ [_x, 0, ["ACE_MainActions"], _action, true] call ace_interact_menu_fnc_addActionToObject } forEach sia_f_ACEButtons;
 };
 
-// Manage Loadouts
+// === Manage Loadouts =======================================================================================
 if (sia_f_enableManageKit) then {
 	_statement = {
 		player setVariable ["Saved_Loadout", getUnitLoadout player];
@@ -43,7 +43,7 @@ if (sia_f_enableManageKit) then {
 	{ [_x, 0, ["ACE_MainActions", "siaKit"], _action, true] call ace_interact_menu_fnc_addActionToObject; } forEach (sia_f_ACEButtons + sia_f_arsenals);
 };
 
-// === SIA actions ===
+// === SIA actions =======================================================================================
 _action = ["SIA", " SIA Options", "sia_f\images\sia_tiny.paa", {}, { true }] call ace_interact_menu_fnc_createAction;
 [(typeOf player), 1, ["ACE_SelfActions"], _action] call ace_interact_menu_fnc_addActionToClass;
 
@@ -52,7 +52,7 @@ if (sia_f_enableGoAFK) then {
 	[(typeOf player), 1, ["ACE_SelfActions", "SIA"], _action] call ace_interact_menu_fnc_addActionToClass;
 };
 
-// Update Loadout Info
+// === Update Loadout Info =======================================================================================
 if (sia_f_enableLoadoutInfo && sia_f_briefLoadout) then {
 	_action = ["loadoutInfo", "Update Team Loadout Info", "\A3\Ui_F\Data\IGUI\Cfg\simpleTasks\types\documents_ca.paa", {
 		call sia_f_fnc_loadoutNotes;
@@ -64,7 +64,7 @@ if (sia_f_enableLoadoutInfo && sia_f_briefLoadout) then {
 	[(typeOf player), 1, ["ACE_SelfActions", "SIA"], _action] call ace_interact_menu_fnc_addActionToClass;
 };
 
-// Mission Info Hint System
+// === Mission Info Hint System =======================================================================================
 _action = ["SIA_Hint", "Show Mission Info", "\A3\Ui_F\Data\IGUI\Cfg\simpleTasks\types\unknown_ca.paa", { call sia_f_fnc_hint }, { true }] call ace_interact_menu_fnc_createAction;
 [(typeOf player), 1, ["ACE_SelfActions", "SIA"], _action] call ace_interact_menu_fnc_addActionToClass;
 
@@ -81,7 +81,17 @@ _statement = {
 _action = ["SIA_Hint_Toggle", "Toggle Persistent Hint", "", _statement, { true }] call ace_interact_menu_fnc_createAction;
 [(typeOf player), 1, ["ACE_SelfActions", "SIA", "SIA_Hint"], _action] call ace_interact_menu_fnc_addActionToClass;
 
-// SIA Radio Actions
+// === SIA Misc Actions =======================================================================================
+_action = ["SIA_MusicStop", "Stop Music", "\A3\Ui_F\Data\IGUI\RscIngameUI\RscUnitInfoAirRTDFull\ico_cpt_music_OFF_ca.paa", { playMusic "" }, { true }] call ace_interact_menu_fnc_createAction;
+[(typeOf player), 1, ["ACE_SelfActions", "SIA"], _action] call ace_interact_menu_fnc_addActionToClass;
+
+_action = ["SIA_MusicMute", "Mute All Music", "", { 1 fadeMusic 0 }, { musicVolume > 0 }] call ace_interact_menu_fnc_createAction;
+[(typeOf player), 1, ["ACE_SelfActions", "SIA", "SIA_MusicStop"], _action] call ace_interact_menu_fnc_addActionToClass;
+
+_action = ["SIA_MusicUnmute", "Unmute All Music", "", { 1 fadeMusic 0.5 }, { musicVolume <= 0 }] call ace_interact_menu_fnc_createAction;
+[(typeOf player), 1, ["ACE_SelfActions", "SIA", "SIA_MusicStop"], _action] call ace_interact_menu_fnc_addActionToClass;
+
+// === SIA Radio Actions =======================================================================================
 if (sia_f_acreEnabled) then {
 	_action = ["SIA_ConfigACRE", "ACRE Settings", "\A3\Ui_F\Data\IGUI\Cfg\simpleTasks\types\radio_ca.paa", {
 		["loadRadioDefaultSpatials", []] spawn sia_f_fnc_ACRERadioSetup;
@@ -120,7 +130,7 @@ _action = ["SIA_resetSpatials", "Clear Saved Settings", "", { ["resetRadioDefaul
 _action = ["SIA_getSpatials", "Print Saved Settings", "", { ["printRadioDefaultSpatials", []] spawn sia_f_fnc_ACRERadioSetup; }, { true }] call ace_interact_menu_fnc_createAction;
 [(typeOf player), 1, ["ACE_SelfActions", "SIA", "SIA_ConfigACRE"], _action] call ace_interact_menu_fnc_addActionToClass;
 
-// === Zeus/Plt actions ===
+// === Zeus/Plt actions =======================================================================================
 _action = ["setupPhase", "Set Phase", "\A3\ui_f\data\IGUI\Cfg\simpleTasks\types\use_ca.paa", {}, { !sia_f_missionStarted }] call ace_interact_menu_fnc_createAction;
 [["ACE_ZeusActions"], _action] call ace_interact_menu_fnc_addActionToZeus;
 if ((player getVariable ["role", ""]) == "pltco") then { [(typeOf player), 1, ["ACE_SelfActions", "SIA"], _action] call ace_interact_menu_fnc_addActionToClass; }; // Give plt leader access to phase change.
