@@ -33,6 +33,8 @@ sia_f_setupPhase = "In Progress";
 ["setupPhase", ["Mission is a go!", "\A3\ui_f\data\IGUI\Cfg\simpleTasks\types\run_ca.paa"]] remoteExec ["BIS_fnc_showNotification"];
 [""] remoteExec ["hintSilent"];
 
+if (fileExists "onMissionStart.sqf") then { execVM "onMissionStart.sqf" }; 
+
 if (sia_f_showReplay) then { [] remoteExec ["GRAD_replay_fnc_init", 0, true] }; // Start GRAD replay recording if enabled.
 
 // Display intro text if enabled.
@@ -43,3 +45,4 @@ if (sia_f_showIntroText) then {
 	sleep 10;
 	["sia_f\introText.sqf"] remoteExec ["execVM"];
 };
+
