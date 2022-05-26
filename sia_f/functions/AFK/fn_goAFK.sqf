@@ -49,11 +49,3 @@ sleep _timeout; // Pause until exit dialog is opened.
 if (!alive player) exitWith {}; // Exit if player is dead.
 
 createDialog "dialogAFK"; // Open Exit Dialog
-_display = findDisplay 3289;
-
-// Exit AFK if player closes dialog with escape key.
-_display displayAddEventHandler ["KeyDown", {
-	params ["_display","_key"];
-	if (_key == 1) exitWith { [false] spawn sia_f_fnc_exitAFK }; // ESC pressed while dialog is open, overwrite default behavior
-	false
-}];

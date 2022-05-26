@@ -11,15 +11,10 @@
 
 	USAGE: Private
 
-	PARAMS: 
-		0: Boolean whether to execute tp script.
+	PARAMS: None
 */
 
 if (!hasInterface) exitWith {}; // Exit if not player.
-
-params [
-	["_doTP", false, [false]]
-];
 
 private _unit = player;
 private _serializedMedStatus = player getVariable ["serializedMedStatus", "{}"];
@@ -33,5 +28,3 @@ _unit setCaptive false;
 [] spawn { sleep 60; player setVariable ["sia_isAFK", false]; }; // Time out for 60 seconds.
 
 5 cutText ["", "PLAIN", -1, true];
-
-if (_doTP) then { [player] spawn sia_f_fnc_teleportToSquad };
