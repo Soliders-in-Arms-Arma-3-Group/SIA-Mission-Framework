@@ -22,6 +22,6 @@ private _role = player getVariable ["role", "none"];
 private _rolesWithHandheldRadio = ["sql", "tl", "pltco", "pltsgt", "gm", "drone_op", "spotter", "sniper", "medic"];
 private _rolesManpackRadio = [];
 
-player addItem sia_f_personalRadio;
-if (_role in _rolesWithHandheldRadio) then { player addItem sia_f_handheldRadio };
-if (_role in _rolesManpackRadio) then { player addItem sia_f_manpackRadio };
+if !([player, sia_f_personalRadio] call BIS_fnc_hasItem) then { player addItem sia_f_personalRadio };
+if (_role in _rolesWithHandheldRadio && !([player, sia_f_handheldRadio] call BIS_fnc_hasItem)) then { player addItem sia_f_handheldRadio };
+if (_role in _rolesManpackRadio && !([player, sia_f_manpackRadio] call BIS_fnc_hasItem)) then { player addItem sia_f_manpackRadio };
