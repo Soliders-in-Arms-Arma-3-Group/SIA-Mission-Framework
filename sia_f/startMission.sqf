@@ -35,8 +35,6 @@ sia_f_setupPhase = "In Progress";
 
 if (fileExists "onMissionStart.sqf") then { execVM "onMissionStart.sqf" }; 
 
-if (sia_f_showReplay) then { [] remoteExec ["GRAD_replay_fnc_init", 0, true] }; // Start GRAD replay recording if enabled.
-
 // Display intro text if enabled.
 if (sia_f_showIntroText) then {
 	sleep 3;
