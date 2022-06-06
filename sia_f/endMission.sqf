@@ -19,4 +19,15 @@ if (!isServer) exitWith {}; // Exit if not server.
 
 execVM "sia_f\missionEnd\exportScoreboard.sqf";
 
+private _opType = "ZGM";
+private _weekday = ("real_date" callExtension "EST+") select 6;
+switch (_weekday) do {
+	case 0: { _opType = "Main"; }; // sunday
+	case 5: { _opType = "Side"; }; // friday
+};
+
+if !(isNil "ocap_fnc_exportData") then {
+	["Mission End", "Mission ended with Siege at the top of the leaderboard", _opType] call ocap_fnc_exportData;
+};
+
 ["end1", true, true] remoteExecCall ["BIS_fnc_endMission", 0];
