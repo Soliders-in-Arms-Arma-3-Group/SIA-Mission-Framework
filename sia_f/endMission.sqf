@@ -19,30 +19,23 @@ if (!isServer) exitWith {}; // Exit if not server.
 
 execVM "sia_f\missionEnd\exportScoreboard.sqf";
 
-if (sia_f_showReplay) then {
-	["Starting replay..."] remoteExec ["hint"];
+if !(isNil "ocap_fnc_exportData") then {
+	private _realDate = "real_date" callExtension "EST+"; // EST+ might not be a valid option
+	if (_realDate != "") then {
+		private _opType = "ZGM";
+		private _weekday = (parseSimpleArray _realDate) # 6;
+		switch (_weekday) do {
+			case 0: { _opType = "Main"; }; // sunday
+			case 5: { _opType = "Side"; }; // friday
+		};
 
-	[player] remoteExec ["ace_medical_treatment_fnc_fullHealLocal"]; // Fully heal all players
-	[player, false] remoteExec ["allowDamage"]; // Disable damage for all players
-	if (!isNil "respawn_pos_blufor") then {
-		_pos = (getPosASL respawn_pos_blufor);
-		[player] remoteExec ["moveOut"];
-		{ _x setPosASL _pos } forEach allPlayers;
-	}; // Moves all players to blufor spawn (NEEDS IMPROVEMENT)
-	[0] remoteExec ["setPlayerRespawnTime"]; // Respawn all players.
-	[player, 1] remoteExec ["BIS_fnc_respawnTickets", -2];
-
-	sleep 1;
-
-	// stops record, and starts replay
-	call GRAD_replay_fnc_stopRecord;
-
-	// ends mission after replay is over
-	[{
-		REPLAY_FINISHED
-	}, {
-		["end1", true, true] remoteExecCall ["BIS_fnc_endMission", 0];
-	}, []] call CBA_fnc_waitUntilAndExecute;
+		["Mission End", "Mission ended with Siege at the top of the leaderboard", _opType] call ocap_fnc_exportData;
+	} else {
+		["Mission End", "Mission ended with Siege at the top of the leaderboard", "unk"] call ocap_fnc_exportData;
+		diag_log "endMission.sqf Error: real_date extension not found.";
+	};
 } else {
-	["end1", true, true] remoteExecCall ["BIS_fnc_endMission", 0];
+	diag_log "endMission.sqf Error: ocap_fnc_exportData function not found.";
 };
+
+["end1", true, true] remoteExecCall ["BIS_fnc_endMission", 0];

@@ -34,8 +34,6 @@ sia_f_showStatusHint = true; // Toggle persistent info display.
 
 sia_f_showIntroText = true; // Show cinematic intro text on mission start.
 
-sia_f_showReplay = true; // Record and playback the mission using the GRAD Replay system.
-
 // ============================================================================================
 // Arsenal Options
 // Equipment pools to be included in the arsenal. If you're not using the respective mod for an option, be sure to set it to false.
