@@ -186,5 +186,8 @@ _action = ["missionStartConfirm", "Confirm", "", { [[player], "sia_f\startMissio
 _action = ["missionEnd", "End Mission", "\A3\ui_f\data\IGUI\Cfg\simpleTasks\types\getOut_ca.paa", {}, { sia_f_missionStarted }] call ace_interact_menu_fnc_createAction;
 [["ACE_ZeusActions"], _action] call ace_interact_menu_fnc_addActionToZeus;
 
-_action = ["missionEndConfirm", "Confirm", "", { ["sia_f\endMission.sqf"] remoteExec ["execVM", 2] }, { sia_f_missionStarted }] call ace_interact_menu_fnc_createAction;
+_action = ["missionEndWin", "Win", "", { [[true],"sia_f\endMission.sqf"] remoteExec ["execVM", 2] }, { sia_f_missionStarted }] call ace_interact_menu_fnc_createAction;
+[["ACE_ZeusActions", "missionEnd"], _action] call ace_interact_menu_fnc_addActionToZeus;
+
+_action = ["missionEndLose", "Lose", "", { [[false],"sia_f\endMission.sqf"] remoteExec ["execVM", 2] }, { sia_f_missionStarted }] call ace_interact_menu_fnc_createAction;
 [["ACE_ZeusActions", "missionEnd"], _action] call ace_interact_menu_fnc_addActionToZeus;
