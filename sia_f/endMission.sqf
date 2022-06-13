@@ -30,8 +30,8 @@ if !(isNil "ocap_fnc_exportData") then {
 		private _opType = "MISC";
 		private _weekday = (parseSimpleArray _realDate) # 6;
 		switch (_weekday) do {
-			case 0: { _opType = "Main"; }; // sunday
-			case 5: { _opType = "Side"; }; // friday
+			case 0: { _opType = "MAIN OP"; }; // sunday
+			case 5: { _opType = "SIDE OP"; }; // friday
 		};
 
 		["Mission End", _outcome, _opType] call ocap_fnc_exportData;
