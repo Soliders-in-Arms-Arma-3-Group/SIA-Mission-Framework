@@ -34,6 +34,8 @@ player removeItem "ItemGPS";
 removeGoggles player;
 player addItem "ACE_EarPlugs";
 
+sleep 1; // temp fix for arsenal not updating bug
+
 private _script_handler = [sia_f_arsenals] execVM "sia_f\ace arsenal\setupLocalArsenal.sqf";
 waitUntil { scriptDone _script_handler };
 
