@@ -25,8 +25,8 @@ if (isServer && sia_f_showStatusHint) then {
 	};
 };
 
-// Enable invincibility for players
-if (hasInterface) then {
+// Enable invincibility for players, but not the GM
+if (hasInterface && !((player getVariable "role") in ["gm_blufor","gm_opfor","gm_independent","gm"])) then { 
 
 	player allowDamage false;
 	{ [player, _x, true] call ace_safemode_fnc_setWeaponSafety } forEach (weapons player);
