@@ -30,7 +30,7 @@ if (
 private _timeout = 15; // Time in seconds to temporarily suspend script after use.
 
 private _unit = player;
-private _serializedMedStatus = [_unit] call sia_f_fnc_serializeState;
+private _serializedMedStatus = [_unit] call ace_medical_fnc_serializeState;
 
 player setCaptive true; // Set player to captive.
 [_unit, true] remoteExec ["hideObjectGlobal", 2]; // Hide player object.
