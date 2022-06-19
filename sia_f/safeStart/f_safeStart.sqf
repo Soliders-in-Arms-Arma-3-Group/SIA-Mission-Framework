@@ -26,33 +26,32 @@ if (isServer && sia_f_showStatusHint) then {
 };
 
 // Enable invincibility for players, but not the GM
-if (hasInterface && !((player getVariable "role") in ["gm_blufor","gm_opfor","gm_independent","gm"])) then { 
+if (!hasInterface || ((player getVariable "role") in ["gm_blufor","gm_opfor","gm_independent","gm"])) exitWith {};
 
-	player allowDamage false;
-	{ [player, _x, true] call ace_safemode_fnc_setWeaponSafety } forEach (weapons player);
-	player setVariable ["ace_common_effect_blockThrow", 1]; // force use vanilla throwing so the event handler works (need to make ensure that another function doesn't set it to 0)
-	player setVariable ["ace_explosives_PlantingExplosive", true]; // This is the only way to stop planting of explosives that I could find
+player allowDamage false;
+{ [player, _x, true] call ace_safemode_fnc_setWeaponSafety } forEach (weapons player);
+player setVariable ["ace_common_effect_blockThrow", 1]; // force use vanilla throwing so the event handler works (need to make ensure that another function doesn't set it to 0)
+player setVariable ["ace_explosives_PlantingExplosive", true]; // This is the only way to stop planting of explosives that I could find
 
-	private _FiredMan_EH = player addEventHandler ["FiredMan", {
-		deleteVehicle (_this # 6);
-		
-		if (_this # 1 == "Throw") then {
-			(_this # 0) addItem (_this # 4); // replace lost grenades, smokes, etc.
-		};
-	}];
-
-	while { !sia_f_missionStarted } do { // ToDo: Find event handler that does this (CBA "weaponMode" doesn't work because it doesn't account for just turning off the safety)
-		// This still doesn't really work, players can just hold down their change fire mode button and shoot normally.
-		waitUntil { (player getVariable "ace_safemode_safedWeapons") isNotEqualTo (weapons player) || sia_f_missionStarted };
-		if (!sia_f_missionStarted) then {
-			{ [player, _x, true] call ace_safemode_fnc_setWeaponSafety } forEach ((weapons player) - (player getVariable "ace_safemode_safedWeapons"));
-		};
+private _FiredMan_EH = player addEventHandler ["FiredMan", {
+	deleteVehicle (_this # 6);
+	
+	if (_this # 1 == "Throw") then {
+		(_this # 0) addItem (_this # 4); // replace lost grenades, smokes, etc.
 	};
+}];
 
-	// reset everything to their proper states
-	player allowDamage true;
-	{ [player, _x, false] call ace_safemode_fnc_setWeaponSafety } forEach (weapons player);
-	player setVariable ["ace_common_effect_blockThrow", 0];
-	player setVariable ["ace_explosives_PlantingExplosive", false];
-	player removeEventHandler ["FiredMan", _FiredMan_EH];
+while { !sia_f_missionStarted } do { // ToDo: Find event handler that does this (CBA "weaponMode" doesn't work because it doesn't account for just turning off the safety)
+	// This still doesn't really work, players can just hold down their change fire mode button and shoot normally.
+	waitUntil { (player getVariable "ace_safemode_safedWeapons") isNotEqualTo (weapons player) || sia_f_missionStarted };
+	if (!sia_f_missionStarted) then {
+		{ [player, _x, true] call ace_safemode_fnc_setWeaponSafety } forEach ((weapons player) - (player getVariable "ace_safemode_safedWeapons"));
+	};
 };
+
+// reset everything to their proper states
+player allowDamage true;
+{ [player, _x, false] call ace_safemode_fnc_setWeaponSafety } forEach (weapons player);
+player setVariable ["ace_common_effect_blockThrow", 0];
+player setVariable ["ace_explosives_PlantingExplosive", false];
+player removeEventHandler ["FiredMan", _FiredMan_EH];
