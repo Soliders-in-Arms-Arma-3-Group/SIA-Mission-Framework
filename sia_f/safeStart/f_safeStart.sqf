@@ -43,7 +43,7 @@ if (hasInterface && !((player getVariable "role") in ["gm_blufor","gm_opfor","gm
 
 	while { !sia_f_missionStarted } do { // ToDo: Find event handler that does this (CBA "weaponMode" doesn't work because it doesn't account for just turning off the safety)
 		// This still doesn't really work, players can just hold down their change fire mode button and shoot normally.
-		waitUntil { (player getVariable "ace_safemode_safedWeapons") isNotEqualTo (weapons player) || sia_f_missionStarted };
+		waitUntil { (player getVariable ["ace_safemode_safedWeapons", []]) isNotEqualTo (weapons player) || sia_f_missionStarted };
 		if (!sia_f_missionStarted) then {
 			{ [player, _x, true] call ace_safemode_fnc_setWeaponSafety } forEach ((weapons player) - (player getVariable "ace_safemode_safedWeapons"));
 		};
