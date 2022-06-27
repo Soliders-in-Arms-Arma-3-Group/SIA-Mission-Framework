@@ -18,7 +18,7 @@
 if (!isServer) exitWith {}; // Exit if not server.
 
 params [
-	["_isVictory", true]
+	["_isVictory", true], ["_side", west]
 ];
 
 execVM "sia_f\missionEnd\exportScoreboard.sqf";
@@ -33,10 +33,9 @@ if !(isNil "ocap_fnc_exportData") then {
 			case 0: { _opType = "MAIN OP"; }; // sunday
 			case 5: { _opType = "SIDE OP"; }; // friday
 		};
-
-		["Mission End", _outcome, _opType] call ocap_fnc_exportData;
+		[_side, _outcome, _opType] call ocap_fnc_exportData;
 	} else {
-		["Mission End", _outcome, "unk"] call ocap_fnc_exportData;
+		[_side, _outcome, "unk"] call ocap_fnc_exportData;
 		diag_log "endMission.sqf Error: real_date extension not found.";
 	};
 } else {
