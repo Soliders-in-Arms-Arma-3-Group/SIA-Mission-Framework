@@ -46,7 +46,7 @@ while { _p == _sl || ((_sl distance _p) < _safezone) } do {
 	_i = _i + 1;
 };
 
-if (_p == sl) exitWith { [] spawn _clearText }; //Checks if the search for another player worked
+if (_p == _sl) exitWith { [] spawn _clearText }; //Checks if the search for another player worked
 
 //Check if sl is on foot
 if (vehicle _sl == _sl) then {
