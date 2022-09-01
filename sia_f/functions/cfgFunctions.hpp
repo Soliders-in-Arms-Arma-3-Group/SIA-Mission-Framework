@@ -5,6 +5,7 @@ class sia_f
 		file = "sia_f\functions\briefing";
 		class loadoutNotes {}; // sia_f_fnc_loadoutNotes
 		class orbat {}; // sia_f_fnc_orbat
+		class vehicleInfo {}; // sia_f_fnc_vehicleInfo
 	};
 
 	class AFK
