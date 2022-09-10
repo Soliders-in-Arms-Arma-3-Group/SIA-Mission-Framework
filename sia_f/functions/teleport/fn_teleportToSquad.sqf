@@ -16,75 +16,54 @@
 */
 
 if (!hasInterface) exitWith {}; // Exit if not a player.
-
-params [
-	["_p", objNull, [objNull]]
-];
-if (isNull _p) exitWith { ["teleportToSquad Error: Invalid Parameters: %1", _this select 0] call BIS_fnc_error };
-
-private _clearText = { //Clears any text;
-	sleep 1.5;
-	1 cutText ["","PLAIN",-1,true];
-};
-
-private _sl = leader _p;
+private _units = (units group player) - [player];
+private _safezone = 100;
+private _target = objNull;
 private _i = 0;
-private _safezone = 150;
 
-if (count (units group _p) <= 1) exitWith {
+if (count _units < 1) exitWith {
 	1 cutText ["Teleport failed, squad is empty!", "PLAIN", -1, true];
-	[] spawn _clearText;
+	false
 };
 
-//Searches squad for another player not in the safezone
-while { _p == _sl || ((_sl distance _p) < _safezone) } do {
-	if (_i >= (count units group _p)) exitWith {
-		1 cutText ["Teleport failed, squad is in safezone", "PLAIN", -1, true];
-		_sl = _p;
-	};
-	_sl =  (units group _p) select _i;
-	_i = _i + 1;
-};
+{
+	if (
+	((player distance _x) > _safezone) &&	
+	(side _x == side player) &&
+	isAbleToBreathe _x &&
+	simulationEnabled _x &&
+	((vehicle _x == _x) || ((vehicle _x) emptyPositions "cargo" > 0))
+	) exitWith { _target = _x };
+} forEach _units;
 
-if (_p == _sl) exitWith { [] spawn _clearText }; //Checks if the search for another player worked
-
-//Check if sl is on foot
-if (vehicle _sl == _sl) then {
-	//Teleport effects
-	1 cutText ["Teleporting...", "PLAIN", -1, true];
-	sleep 0.5;	
-	2 cutText ["", "BLACK OUT", 1];
-	sleep 1;
-
-	//Teleport player 0.3m behind squad
-	_LX = (getPos _sl select 0) + (0.3 * sin ((getDir _sl) - 180));
-	_LY = (getPos _sl select 1) + (0.3 * cos ((getDir _sl) - 180));
-	_LZ = (getPos _sl select 2);
-	_p setPos [_LX, _LY, _LZ];
-
-	//Teleport effects
-	sleep 0.5;
-	2 cutText ["", "BLACK IN", .5];
-	1 cutText ["", "PLAIN", -1, true];
+if (isNull _target) then {
+	1 cutText ["Teleport Failed: No suitable unit found.", "PLAIN DOWN", -1, true];
+	false
 } else {
-	//Move into vehicle, or print vehicle is full
-	if ((vehicle _sl) emptyPositions "cargo" == 0) then {
-		1 cutText ["Teleport failed\nNo room in the squad's vehicle!", "PLAIN", -1, true];
-	} else {
-		//Teleport effects
-		1 cutText ["Teleporting...", "PLAIN", -1, true];
-		sleep 0.5;
-		2 cutText ["", "BLACK OUT", 1];
-		sleep 1;
+	private _str = "Teleporting to " + (name _target) + "...";
+	if (vehicle _target != _target) then { _str = _str + "\nVehicle: " + getText (configFile >> "cfgVehicles" >> (typeOf (vehicle _target)) >> "displayName") };
+	1 cutText [_str, "PLAIN DOWN", -1, true];
+		[{ 0 cutText ["", "BLACK OUT", 1] }, [], 0.5] call CBA_fnc_waitAndExecute;
 
-		_p moveInCargo vehicle _sl;
+		//Teleport player 0.3m behind squad
+		if (vehicle _target == _target) then {
+		_LX = (getPos _target select 0) + (0.3 * sin ((getDir _target) - 180));
+		_LY = (getPos _target select 1) + (0.3 * cos ((getDir _target) - 180));
+		_LZ = (getPos _target select 2);
+		[{ player setPos _this }, [_LX, _LY, _LZ], 2.5] call CBA_fnc_waitAndExecute;
+		} else {
+			[{ player moveInCargo _this }, (vehicle _target), 2.5] call CBA_fnc_waitAndExecute;	 
+		};
 
 		//Teleport effects
-		sleep 0.5;
-		2 cutText ["", "BLACK IN", .5];
-		1 cutText ["","PLAIN",-1,true];
-	};
+		[
+			{
+				0 cutText ["", "BLACK IN", .5];
+				1 cutText ["", "PLAIN", -1, true];
+			},
+			[],
+			3
+		] call CBA_fnc_waitAndExecute;
+		
+	true
 };
-
-sleep 1.5;
-1 cutText ["","PLAIN",-1,true];
