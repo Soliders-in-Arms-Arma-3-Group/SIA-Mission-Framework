@@ -1,6 +1,6 @@
 class dialogAFK {
 	onUnload = "[] spawn sia_f_fnc_exitAFK;";
-	idd = 3289
+	idd = 3289;
 	class controls {
 		class AFK_background: RscPicture
 		{
