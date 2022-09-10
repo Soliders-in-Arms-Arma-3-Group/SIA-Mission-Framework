@@ -90,3 +90,8 @@ if (!isNil "sia_f_ACEButtons") then {
 
 sia_f_setupComplete = true;
 publicVariable "sia_f_setupComplete";
+
+// Backup scoreboard and OCAP2 log on mission end.
+addMissionEventHandler ["MPEnded", {
+	execVM "sia_f\endMission.sqf"
+}];
