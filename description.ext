@@ -10,6 +10,9 @@
 	#include "sia_f\goAFK\defines.hpp"
 	#include "sia_f\goAFK\control.hpp"
 
+// GCam script
+	#include "gcam\gcam_component.hpp"
+
 class cfgNotifications
 {
 	// Notification Template

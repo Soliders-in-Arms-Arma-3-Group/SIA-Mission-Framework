@@ -2,6 +2,16 @@ waitUntil {!isNull player};
 waitUntil {!isNil "sia_f_setupComplete"}; // Test if this is needed
 waitUntil {sia_f_setupComplete};
 
+if ((player getVariable ["role", "none"]) == "spectator") exitWith {
+	sia_f_showStatusHint = false;
+	if (typeOf player == "ace_spectator_virtual" || !(fileExists "gcam\gcam.sqf")) exitWith {}; // Exit if player is an ACE spectator or if GCam file is not installed.
+	sleep 0.1;
+	["Terminate"] call BIS_fnc_EGSpectator; // Close vanilla spectator in favor of GCam.
+	sleep 1;
+	[player] execVM "gcam\gcam.sqf";
+	player addAction ["Open GCam", { [player] execVM "gcam\gcam.sqf" }];
+};
+
 sia_f_factionName = "";
 // Get player side and faction name
 	switch (side player) do
