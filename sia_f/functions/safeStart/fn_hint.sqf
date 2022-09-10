@@ -52,6 +52,7 @@ _hour = if (_hour + _timezoneOffset < 0) then [{ _hour + _timezoneOffset + 24}, 
 _txtTime = text (([(_hour + ((_systemTime select 4) / 60)), "HH:MM"] call BIS_fnc_timeToString) + " " + _timezoneName);
 _txtTime setAttributes ["align", "right", "font", _fontHeader];
 
+/*
 private _txt3 = text "CTab:";
 _txt3 setAttributes ["align", "left", "color", _colorSecondary, "font", _fontPrimary];
 private _txt4 = text toUpper (str sia_f_haveCTab);
@@ -71,6 +72,7 @@ private _txtKAT = text "KAT Medical:";
 _txtKAT setAttributes ["align", "left", "color", _colorSecondary, "font", _fontPrimary];
 private _txtKATState = text toUpper sia_f_haveKATMedical;
 _txtKATState setAttributes ["align", "right", "color", _colorSecondary, "font", _fontPrimary];
+*/
 
 private _txtFaction = text "Faction:";
 _txtFaction setAttributes ["align", "left", "font", _fontPrimary];
@@ -101,6 +103,7 @@ private _array = [
 	_txtSystemTime, _txtTime,
 	lineBreak,
 	lineBreak,
+	/*
 	_txtArsenal,_txtArsenalEnabled,
 	lineBreak,
 	_txt3,  _txt4,
@@ -110,6 +113,7 @@ private _array = [
 	_txtKAT,_txtKATState,
 	lineBreak,
 	lineBreak,
+	*/
 	_txtFaction, _txtFactionName,
 	lineBreak,
 	_txtRole, _txtRoleName,
